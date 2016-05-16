@@ -2,8 +2,9 @@ package com.shyslav.controller;
 
 
 import com.shyslav.database.connector;
-import com.shyslav.models.employees;
-import com.shyslav.models.user;
+import com.shyslav.models.*;
+import com.shyslav.selectCommands.*;
+
 import java.io.*;
 import java.net.Socket;
 import java.sql.Connection;
@@ -48,17 +49,7 @@ public class work implements Runnable {
                 String line = scanner.nextLine();
                 System.out.println(line);
                 String[] splits = line.split("[;,:]");
-                if(splits[0].equals("login"))
-                {
-                    ArrayList<employees> employees = login(splits[1],splits[2]);
-                    if(employees!=null&&employees.size()==1) {
-                        objectOut.writeObject(employees);
-                        objectOut.flush();
-                    }else
-                    {
-                        objectOut.writeObject("not found");
-                    }
-                }
+                commandCheck(splits);
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -74,6 +65,97 @@ public class work implements Runnable {
             } catch (IOException e) {
                 System.out.println(e);
             }
+        }
+    }
+
+    private void commandCheck(String[] splits) {
+        try {
+            if (splits[0].equals("login")) {
+                ArrayList<employees> employees = login(splits[1], splits[2]);
+                if (employees != null && employees.size() == 1) {
+
+                    objectOut.writeObject(employees);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            } else if (splits[0].equals("selectNews")) {
+                ArrayList<news> news = NewsAction.selectNews(Integer.parseInt(splits[1]));
+                if (news != null) {
+                    objectOut.writeObject(news);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            } else if (splits[0].equals("selectCategory")) {
+                ArrayList<category> category = CategoryAction.selectCategory(Integer.parseInt(splits[1]));
+                if (category != null) {
+                    objectOut.writeObject(category);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            } else if (splits[0].equals("selectDish")) {
+                ArrayList<dish> dish = CategoryAction.selectDish(Integer.parseInt(splits[1]));
+                if (dish != null) {
+                    objectOut.writeObject(dish);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            } else if (splits[0].equals("selectReservation")) {
+                ArrayList<reservation> reservation = ReservationAction.selectReservation(Integer.parseInt(splits[1]));
+                if (reservation != null) {
+                    objectOut.writeObject(reservation);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            } else if (splits[0].equals("selectPreOrder")) {
+                ArrayList<preOrderTable> preOrderTables = ReservationAction.selectPreOrder(Integer.parseInt(splits[1]));
+                if (preOrderTables != null) {
+                    objectOut.writeObject(preOrderTables);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }else if (splits[0].equals("selectEmployees")) {
+                ArrayList<employees> employees = EmployeeAction.selectEmployees(Integer.parseInt(splits[1]));
+                if (employees != null) {
+                    objectOut.writeObject(employees);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+            else if (splits[0].equals("selectReports")) {
+                ArrayList<reports> reports = ReportsAction.selectReports(Integer.parseInt(splits[1]));
+                if (reports != null) {
+                    objectOut.writeObject(reports);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+            else if (splits[0].equals("selectCafeCoordinte")) {
+                ArrayList<cafeCoordinate> cafeCoordinates = EmployeeAction.selectcafeCoordinate(Integer.parseInt(splits[1]));
+                if (cafeCoordinates != null) {
+                    objectOut.writeObject(cafeCoordinates);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }else if (splits[0].equals("selectPositions")) {
+                ArrayList<positions> positionses = EmployeeAction.selectPositions(Integer.parseInt(splits[1]));
+                if (positionses != null) {
+                    objectOut.writeObject(positionses);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
