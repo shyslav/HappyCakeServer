@@ -64,7 +64,7 @@ public class CategoryAction {
                 break;
 
             default:
-                query = "select id as idfromdish, categoryID, name, description, amount, price, image, readyORnot, (select percent from hotprice where dishID = idfromdish and dateEnd>=curdate() ) as sell from dish  where dishID = " + id;
+                query = "select id as idfromdish, categoryID, name, description, amount, price, image, readyORnot, (select percent from hotprice where dishID = idfromdish and dateEnd>=curdate() ) as sell from dish  where categoryID = " + id;
                 break;
         }
         try (Connection conn = connector.connect()) {

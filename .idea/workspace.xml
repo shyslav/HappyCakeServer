@@ -2,28 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd435d5b-95ea-4404-ac28-f4cc59ea309a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/cafeCoordinate.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/category.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/dish.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/hotPrice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/news.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/positions.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/preOrder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/preOrderTable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/reports.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/reservation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/reservationData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/models/webMenu.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/EmployeeAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/NewsAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/ReportsAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/ReservationAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCakeServer/com/shyslav/controller/work.class" afterPath="$PROJECT_DIR$/out/production/HappyCakeServer/com/shyslav/controller/work.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/DeleteAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCakeServer/com/shyslav/selectCommands/CategoryAction.class" afterPath="$PROJECT_DIR$/out/production/HappyCakeServer/com/shyslav/selectCommands/CategoryAction.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/HappyCakeServer/com/shyslav/database/database.properties" afterPath="$PROJECT_DIR$/out/production/HappyCakeServer/com/shyslav/database/database.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/work.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/work.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/database/database.properties" afterPath="$PROJECT_DIR$/src/com/shyslav/database/database.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java" afterPath="$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java" />
     </list>
     <ignored path="HappyCakeServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,20 +45,56 @@
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/work.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="147" column="55" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="55" />
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1463427477241" expanded="true" signature="7135:7327" placeholder="select id, p... employees" />
+                <marker date="1463848478142" expanded="true" signature="7418:7610" placeholder="select id, p... employees" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="positions.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CategoryAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="77" column="43" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1463844993149" expanded="true" signature="701:715" placeholder="select * fro... news" />
+                <marker date="1463844993149" expanded="true" signature="701:723" placeholder="select * fro... category" />
+                <marker date="1463844993149" expanded="true" signature="796:830" placeholder="select * fro... news" />
+                <marker date="1463844993149" expanded="true" signature="1929:2113" placeholder="select * fro... category" />
+                <marker date="1463844993149" expanded="true" signature="1929:2117" placeholder="select id as... dish" />
+                <marker date="1463844993149" expanded="true" signature="2020:2097" placeholder="select perce... hotprice" />
+                <marker date="1463844993149" expanded="true" signature="2190:2197" placeholder="select * fro... category" />
+                <marker date="1463844993149" expanded="true" signature="2190:2399" placeholder="select id as... dish" />
+                <marker date="1463844993149" expanded="true" signature="2281:2358" placeholder="select perce... hotprice" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeleteAction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/DeleteAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6081301">
+              <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1463849877965" expanded="true" signature="398:410" placeholder="delete from " />
+                <marker date="1463849877965" expanded="true" signature="398:411" placeholder="delete from " />
+                <marker date="1463849877965" expanded="true" signature="398:436" placeholder="delete from " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="positions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/positions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22601625">
-              <caret line="10" column="25" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="e#403#404#0" expanded="true" />
                 <element signature="e#428#429#0" expanded="true" />
@@ -191,7 +210,6 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/news.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/NewsAction.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/category.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/dish.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/reservation.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/preOrderTable.java" />
@@ -200,9 +218,11 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/ReportsAction.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/reports.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/EmployeeAction.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/work.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/positions.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/cafeCoordinate.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/work.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/DeleteAction.java" />
       </list>
     </option>
   </component>
@@ -843,12 +863,12 @@
       <option name="number" value="Default" />
       <updated>1459070846111</updated>
       <workItem from="1459070848967" duration="35551000" />
-      <workItem from="1463394431877" duration="21077000" />
+      <workItem from="1463394431877" duration="31035000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56628000" />
+    <option name="totallyTimeSpent" value="66586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1296" height="1040" extended-state="6" />
@@ -861,7 +881,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27097505" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27097505" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31472492" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -921,7 +941,7 @@
           <caret line="67" column="36" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1463427477241" expanded="true" signature="7135:7327" placeholder="select id, p... employees" />
+            <marker date="1463848478142" expanded="true" signature="7418:7610" placeholder="select id, p... employees" />
           </folding>
         </state>
       </provider>
@@ -1034,25 +1054,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="5" selection-start-line="56" selection-start-column="4" selection-end-line="97" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1463407085881" expanded="true" signature="701:715" placeholder="select * fro... news" />
-            <marker date="1463407085881" expanded="true" signature="701:723" placeholder="select * fro... category" />
-            <marker date="1463407085881" expanded="true" signature="796:830" placeholder="select * fro... news" />
-            <marker date="1463407085881" expanded="true" signature="1929:2113" placeholder="select * fro... category" />
-            <marker date="1463407085881" expanded="true" signature="1929:2117" placeholder="select id as... dish" />
-            <marker date="1463407085881" expanded="true" signature="2020:2097" placeholder="select perce... hotprice" />
-            <marker date="1463407085881" expanded="true" signature="2190:2197" placeholder="select * fro... category" />
-            <marker date="1463407085881" expanded="true" signature="2190:2395" placeholder="select id as... dish" />
-            <marker date="1463407085881" expanded="true" signature="2281:2358" placeholder="select perce... hotprice" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/reservation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1130,16 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/ReportsAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1209,17 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/work.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="55" selection-start-line="147" selection-start-column="40" selection-end-line="147" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1463427477241" expanded="true" signature="7135:7327" placeholder="select id, p... employees" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/cafeCoordinate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1230,11 +1210,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/positions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22601625">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="e#403#404#0" expanded="true" />
             <element signature="e#428#429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/work.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1463848478142" expanded="true" signature="7418:7610" placeholder="select id, p... employees" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/CategoryAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="43" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1463844993149" expanded="true" signature="701:715" placeholder="select * fro... news" />
+            <marker date="1463844993149" expanded="true" signature="701:723" placeholder="select * fro... category" />
+            <marker date="1463844993149" expanded="true" signature="796:830" placeholder="select * fro... news" />
+            <marker date="1463844993149" expanded="true" signature="1929:2113" placeholder="select * fro... category" />
+            <marker date="1463844993149" expanded="true" signature="1929:2117" placeholder="select id as... dish" />
+            <marker date="1463844993149" expanded="true" signature="2020:2097" placeholder="select perce... hotprice" />
+            <marker date="1463844993149" expanded="true" signature="2190:2197" placeholder="select * fro... category" />
+            <marker date="1463844993149" expanded="true" signature="2190:2399" placeholder="select id as... dish" />
+            <marker date="1463844993149" expanded="true" signature="2281:2358" placeholder="select perce... hotprice" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/DeleteAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6081301">
+          <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1463849877965" expanded="true" signature="398:410" placeholder="delete from " />
+            <marker date="1463849877965" expanded="true" signature="398:411" placeholder="delete from " />
+            <marker date="1463849877965" expanded="true" signature="398:436" placeholder="delete from " />
           </folding>
         </state>
       </provider>

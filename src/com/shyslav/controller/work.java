@@ -153,6 +153,12 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+            }else if (splits[0].equals("deleteFromTable")) {
+                if (DeleteAction.delete(splits[1],splits[2]) != null) {
+                    objectOut.writeObject("done");
+                } else {
+                    objectOut.writeObject("not found");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
