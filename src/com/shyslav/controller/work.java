@@ -4,6 +4,7 @@ package com.shyslav.controller;
 import com.shyslav.database.connector;
 import com.shyslav.models.*;
 import com.shyslav.selectCommands.*;
+import javafx.scene.chart.Chart;
 
 import java.io.*;
 import java.net.Socket;
@@ -153,9 +154,66 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+            }else if (splits[0].equals("selectOrders")) {
+                ArrayList<orders> orderses = OrderAction.selectOrders(Integer.parseInt(splits[1]));
+                if (orderses != null) {
+                    objectOut.writeObject(orderses);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }else if (splits[0].equals("selectOrderList")) {
+                ArrayList<orderList> orderList = OrderAction.selectorderList(Integer.parseInt(splits[1]));
+                if (orderList != null) {
+                    objectOut.writeObject(orderList);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
             }else if (splits[0].equals("deleteFromTable")) {
                 if (DeleteAction.delete(splits[1],splits[2]) != null) {
                     objectOut.writeObject("done");
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }else if (splits[0].equals("getValueToUpdate")) {
+                String update = UpdateAction.selectToUpdate(splits[1],splits[2],splits[3]);
+                if (update != null) {
+                    objectOut.writeObject(update);
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+            else if (splits[0].equals("update")) {
+                String update = UpdateAction.update(splits);
+                if (update != null) {
+                    objectOut.writeObject(update);
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+            else if (splits[0].equals("insert")) {
+                String insert = UpdateAction.insert(splits);
+                if (insert != null) {
+                    objectOut.writeObject(insert);
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+            else if (splits[0].equals("selectGrapgMonth")) {
+                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1],null,null);
+                if (tmp != null) {
+                    objectOut.writeObject(tmp);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }
+            else if (splits[0].equals("selectGrapg")) {
+                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1],splits[2],splits[3]);
+                if (tmp != null) {
+                    objectOut.writeObject(tmp);
+                    objectOut.flush();
                 } else {
                     objectOut.writeObject("not found");
                 }

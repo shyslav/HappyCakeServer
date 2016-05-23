@@ -64,13 +64,13 @@ public class ReservationAction {
         switch (id)
         {
             case 0:
-                query = "select p.reservID as reservID,d.name as dishName, p.amount as amount, p.price as price  from preorder p\n" +
+                query = "select p.id as resid, p.reservID as reservID,d.name as dishName, p.amount as amount, p.price as price  from preorder p\n" +
                         "inner join dish d on d.id = p.dishID\n" +
                         "inner join reservation r on r.id=p.reservID";
                 break;
 
             default:
-                query = "select p.reservID as reservID,d.name as dishName, p.amount as amount, p.price as price  from preorder p\n" +
+                query = "select p.id as resid,p.reservID as reservID,d.name as dishName, p.amount as amount, p.price as price  from preorder p\n" +
                         "inner join dish d on d.id = p.dishID\n" +
                         "inner join reservation r on r.id=p.reservID where r.id  = " + id;
                 break;
@@ -80,6 +80,7 @@ public class ReservationAction {
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
                     preOrderTable.add(new preOrderTable(
+                            resultSet.getInt("resid"),
                             resultSet.getInt("reservID"),
                             resultSet.getString("dishName"),
                             resultSet.getInt("amount"),

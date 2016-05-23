@@ -3,21 +3,31 @@ package com.shyslav.models;
 import java.io.Serializable;
 
 /**
- * Created by Shyshkin Vladyslav on 16.05.2016.
+ * Created by Shyshkin Vladyslav on 21.05.2016.
  */
-public class preOrderTable implements Serializable {
+public class orderList implements Serializable {
     private int id;
-    private int reservID;
+    private int orderId;
+    private int dishID;
     private String dishName;
     private int amount;
     private double price;
 
-    public preOrderTable(int id, int reservID, String dishName, int amount, double price) {
+    public orderList(int id, int orderId, int dishID, String dishName, int amount, double price) {
         this.id = id;
-        this.reservID = reservID;
+        this.orderId = orderId;
+        this.dishID = dishID;
         this.dishName = dishName;
         this.amount = amount;
         this.price = price;
+    }
+
+    public int getDishID() {
+        return dishID;
+    }
+
+    public void setDishID(int dishID) {
+        this.dishID = dishID;
     }
 
     public int getId() {
@@ -28,12 +38,12 @@ public class preOrderTable implements Serializable {
         this.id = id;
     }
 
-    public int getReservID() {
-        return reservID;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setReservID(int reservID) {
-        this.reservID = reservID;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getDishName() {
