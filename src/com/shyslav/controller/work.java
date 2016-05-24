@@ -217,6 +217,14 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+            }else if (splits[0].equals("selectCassir")) {
+                ArrayList<_Cassir> tmp = CasirAction.CasirAction();
+                if (tmp != null) {
+                    objectOut.writeObject(tmp);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
