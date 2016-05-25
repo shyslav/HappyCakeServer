@@ -37,7 +37,7 @@ public class OrderAction {
                             resultSet.getInt("employeeId"),
                             resultSet.getDouble("fullPrice"),
                             resultSet.getString("odate"),
-                            resultSet.getBoolean("compliteORnot")));
+                            resultSet.getString("compliteORnot")));
                 }
                 if(order.size()!=0)
                 {

@@ -11,9 +11,9 @@ public class orders implements Serializable{
     private int employeeId;
     private double fullPrice;
     private String orderDate;
-    private boolean compliteOrNot;
+    private String compliteOrNot;
 
-    public orders(int id, int employeeId, double fullPrice, String orderDate, boolean compliteOrNot) {
+    public orders(int id, int employeeId, double fullPrice, String orderDate, String compliteOrNot) {
         this.id = id;
         this.employeeId = employeeId;
         this.fullPrice = fullPrice;
@@ -53,11 +53,11 @@ public class orders implements Serializable{
         this.fullPrice = fullPrice;
     }
 
-    public boolean isCompliteOrNot() {
+    public String getCompliteOrNot() {
         return compliteOrNot;
     }
 
-    public void setCompliteOrNot(boolean compliteOrNot) {
+    public void setCompliteOrNot(String compliteOrNot) {
         this.compliteOrNot = compliteOrNot;
     }
 }

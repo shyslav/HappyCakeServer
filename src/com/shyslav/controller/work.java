@@ -46,6 +46,7 @@ public class work implements Runnable {
             printWriter = new PrintWriter(outputStream, true);
             //исходящий поток данных
             objectOut = new ObjectOutputStream(incoming.getOutputStream());
+            objectInp = new ObjectInputStream(incoming.getInputStream());
             while (!done && scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 System.out.println(line);
@@ -74,7 +75,6 @@ public class work implements Runnable {
             if (splits[0].equals("login")) {
                 ArrayList<employees> employees = login(splits[1], splits[2]);
                 if (employees != null && employees.size() == 1) {
-
                     objectOut.writeObject(employees);
                     objectOut.flush();
                 } else {
@@ -225,17 +225,23 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+            }else if(splits[0].equals("readObj")){
+                try {
+                    ArrayList<orderList> orders = (ArrayList<orderList>) objectInp.readObject();
+                    System.out.println(orders.get(0).getDishName());
+                    System.out.println(splits[splits.length-1]);
+                    String str = CasirAction.CasirAdd(orders,splits[1],splits[2]);
+                    if (orders != null) {
+                        objectOut.writeObject(str);
+                    } else {
+                        objectOut.writeObject("not found");
+                    }
+                } catch (ClassNotFoundException e) {
+                    System.out.println(e);
+                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendMessageToAllUser(ArrayList<user> client) throws IOException {
-        for (int i = 0; i < client.size(); i++) {
-            OutputStream outputSt = client.get(i).getSock().getOutputStream();
-            PrintWriter out = new PrintWriter(outputSt, true);
-            out.println("Client" + client.get(i).getLastName() + i + " disconected");
+            System.out.println(e);
         }
     }
 
@@ -254,9 +260,11 @@ public class work implements Runnable {
             try (ResultSet resultSet = statement.executeQuery("select id, positionsID, cafeID, name, lastname, adress, birthdayDay, elogin, epassword from employees " +
                     " where elogin='" + username + "' and epassword='" + password + "'")) {
                 if (resultSet.next()) {
+                    //public user(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, ObjectOutputStream objectOut, ObjectInputStream objectInp, Socket sock, int positionId) {
                     Main.client.add(new user(resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getString("lastname"),
+                            inputStream, scanner, outputStream,printWriter,objectOut,objectInp,
                             incoming, resultSet.getInt("positionsID")));
                     ArrayList<employees> empl = new ArrayList<>();
                     empl.add(new employees(resultSet.getInt("id"), resultSet.getInt("positionsID"), resultSet.getInt("cafeID"),

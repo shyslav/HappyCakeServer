@@ -2,6 +2,7 @@ package com.shyslav.controller;
 
 import com.shyslav.database.connector;
 import com.shyslav.models.user;
+import com.shyslav.selectCommands.CookAction;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,14 +41,21 @@ public class Main {
             System.out.println(e);
         }
     }
-    public static int getCommandArg(String nameParam)
+    public static void sendToCook(int id)
     {
-        if(prop!=null)
-        {
-            return Integer.parseInt(prop.getProperty(nameParam));
-        }else
-        {
-            return 0;
+        CookAction cookAction = new CookAction();
+        sendMessageToAllUser(cookAction.add(id),2);
+    }
+    private static void sendMessageToAllUser(Object o, int toPosition){
+        for (int i = 0; i < Main.client.size(); i++) {
+            if(Main.client.get(i).getPositionId()==toPosition)
+            {
+                try {
+                    Main.client.get(i).getObjectOut().writeUnshared(o);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
