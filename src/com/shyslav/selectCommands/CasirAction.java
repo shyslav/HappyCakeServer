@@ -2,20 +2,24 @@ package com.shyslav.selectCommands;
 
 import com.shyslav.controller.Main;
 import com.shyslav.database.connector;
-import com.shyslav.models.*;
+import com.shyslav.models._Cassir;
+import com.shyslav.models.orderList;
+import com.shyslav.models.orders;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Queue;
-import java.util.jar.Pack200;
 
 /**
  * Created by Shyshkin Vladyslav on 24.05.2016.
  */
 public class CasirAction {
+    /**
+     * Функция получения данных таблицы категорий и блюд для кассира
+     * @return лист инициализации начального значения кассира
+     */
     public static ArrayList<_Cassir> CasirAction() {
         ArrayList<_Cassir> cas = new ArrayList<>();
         String query = "select * from category";
@@ -32,7 +36,6 @@ public class CasirAction {
                 }
                 if(cas.size()!=0)
                 {
-                    System.out.println(cas.size());
                     return cas;
                 }
                 else
@@ -45,10 +48,21 @@ public class CasirAction {
             return null;
         }
     }
+
+    /**
+     * Функция вставки заказа в таблицу
+     * @param ord - лист заказа
+     * @param cassirID - ид кассира
+     * @param fullPrice - полная стоимость заказа
+     * @return сообщение которое должен сказать кассир заказчику
+     */
     public static String CasirAdd(ArrayList<orderList> ord, String cassirID, String fullPrice) {
+        //Массив длякоманды insert вставляет в таблицу заказы, ид кассира который пришел в команде
+        //Прайс текущего заказа который пришел в команде и текущее время и дату.
         String[] data = {"insert", "orders", cassirID, fullPrice, "now()",
                 "(select case when (select count(readyORnot) from dish where id in (" + dishID(ord) + ") and readyORnot = '+')<=0 then '+' else '-' end)"};
         UpdateAction.insert(data);
+        //ид последнего заказа от текущего кассира
         orders od = orderInBase(cassirID);
         if (od == null) {
             System.out.println("Ошибка записи, данные не были внесены в базу");
@@ -71,6 +85,11 @@ public class CasirAction {
         }
     }
 
+    /**
+     * Функция получения ид внесенного заказа в базу
+     * @param cassirID - ид текущего кассира
+     * @return - обьект заказ текущего кассира который был внесен в базу
+     */
     private static orders orderInBase(String cassirID)
     {
         orders od = null;
@@ -100,6 +119,12 @@ public class CasirAction {
             return null;
         }
     }
+
+    /**
+     * Соеденить ид все блюд в заказе через запятую
+     * @param ord - список блюд в чеке
+     * @return перечень всех блюд через запятую
+     */
     private static String dishID(ArrayList<orderList> ord)
     {
         String result = "";

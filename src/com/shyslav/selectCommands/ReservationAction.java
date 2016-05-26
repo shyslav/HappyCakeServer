@@ -16,11 +16,16 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class ReservationAction {
+    /**
+     * Функция получения всех данных по резервации
+     *
+     * @param id - номер конкретного резерва
+     * @return - лист резервов
+     */
     public static ArrayList<reservation> selectReservation(int id) {
         ArrayList<reservation> reservation = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select * from reservation";
                 break;
@@ -44,12 +49,9 @@ public class ReservationAction {
                             resultSet.getInt("amountPeople"),
                             resultSet.getString("description")));
                 }
-                if(reservation.size()!=0)
-                {
+                if (reservation.size() != 0) {
                     return reservation;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }
@@ -58,11 +60,17 @@ public class ReservationAction {
             return null;
         }
     }
+
+    /**
+     * Функция получения предзаказов
+     *
+     * @param id - номер резерва для получения предзаказа
+     * @return - лист предзаказов
+     */
     public static ArrayList<preOrderTable> selectPreOrder(int id) {
         ArrayList<preOrderTable> preOrderTable = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select p.id as resid, p.reservID as reservID,d.name as dishName, p.amount as amount, p.price as price  from preorder p\n" +
                         "inner join dish d on d.id = p.dishID\n" +
@@ -86,12 +94,9 @@ public class ReservationAction {
                             resultSet.getInt("amount"),
                             resultSet.getDouble("price")));
                 }
-                if(preOrderTable.size()!=0)
-                {
+                if (preOrderTable.size() != 0) {
                     return preOrderTable;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }

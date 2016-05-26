@@ -15,11 +15,16 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 21.05.2016.
  */
 public class OrderAction {
+    /**
+     * Функция плучения всех заказов из базы
+     *
+     * @param id - ид заказа
+     * @return лист заказов
+     */
     public static ArrayList<orders> selectOrders(int id) {
         ArrayList<orders> order = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select *  from orders";
                 break;
@@ -39,12 +44,9 @@ public class OrderAction {
                             resultSet.getString("odate"),
                             resultSet.getString("compliteORnot")));
                 }
-                if(order.size()!=0)
-                {
+                if (order.size() != 0) {
                     return order;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }
@@ -54,11 +56,16 @@ public class OrderAction {
         }
     }
 
+    /**
+     * Получение всех элементов заказа
+     *
+     * @param id - ид заказа
+     * @return лист всех элементов заказа
+     */
     public static ArrayList<orderList> selectorderList(int id) {
         ArrayList<orderList> order = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select list.id as id, list.orderID as orderID ,list.dishID as dishID ,dish.name as dishName,list.amount as amount, list.price as price from orderlist list inner join dish dish on dish.id = list.dishID";
                 break;
@@ -79,12 +86,9 @@ public class OrderAction {
                             resultSet.getInt("amount"),
                             resultSet.getDouble("price")));
                 }
-                if(order.size()!=0)
-                {
+                if (order.size() != 0) {
                     return order;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }

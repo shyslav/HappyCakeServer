@@ -2,7 +2,6 @@ package com.shyslav.selectCommands;
 
 import com.shyslav.database.connector;
 import com.shyslav.models.ReportsGraph;
-import com.shyslav.models.orderList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,8 +13,16 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 23.05.2016.
  */
 public class ChartAction {
+    /**
+     * Фунция формирования отчетности
+     * @param chart какой график строить
+     * @param dateStart - дата начала формирования отчета
+     * @param dateEnd - дата конца формирования отчета
+     * @return - обьект типа ReportsGraph который содержит описание и кол-во продуктов
+     */
     public static ArrayList<ReportsGraph> selectChart(String chart,String dateStart,String dateEnd) {
         String query = " ";
+        //генерировать отчет по текущему месяцу если на вход поступают пустые значения
         if(dateStart==null||dateEnd==null)
         {
             switch (chart){
@@ -33,6 +40,7 @@ public class ChartAction {
                     break;
             }
         }
+        //генерировать отчет по заданой дате
         else
         {
             switch (chart){
@@ -50,8 +58,8 @@ public class ChartAction {
                     break;
             }
         }
+        //Лист содержащий элементы графика
         ArrayList<ReportsGraph> charts = new ArrayList<>();
-
         try (Connection conn = connector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {

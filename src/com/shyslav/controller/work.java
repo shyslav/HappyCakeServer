@@ -37,6 +37,9 @@ public class work implements Runnable {
     }
 
     @Override
+    /**
+     * Начало работы программы, которая принимает запрос от клиента
+     */
     public void run() {
         try {
             //входящий
@@ -71,8 +74,14 @@ public class work implements Runnable {
         }
     }
 
+    /**
+     * Функция приема команды от клиента и правилами что делать после ее поступление
+     *
+     * @param splits - массив элементов команды
+     */
     private void commandCheck(String[] splits) {
         try {
+            //Подключение к серверу
             if (splits[0].equals("login")) {
                 ArrayList<employees> employees = login(splits[1], splits[2]);
                 if (employees != null && employees.size() == 1) {
@@ -81,6 +90,7 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+                //Команда на получение новостей
             } else if (splits[0].equals("selectNews")) {
                 ArrayList<news> news = NewsAction.selectNews(Integer.parseInt(splits[1]));
                 if (news != null) {
@@ -89,6 +99,7 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+                //Команда на получение категорий
             } else if (splits[0].equals("selectCategory")) {
                 ArrayList<category> category = CategoryAction.selectCategory(Integer.parseInt(splits[1]));
                 if (category != null) {
@@ -97,6 +108,7 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+                //Команда на получение блюд
             } else if (splits[0].equals("selectDish")) {
                 ArrayList<dish> dish = CategoryAction.selectDish(Integer.parseInt(splits[1]));
                 if (dish != null) {
@@ -105,6 +117,7 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+                //Команда на получение резервов
             } else if (splits[0].equals("selectReservation")) {
                 ArrayList<reservation> reservation = ReservationAction.selectReservation(Integer.parseInt(splits[1]));
                 if (reservation != null) {
@@ -113,6 +126,7 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
+                //Команда на получение предзаказов в заказе
             } else if (splits[0].equals("selectPreOrder")) {
                 ArrayList<preOrderTable> preOrderTables = ReservationAction.selectPreOrder(Integer.parseInt(splits[1]));
                 if (preOrderTables != null) {
@@ -121,7 +135,8 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("selectEmployees")) {
+                //Команда на получение сотрудников
+            } else if (splits[0].equals("selectEmployees")) {
                 ArrayList<employees> employees = EmployeeAction.selectEmployees(Integer.parseInt(splits[1]));
                 if (employees != null) {
                     objectOut.writeObject(employees);
@@ -129,8 +144,8 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }
-            else if (splits[0].equals("selectReports")) {
+                //Команда на получение отзывов
+            } else if (splits[0].equals("selectReports")) {
                 ArrayList<reports> reports = ReportsAction.selectReports(Integer.parseInt(splits[1]));
                 if (reports != null) {
                     objectOut.writeObject(reports);
@@ -138,8 +153,8 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }
-            else if (splits[0].equals("selectCafeCoordinte")) {
+                //Команда на получение кординат
+            } else if (splits[0].equals("selectCafeCoordinte")) {
                 ArrayList<cafeCoordinate> cafeCoordinates = EmployeeAction.selectcafeCoordinate(Integer.parseInt(splits[1]));
                 if (cafeCoordinates != null) {
                     objectOut.writeObject(cafeCoordinates);
@@ -147,7 +162,8 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("selectPositions")) {
+                //Команда на получение вакансий
+            } else if (splits[0].equals("selectPositions")) {
                 ArrayList<positions> positionses = EmployeeAction.selectPositions(Integer.parseInt(splits[1]));
                 if (positionses != null) {
                     objectOut.writeObject(positionses);
@@ -155,7 +171,8 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("selectOrders")) {
+                //Команда на получение заказов
+            } else if (splits[0].equals("selectOrders")) {
                 ArrayList<orders> orderses = OrderAction.selectOrders(Integer.parseInt(splits[1]));
                 if (orderses != null) {
                     objectOut.writeObject(orderses);
@@ -163,7 +180,8 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("selectOrderList")) {
+                //Команда на получение элементов заказа
+            } else if (splits[0].equals("selectOrderList")) {
                 ArrayList<orderList> orderList = OrderAction.selectorderList(Integer.parseInt(splits[1]));
                 if (orderList != null) {
                     objectOut.writeObject(orderList);
@@ -171,54 +189,57 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("deleteFromTable")) {
-                if (DeleteAction.delete(splits[1],splits[2]) != null) {
+                //Команда на удаление из таблицы
+            } else if (splits[0].equals("deleteFromTable")) {
+                if (DeleteAction.delete(splits[1], splits[2]) != null) {
                     objectOut.writeObject("done");
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("getValueToUpdate")) {
-                String update = UpdateAction.selectToUpdate(splits[1],splits[2],splits[3]);
+                //Команда на получение значения на апдейт
+            } else if (splits[0].equals("getValueToUpdate")) {
+                String update = UpdateAction.selectToUpdate(splits[1], splits[2], splits[3]);
                 if (update != null) {
                     objectOut.writeObject(update);
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }
-            else if (splits[0].equals("update")) {
+                //Команда на обновление
+            } else if (splits[0].equals("update")) {
                 String update = UpdateAction.update(splits);
                 if (update != null) {
                     objectOut.writeObject(update);
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }
-            else if (splits[0].equals("insert")) {
+                //Команда на вставку
+            } else if (splits[0].equals("insert")) {
                 String insert = UpdateAction.insert(splits);
                 if (insert != null) {
                     objectOut.writeObject(insert);
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }
-            else if (splits[0].equals("selectGrapgMonth")) {
-                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1],null,null);
+                //Команда на получение графиков по месяцу
+            } else if (splits[0].equals("selectGrapgMonth")) {
+                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1], null, null);
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
                     objectOut.flush();
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }
-            else if (splits[0].equals("selectGrapg")) {
-                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1],splits[2],splits[3]);
+                //Команда на получение графиков по дате
+            } else if (splits[0].equals("selectGrapg")) {
+                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1], splits[2], splits[3]);
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
                     objectOut.flush();
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if (splits[0].equals("selectCassir")) {
+                //Команда на инициализацию касира
+            } else if (splits[0].equals("selectCassir")) {
                 ArrayList<_Cassir> tmp = CasirAction.CasirAction();
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
@@ -226,12 +247,13 @@ public class work implements Runnable {
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if(splits[0].equals("readObj")){
+                //Команда на передачу на сервер обьекта
+            } else if (splits[0].equals("readObj")) {
                 try {
                     ArrayList<orderList> orders = (ArrayList<orderList>) objectInp.readObject();
                     System.out.println(orders.get(0).getDishName());
-                    System.out.println(splits[splits.length-1]);
-                    String str = CasirAction.CasirAdd(orders,splits[1],splits[2]);
+                    System.out.println(splits[splits.length - 1]);
+                    String str = CasirAction.CasirAdd(orders, splits[1], splits[2]);
                     if (orders != null) {
                         objectOut.writeObject(str);
                     } else {
@@ -240,16 +262,17 @@ public class work implements Runnable {
                 } catch (ClassNotFoundException e) {
                     System.out.println(e);
                 }
-            }else if (splits[0].equals("getCookList")) {
-                    Object tmp = cook.start();
+                //Команда на инициализцию повара
+            } else if (splits[0].equals("getCookList")) {
+                Object tmp = cook.start();
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
                     objectOut.flush();
                 } else {
                     objectOut.writeObject("not found");
                 }
-            }else if(splits[0].equals("compliteCookOrder"))
-            {
+                //Команда на закрытие заказа
+            } else if (splits[0].equals("compliteCookOrder")) {
                 cook.close(Integer.parseInt(splits[1]));
                 Main.sendToCook();
             }
@@ -258,6 +281,11 @@ public class work implements Runnable {
         }
     }
 
+    /**
+     * Функция удаления клиента из списка подключенных к серверу
+     *
+     * @param client - лист клиента для удаления
+     */
     public void delete(ArrayList<user> client) {
         System.out.println("Клиент Удален");
         for (int i = 0; i < client.size(); i++) {
@@ -267,19 +295,27 @@ public class work implements Runnable {
         }
     }
 
+    /**
+     * Функция логина и доступа к серверу
+     *
+     * @param username - имя пользователя
+     * @param password - пароль пользователя
+     * @return Лист сотрудника который успешно подключился к серверу
+     */
     public ArrayList<employees> login(String username, String password) {
         try (Connection conn = connector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery("select id, positionsID, cafeID, name, lastname, adress, birthdayDay, elogin, epassword from employees " +
                     " where elogin='" + username + "' and epassword='" + password + "'")) {
                 if (resultSet.next()) {
-                    //public user(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, ObjectOutputStream objectOut, ObjectInputStream objectInp, Socket sock, int positionId) {
+                    //Добавить в лист текущих клиентов подключившегося клиента с всеми параметрами для работы с ним
                     Main.client.add(new user(resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getString("lastname"),
-                            inputStream, scanner, outputStream,printWriter,objectOut,objectInp,
+                            inputStream, scanner, outputStream, printWriter, objectOut, objectInp,
                             incoming, resultSet.getInt("positionsID")));
                     ArrayList<employees> empl = new ArrayList<>();
+                    //Заполнить лист для передачи на клиента его всех данных
                     empl.add(new employees(resultSet.getInt("id"), resultSet.getInt("positionsID"), resultSet.getInt("cafeID"),
                             resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("adress"), resultSet.getDate("birthdayDay"),
                             resultSet.getString("elogin"), resultSet.getString("epassword")));

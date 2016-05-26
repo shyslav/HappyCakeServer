@@ -14,8 +14,14 @@ import java.util.Properties;
  * Created by Shyshkin Vladyslav on 27.03.2016.
  */
 public class connector {
+    /**
+     * Фукция подлкючения к базе
+     * @return драйвер подключения
+     * @throws SQLException
+     */
     public static Connection connect() throws SQLException {
         Properties prop = new Properties();
+        //Считать с файла значения для подключения к базе
         try(InputStream in = connector.class.getResourceAsStream("database.properties")){
             prop.load(in);
         } catch (IOException e) {
@@ -29,7 +35,6 @@ public class connector {
         String username = prop.getProperty("jdbc.username");
         String password = prop.getProperty("jdbc.password");
         return DriverManager.getConnection(url,username,password);
-
     }
 
 }

@@ -1,8 +1,6 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.database.connector;
-import com.shyslav.models.employees;
-import com.shyslav.models.preOrderTable;
 import com.shyslav.models.reports;
 
 import java.sql.Connection;
@@ -15,11 +13,16 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class ReportsAction {
+    /**
+     * Функция получения всех отзывов о ресторане
+     *
+     * @param id отзыва для выборки
+     * @return лист отзывов о ресторане
+     */
     public static ArrayList<reports> selectReports(int id) {
         ArrayList<reports> reports = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select * from reports";
                 break;
@@ -40,12 +43,9 @@ public class ReportsAction {
                             resultSet.getString("phone"),
                             resultSet.getString("vision")));
                 }
-                if(reports.size()!=0)
-                {
+                if (reports.size() != 0) {
                     return reports;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }

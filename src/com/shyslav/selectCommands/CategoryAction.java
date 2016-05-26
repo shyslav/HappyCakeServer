@@ -17,15 +17,21 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class CategoryAction {
+    /**
+     * Функция получения данных из категории
+     * @param id ид категории
+     * @return лист категорий
+     */
     public static ArrayList<category> selectCategory(int id) {
         ArrayList<category> category = new ArrayList<>();
         String query = " ";
         switch (id)
         {
+            //Получить все категоии из базы
             case 0:
                 query = "select * from category";
                 break;
-
+            //Получить категорию по id
             default:
                 query = "select * from category where id = "+id;
                 break;
@@ -54,16 +60,25 @@ public class CategoryAction {
             return null;
         }
     }
+
+    /**
+     * Функция получения блюда из базы
+     * @param id ид блюда для селекта
+     * @return лист блюд
+     */
     public static ArrayList<dish> selectDish(int id) {
         ArrayList<dish> dish = new ArrayList<>();
+        //В поле sell записывается скидка с таблицы hotprice
         String query = " ";
         switch (id)
         {
             case 0:
+                //Все блюда
                 query = "select id as idfromdish, categoryID, name, description, amount, price, image, readyORnot, (select percent from hotprice where dishID = idfromdish and dateEnd>=curdate() ) as sell from dish";
                 break;
 
             default:
+                //Блюда по категории
                 query = "select id as idfromdish, categoryID, name, description, amount, price, image, readyORnot, (select percent from hotprice where dishID = idfromdish and dateEnd>=curdate() ) as sell from dish  where categoryID = " + id;
                 break;
         }

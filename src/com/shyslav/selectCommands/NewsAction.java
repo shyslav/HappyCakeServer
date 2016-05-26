@@ -1,6 +1,7 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.database.connector;
+import com.shyslav.models.news;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,9 +13,14 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class NewsAction {
-    public static ArrayList<com.shyslav.models.news> selectNews(int id)
+    /**
+     * Функция получения всех новостей ресторана которые отображаются на сайте
+     * @param id - ид новости
+     * @return лист новостей
+     */
+    public static ArrayList<news> selectNews(int id)
     {
-        ArrayList<com.shyslav.models.news> news = new ArrayList<>();
+        ArrayList<news> news = new ArrayList<>();
         String query = " ";
         switch (id)
         {

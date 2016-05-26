@@ -15,11 +15,16 @@ import java.util.ArrayList;
  * Created by Shyshkin Vladyslav on 16.05.2016.
  */
 public class EmployeeAction {
+    /**
+     * Функция получения всех данных по сотрудниках
+     *
+     * @param id - ид сотрудника по которому можно сделать выборку
+     * @return - лист сотрудников
+     */
     public static ArrayList<employees> selectEmployees(int id) {
         ArrayList<employees> employees = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select * from employees";
                 break;
@@ -43,12 +48,9 @@ public class EmployeeAction {
                             resultSet.getString("elogin"),
                             resultSet.getString("epassword")));
                 }
-                if(employees.size()!=0)
-                {
+                if (employees.size() != 0) {
                     return employees;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }
@@ -57,11 +59,17 @@ public class EmployeeAction {
             return null;
         }
     }
+
+    /**
+     * Функция получения всех данных по расположению кафе
+     *
+     * @param id - ид кафе в базе
+     * @return лист размещения кафе в базе
+     */
     public static ArrayList<cafeCoordinate> selectcafeCoordinate(int id) {
         ArrayList<cafeCoordinate> cafeCoordinate = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select * from cafecoordinate";
                 break;
@@ -80,12 +88,9 @@ public class EmployeeAction {
                             resultSet.getString("mobilePhone"),
                             resultSet.getString("cafeemail")));
                 }
-                if(cafeCoordinate.size()!=0)
-                {
+                if (cafeCoordinate.size() != 0) {
                     return cafeCoordinate;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }
@@ -94,11 +99,17 @@ public class EmployeeAction {
             return null;
         }
     }
+
+    /**
+     * Получение позиций(рабочих мест) ресторана
+     *
+     * @param id - ид позиции
+     * @return - лист позиций
+     */
     public static ArrayList<positions> selectPositions(int id) {
         ArrayList<positions> positions = new ArrayList<>();
         String query = " ";
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 query = "select * from positions";
                 break;
@@ -116,12 +127,9 @@ public class EmployeeAction {
                             resultSet.getString("name"),
                             resultSet.getDouble("salary")));
                 }
-                if(positions.size()!=0)
-                {
+                if (positions.size() != 0) {
                     return positions;
-                }
-                else
-                {
+                } else {
                     return null;
                 }
             }

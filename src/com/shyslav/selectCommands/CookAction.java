@@ -14,11 +14,21 @@ import java.util.Date;
  */
 public class CookAction {
     public LinkedList<CookOrder> queue = new LinkedList<>();
+
+    /**
+     * Функция которая начинает работу повара
+     * @return не закрытые заказы на текущий момент
+     */
     public LinkedList<CookOrder> start()
     {
         selectFromOrderList();
         return queue;
     }
+
+    /**
+     * Функция получения всех данных незакрытых заказов
+     * @return лист незакрытых заказов
+     */
     public LinkedList<CookOrder> get()
     {
         if(selectFromOrderList())
@@ -27,60 +37,21 @@ public class CookAction {
         }
         return null;
     }
+
+    /**
+     * Функция закрытия заказа в базе
+     * @param orders № заказа котрый выполнил повар
+     */
     public void close(int orders)
     {
-        UpdateAction.update(new String [] {"update:","orders",String.valueOf(orders),"compliteORnot = '+'"}).equals("done");
+        //команда, таблица, №заказа, поле котрое нужно изменить
+        UpdateAction.update(new String [] {"update:","orders",String.valueOf(orders),"compliteORnot = '+'"});
     }
 
-//    private boolean selectFromOrderList(String orderID)
-//    {
-//        queue.clear();
-//        String query = "";
-//        switch (orderID)
-//        {
-//            case "0":
-//                query = "select ords.odate as date ,od.id as id,od.orderID as orderid,od.dishID as dishid,ds.name as dishname,od.amount as amount,od.price as price from orderlist od\n" +
-//                        " inner join dish ds on ds.id = od.dishID \n" +
-//                        " inner join orders ords on ords.id=od.orderID\n" +
-//                        " where od.orderID in (select id from orders where compliteORnot = '-' order by odate asc)" +
-//                        " order by date asc";
-//            break;
-//            default:
-//                query = "select ords.odate as date ,od.id as id,od.orderID as orderid,od.dishID as dishid,ds.name as dishname,od.amount as amount,od.price as price from orderlist od\n" +
-//                        " inner join dish ds on ds.id = od.dishID \n" +
-//                        " inner join orders ords on ords.id=od.orderID\n" +
-//                        " where od.orderID in (select id from orders where compliteORnot = '-' order by odate asc)\n" +
-//                        " and ords.id = " +orderID + " order by date asc";
-//                break;
-//        }
-//           try (Connection conn = connector.connect()) {
-//            Statement statement = conn.createStatement();
-//            try (ResultSet resultSet = statement.executeQuery(query)) {
-//                boolean tmp = false;
-//                while (resultSet.next()) {
-//                    queue.add(new CookOrder(
-//                            resultSet.getTimestamp("date"),
-//                            resultSet.getInt("id"),
-//                            resultSet.getInt("orderid"),
-//                            resultSet.getInt("dishid"),
-//                            resultSet.getString("dishname"),
-//                            resultSet.getInt("amount"),
-//                            resultSet.getDouble("price")));
-//                    tmp = true;
-//                }
-//                if(tmp==true)
-//                {
-//                    return true;
-//                }
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return false;
-//    }
-
-
-
+    /**
+     * Функция селекта всех данных необходимых для работы повара
+     * @return лист всех заказов которе нужно выполнить повару
+     */
     private boolean selectFromOrderList()
     {
         queue.clear();
@@ -94,6 +65,7 @@ public class CookAction {
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 boolean tmp = false;
                 while (resultSet.next()) {
+                    //Вытащить все заказы для текущего заказа
                     ArrayList orders = selectOrderListCook(resultSet.getInt("id"));
                     if(orders!=null) {
                         queue.add(new CookOrder(resultSet.getInt("id"),
@@ -116,6 +88,12 @@ public class CookAction {
         }
         return false;
     }
+
+    /**
+     * Селект всех элементов заказа
+     * @param id номер заказа для которого производить выборку
+     * @return лист элементов в заказе для повара
+     */
     private ArrayList<orderListCook> selectOrderListCook(int id)
     {
         ArrayList<orderListCook> ord = new ArrayList<>();

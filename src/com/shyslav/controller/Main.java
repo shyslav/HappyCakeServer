@@ -14,15 +14,20 @@ import java.util.Properties;
 public class Main {
     public static ArrayList<user> client = new ArrayList<>();
     public static Properties prop = new Properties();
+
+    /**
+     * Начало работы сервера
+     * @param args начальные аргументы программы
+     */
     public static void main(String[] args) {
         int i = 0;
         try {
-            loadProp();
             ServerSocket serverSocket = new ServerSocket(8189);
             while (true)
             {
+                //подключить клиента
                 Socket incoming = serverSocket.accept();
-                //client.add(new user(0," name", "lastName"+i, incoming, 0));
+                //создание нового потока для каждого пользователя
                 Runnable runnable = new work(incoming);
                 Thread tr = new Thread(runnable);
                 tr.start();
@@ -34,29 +39,34 @@ public class Main {
         }
     }
 
-    public static void loadProp() {
-        try(InputStream in = Main.class.getResourceAsStream("commands.properties")){
-            prop.load(in);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
+    /**
+     * Запрос отправки обновлений на повара
+     */
     public static void sendToCook()
     {
         CookAction cookAction = new CookAction();
         sendMessageToAllUser(cookAction.get(),3);
     }
+
+    /**
+     * Функция отправки обьекта на клиента
+     * @param o - обьект для отправки
+     * @param toPosition - с каким ид должности пользователям отправлять
+     */
     private static void sendMessageToAllUser(Object o, int toPosition){
         for (int i = 0; i < Main.client.size(); i++) {
+            //Позиция юзера соответствует входящей позиции для совершения отправки
             if(Main.client.get(i).getPositionId()==toPosition)
             {
                 try {
                     Main.client.get(i).getPrintWriter().println("updateCook");
                     try {
+                        //Задержка перед отправкой 2 команды
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    //Отправить на клиента обьект
                     Main.client.get(i).getObjectOut().writeObject(o);
                     Main.client.get(i).getObjectOut().flush();
                 } catch (IOException e) {
