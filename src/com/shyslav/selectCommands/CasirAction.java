@@ -61,11 +61,11 @@ public class CasirAction {
                         String.valueOf(item.getAmount()),
                         String.valueOf(item.getPrice())});
             }
-            Main.sendToCook(od.getId());
             if (od.getCompliteOrNot().equals("+")) {
                 return "Отдайте клиенту его заказ";
             } else
             {
+                Main.sendToCook();
                 return "Некоторые из блюд нужно готовить";
             }
         }

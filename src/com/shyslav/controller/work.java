@@ -19,6 +19,7 @@ import java.util.Scanner;
  * Created by Shyshkin Vladyslav on 27.03.2016.
  */
 public class work implements Runnable {
+    private CookAction cook = new CookAction();
     private Socket incoming;
     //входящее поток
     private InputStream inputStream = null;
@@ -57,7 +58,7 @@ public class work implements Runnable {
             System.out.println(e);
         } finally {
             try {
-                //delete(Main.client);
+                delete(Main.client);
                 inputStream.close();
                 scanner.close();
                 outputStream.close();
@@ -239,6 +240,18 @@ public class work implements Runnable {
                 } catch (ClassNotFoundException e) {
                     System.out.println(e);
                 }
+            }else if (splits[0].equals("getCookList")) {
+                    Object tmp = cook.start();
+                if (tmp != null) {
+                    objectOut.writeObject(tmp);
+                    objectOut.flush();
+                } else {
+                    objectOut.writeObject("not found");
+                }
+            }else if(splits[0].equals("compliteCookOrder"))
+            {
+                cook.close(Integer.parseInt(splits[1]));
+                Main.sendToCook();
             }
         } catch (IOException e) {
             System.out.println(e);

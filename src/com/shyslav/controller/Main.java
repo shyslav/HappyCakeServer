@@ -41,17 +41,24 @@ public class Main {
             System.out.println(e);
         }
     }
-    public static void sendToCook(int id)
+    public static void sendToCook()
     {
         CookAction cookAction = new CookAction();
-        sendMessageToAllUser(cookAction.add(id),2);
+        sendMessageToAllUser(cookAction.get(),3);
     }
     private static void sendMessageToAllUser(Object o, int toPosition){
         for (int i = 0; i < Main.client.size(); i++) {
             if(Main.client.get(i).getPositionId()==toPosition)
             {
                 try {
-                    Main.client.get(i).getObjectOut().writeUnshared(o);
+                    Main.client.get(i).getPrintWriter().println("updateCook");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Main.client.get(i).getObjectOut().writeObject(o);
+                    Main.client.get(i).getObjectOut().flush();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
