@@ -42,10 +42,10 @@ public class Main {
     /**
      * Запрос отправки обновлений на повара
      */
-    public static void sendToCook()
+    public static String sendToCook()
     {
         CookAction cookAction = new CookAction();
-        sendMessageToAllUser(cookAction.get(),3);
+        return sendMessageToAllUser(cookAction.get(),3);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Main {
      * @param o - обьект для отправки
      * @param toPosition - с каким ид должности пользователям отправлять
      */
-    private static void sendMessageToAllUser(Object o, int toPosition){
+    private static String sendMessageToAllUser(Object o, int toPosition){
         for (int i = 0; i < Main.client.size(); i++) {
             //Позиция юзера соответствует входящей позиции для совершения отправки
             if(Main.client.get(i).getPositionId()==toPosition)
@@ -65,14 +65,18 @@ public class Main {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        return "sleep Error";
                     }
                     //Отправить на клиента обьект
                     Main.client.get(i).getObjectOut().writeObject(o);
                     Main.client.get(i).getObjectOut().flush();
+                    return "send";
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return "SendError";
                 }
             }
         }
+        return "noUsers";
     }
 }
