@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="HappyCakeServer:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="bd435d5b-95ea-4404-ac28-f4cc59ea309a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/Testing/CasirActionTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/shyslav/Testing/ConnectorTesting.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HappyCakeServer.iml" afterPath="$PROJECT_DIR$/HappyCakeServer.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/controller/Main.java" afterPath="$PROJECT_DIR$/src/com/shyslav/controller/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/shyslav/database/database.properties" afterPath="$PROJECT_DIR$/src/com/shyslav/database/database.properties" />
     </list>
     <ignored path="HappyCakeServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="79" column="23" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="23" />
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -44,10 +47,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="232" column="45" selection-start-line="232" selection-start-column="45" selection-end-line="232" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1464289768612" expanded="true" signature="12894:13086" placeholder="select id, p... employees" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,15 +82,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
               <folding>
-                <marker date="1464287308874" expanded="true" signature="816:839" placeholder="select * fro... employees" />
-                <marker date="1464287308874" expanded="true" signature="912:948" placeholder="select * fro... employees" />
-                <marker date="1464287308874" expanded="true" signature="2497:2511" placeholder="select * fro... employees" />
-                <marker date="1464287308874" expanded="true" signature="2497:2521" placeholder="select * fro... cafeCoordi" />
-                <marker date="1464287308874" expanded="true" signature="2497:2525" placeholder="select * fro... cafecoordinate" />
-                <marker date="1464287308874" expanded="true" signature="2598:2639" placeholder="select * fro... employees" />
-                <marker date="1464287308874" expanded="true" signature="3870:3884" placeholder="select * fro... employees" />
-                <marker date="1464287308874" expanded="true" signature="3870:3893" placeholder="select * fro... positions" />
-                <marker date="1464287308874" expanded="true" signature="3966:4002" placeholder="select * fro... employees" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,30 +98,41 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="database.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/shyslav/database/database.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.025252525">
+              <caret line="1" column="99" selection-start-line="1" selection-start-column="99" selection-end-line="1" selection-end-column="99" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ConnectorTesting.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/ConnectorTesting.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#412#413#0" expanded="true" />
-                <element signature="e#449#450#0" expanded="true" />
-                <element signature="e#494#495#0" expanded="true" />
-                <element signature="e#567#568#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#412#413#0" expanded="false" />
+                <element signature="e#449#450#0" expanded="false" />
+                <element signature="e#494#495#0" expanded="false" />
+                <element signature="e#567#568#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CasirActionTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CasirActionTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/CasirActionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17708333">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
               <folding>
-                <element signature="e#712#713#0" expanded="true" />
-                <element signature="e#767#768#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#712#713#0" expanded="false" />
+                <element signature="e#767#768#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -162,7 +165,6 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/commands.properties" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/command.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/database/commands.properties" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/database/database.properties" />
         <option value="$PROJECT_DIR$/src/com/shyslav/models/news.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/category.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/selectCommands/news.java" />
@@ -195,8 +197,9 @@
         <option value="$PROJECT_DIR$/src/com/shyslav/controller/work.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/database/connector.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/Testing/ConnectorTesting.java" />
-        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Main.java" />
         <option value="$PROJECT_DIR$/src/com/shyslav/Testing/CasirActionTest.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/controller/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/shyslav/database/database.properties" />
       </list>
     </option>
   </component>
@@ -213,10 +216,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1616" />
-    <option name="height" value="886" />
+    <option name="x" value="49" />
+    <option name="y" value="924" />
+    <option name="width" value="1551" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -243,6 +246,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -258,6 +262,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="HappyCakeServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HappyCakeServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HappyCakeServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -391,9 +409,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -404,10 +421,10 @@
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HappyCake" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -421,7 +438,7 @@
       <recent name="P:\github\HappyCakeServer\src\com\shyslav\models" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CasirActionTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="com.shyslav.controller.Main" />
@@ -898,9 +915,9 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.CasirActionTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ConnectorTesting" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.CasirActionTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ConnectorTesting" />
       </list>
     </recent_temporary>
   </component>
@@ -920,6 +937,9 @@
       <workItem from="1464432296647" duration="526000" />
       <workItem from="1464673968243" duration="669000" />
       <workItem from="1465271325116" duration="2996000" />
+      <workItem from="1466017632327" duration="749000" />
+      <workItem from="1466182614986" duration="1643000" />
+      <workItem from="1466194343184" duration="4648000" />
     </task>
     <servers />
   </component>
@@ -956,23 +976,23 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154029000" />
+    <option name="totallyTimeSpent" value="161069000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
-    <editor active="true" />
+    <frame x="49" y="924" width="1551" height="876" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32793018" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22265123" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22194514" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.313125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3127015" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1047,6 +1067,32 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/ConnectorTesting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#412#413#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
+            <element signature="e#494#495#0" expanded="false" />
+            <element signature="e#567#568#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/CasirActionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#712#713#0" expanded="false" />
+            <element signature="e#767#768#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/orders.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1069,10 +1115,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="212" column="98" selection-start-line="212" selection-start-column="98" selection-end-line="212" selection-end-column="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1464289768612" expanded="true" signature="12894:13086" placeholder="select id, p... employees" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1094,20 +1137,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1464286341911" expanded="true" signature="995:1290" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="1381:1676" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="1768:2031" placeholder="select odate... orders" />
-            <marker date="1464286341911" expanded="true" signature="2238:2447" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2238:2448" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2238:2498" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2577:2847" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2586:2846" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2935:3102" placeholder="select sum(o... orders" />
-            <marker date="1464286341911" expanded="true" signature="2935:3122" placeholder="select sum(o... orders" />
-            <marker date="1464286341911" expanded="true" signature="2935:3160" placeholder="select sum(o... orders" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1123,10 +1152,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="36" selection-start-line="67" selection-start-column="36" selection-end-line="67" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1464289768612" expanded="true" signature="12894:13086" placeholder="select id, p... employees" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1166,13 +1192,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/database/database.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08292683">
-          <caret line="3" column="7" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1247,21 +1266,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3326572">
-          <caret line="652" column="0" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_77/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="744" column="0" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/models/orderList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1322,15 +1326,6 @@
           <caret line="64" column="38" selection-start-line="64" selection-start-column="7" selection-end-line="64" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1464286059485" expanded="true" signature="866:880" placeholder="select * fro... news" />
-            <marker date="1464286059485" expanded="true" signature="866:888" placeholder="select * fro... category" />
-            <marker date="1464286059485" expanded="true" signature="999:1033" placeholder="select * fro... news" />
-            <marker date="1464286059485" expanded="true" signature="2340:2524" placeholder="select * fro... category" />
-            <marker date="1464286059485" expanded="true" signature="2340:2528" placeholder="select id as... dish" />
-            <marker date="1464286059485" expanded="true" signature="2431:2508" placeholder="select perce... hotprice" />
-            <marker date="1464286059485" expanded="true" signature="2638:2645" placeholder="select * fro... category" />
-            <marker date="1464286059485" expanded="true" signature="2638:2847" placeholder="select id as... dish" />
-            <marker date="1464286059485" expanded="true" signature="2729:2806" placeholder="select perce... hotprice" />
           </folding>
         </state>
       </provider>
@@ -1339,20 +1334,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37935844">
           <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1464286341911" expanded="true" signature="995:1290" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="1381:1676" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="1768:2031" placeholder="select odate... orders" />
-            <marker date="1464286341911" expanded="true" signature="2238:2447" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2238:2448" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2238:2498" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2577:2847" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2586:2846" placeholder="select di.na... orders" />
-            <marker date="1464286341911" expanded="true" signature="2935:3102" placeholder="select sum(o... orders" />
-            <marker date="1464286341911" expanded="true" signature="2935:3122" placeholder="select sum(o... orders" />
-            <marker date="1464286341911" expanded="true" signature="2935:3160" placeholder="select sum(o... orders" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1360,11 +1341,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="34" />
-          <folding>
-            <marker date="1464287030509" expanded="true" signature="576:588" placeholder="delete from " />
-            <marker date="1464287030509" expanded="true" signature="576:589" placeholder="delete from " />
-            <marker date="1464287030509" expanded="true" signature="576:614" placeholder="delete from " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1372,10 +1349,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09902371">
           <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="78" />
-          <folding>
-            <marker date="1464287393256" expanded="true" signature="698:716" placeholder="select * fro... news" />
-            <marker date="1464287393256" expanded="true" signature="789:819" placeholder="select * fro... news" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1383,13 +1356,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="58" column="7" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
-          <folding>
-            <marker date="1464287595049" expanded="true" signature="736:757" placeholder="select * fro... orders" />
-            <marker date="1464287595049" expanded="true" signature="830:863" placeholder="select * fro... orders" />
-            <marker date="1464287595049" expanded="true" signature="2117:2124" placeholder="select * fro... orders" />
-            <marker date="1464287595049" expanded="true" signature="2117:2317" placeholder="select * fro... orderL" />
-            <marker date="1464287595049" expanded="true" signature="2390:2607" placeholder="select * fro... orders" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1397,10 +1363,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37935844">
           <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding>
-            <marker date="1464287662718" expanded="true" signature="699:720" placeholder="select * fro... reports" />
-            <marker date="1464287662718" expanded="true" signature="793:827" placeholder="select * fro... reports" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1415,14 +1378,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50209206">
           <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
-          <folding>
-            <marker date="1464288591774" expanded="true" signature="652:706" placeholder="select missi... missingValue" />
-            <marker date="1464288591774" expanded="true" signature="2187:2255" placeholder="update missi... " />
-            <marker date="1464288591774" expanded="true" signature="3422:3514" placeholder="insert into missingValue... " />
-            <marker date="1464288591774" expanded="true" signature="3433:3457" placeholder="update missi... " />
-            <marker date="1464288591774" expanded="true" signature="3433:3476" placeholder="update missi... " />
-            <marker date="1464288591774" expanded="true" signature="3433:3514" placeholder="update missi... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1437,13 +1393,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="69" column="43" selection-start-line="69" selection-start-column="43" selection-end-line="69" selection-end-column="43" />
-          <folding>
-            <marker date="1464287906669" expanded="true" signature="834:859" placeholder="select * fro... reservation" />
-            <marker date="1464287906669" expanded="true" signature="932:970" placeholder="select * fro... reservation" />
-            <marker date="1464287906669" expanded="true" signature="2521:2528" placeholder="select * fro... reservation" />
-            <marker date="1464287906669" expanded="true" signature="2521:2780" placeholder="select * fro... preorder" />
-            <marker date="1464287906669" expanded="true" signature="2853:3126" placeholder="select * fro... reservation" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1469,10 +1419,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="232" column="45" selection-start-line="232" selection-start-column="45" selection-end-line="232" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1464289768612" expanded="true" signature="12894:13086" placeholder="select id, p... employees" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1491,16 +1438,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
           <folding>
-            <marker date="1464287308874" expanded="true" signature="816:839" placeholder="select * fro... employees" />
-            <marker date="1464287308874" expanded="true" signature="912:948" placeholder="select * fro... employees" />
-            <marker date="1464287308874" expanded="true" signature="2497:2511" placeholder="select * fro... employees" />
-            <marker date="1464287308874" expanded="true" signature="2497:2521" placeholder="select * fro... cafeCoordi" />
-            <marker date="1464287308874" expanded="true" signature="2497:2525" placeholder="select * fro... cafecoordinate" />
-            <marker date="1464287308874" expanded="true" signature="2598:2639" placeholder="select * fro... employees" />
-            <marker date="1464287308874" expanded="true" signature="3870:3884" placeholder="select * fro... employees" />
-            <marker date="1464287308874" expanded="true" signature="3870:3893" placeholder="select * fro... positions" />
-            <marker date="1464287308874" expanded="true" signature="3966:4002" placeholder="select * fro... employees" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/CasirAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029513888">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1512,28 +1459,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/selectCommands/CasirAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.029513888">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <marker date="1464285027397" expanded="true" signature="719:741" placeholder="select * fro... category" />
-            <marker date="1464285027397" expanded="true" signature="3641:3680" placeholder="select * fro... orders" />
-            <marker date="1464285027397" expanded="true" signature="3641:3718" placeholder="select * fro... orders" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/ConnectorTesting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#449#450#0" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
-            <element signature="e#567#568#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#412#413#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
+            <element signature="e#494#495#0" expanded="false" />
+            <element signature="e#567#568#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/CasirActionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#712#713#0" expanded="false" />
+            <element signature="e#767#768#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1541,19 +1488,16 @@
     <entry file="file://$PROJECT_DIR$/src/com/shyslav/controller/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="23" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="23" />
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shyslav/Testing/CasirActionTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/shyslav/database/database.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17708333">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="16" />
-          <folding>
-            <element signature="e#712#713#0" expanded="true" />
-            <element signature="e#767#768#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.025252525">
+          <caret line="1" column="99" selection-start-line="1" selection-start-column="99" selection-end-line="1" selection-end-column="99" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1563,10 +1507,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>HappyCakeServer:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

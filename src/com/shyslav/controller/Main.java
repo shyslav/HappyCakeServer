@@ -21,8 +21,9 @@ public class Main {
      */
     public static void main(String[] args) {
         int i = 0;
+        System.out.println("Server was started. Waiting for a clients...");
         try {
-            ServerSocket serverSocket = new ServerSocket(8189);
+            ServerSocket serverSocket = new ServerSocket(2777);
             while (true)
             {
                 //подключить клиента
@@ -36,6 +37,7 @@ public class Main {
         }catch (IOException ex)
         {
             System.out.println(ex);
+            System.out.println("Server was crashed. STOP!!!");
         }
     }
 
