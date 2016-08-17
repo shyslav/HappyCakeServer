@@ -1,0 +1,40 @@
+.buttonClass
+{
+    -fx-background-color: #fec894;
+}
+.button:hover
+{
+    -fx-background-color: #FF9572;
+    -fx-cursor: hand;
+}
+
+.textareastyle .content{
+    -fx-background-color: #ffc4a2;
+}
+
+.personalText
+{
+    -fx-font-size: 20px;
+}
+Button
+{
+    -fx-background-color: #ffb49b;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-color: white;
+    -fx-border-radius: 5;
+    -fx-border-width: 2px;
+
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 5;
+}
+Button:hover
+{
+    -fx-background-color: #FF9572;
+    -fx-cursor: hand;
+
+}
+.closeCheck{
+    -fx-background-color: rgba(78, 121, 110, 0.69);
+}
