@@ -1,11 +1,9 @@
 package com.shyslav.controller;
 
-import com.shyslav.database.connector;
 import com.shyslav.models.user;
 import com.shyslav.selectCommands.CookAction;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class Main {
      * @param args начальные аргументы программы
      */
     public static void main(String[] args) {
-        int i = 0;
+        System.out.println("Server has been started");
         try {
             ServerSocket serverSocket = new ServerSocket(8189);
             while (true)
@@ -31,7 +29,6 @@ public class Main {
                 Runnable runnable = new work(incoming);
                 Thread tr = new Thread(runnable);
                 tr.start();
-                i++;
             }
         }catch (IOException ex)
         {

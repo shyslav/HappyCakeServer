@@ -1,58 +1,36 @@
-package com.shyslav.Testing;
-
 import com.shyslav.database.connector;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by Shyshkin Vladyslav on 07.06.2016.
  */
 public class ConnectorTesting {
-    connector con;
-
-    @Before
-    public void initial() {
-        con = new connector();
-    }
-
     @Test
-    public void notInitialize() {
-        Assert.assertNotNull("Обьект не проинициализирован", con);
-    }
-
-    @Test
-    public void lostData() {
+    public void databaseConnection() {
         try {
-            Assert.assertNotNull("Данные не введены. Конекшн не создан", con.connect().getMetaData());
-        } catch (SQLException ex) {
-            Assert.fail("Данные не введены. Конекшн не создан");
-        }
-    }
-
-    @Test
-    public void lostConnection() {
-        Connection cont = null;
-        try {
-            cont = con.connect();
+            org.junit.Assert.assertNotNull("connection null point",connector.connect());
         } catch (SQLException e) {
-            Assert.fail("Ошибка подключения. Подключение не возможно. Не верное подключение");
+            System.out.println(e);
+            org.junit.Assert.fail("connection error");
         }
     }
-
     @Test
-    public void warningsConnection() {
-        try (Connection cont = con.connect()) {
-            Assert.assertNull(cont.getWarnings());
+    public void login(){
+        try (Connection conn = connector.connect()) {
+            Statement statement = conn.createStatement();
+            String username = "ivanov";
+            String password = "ivanov";
+            try (ResultSet resultSet = statement.executeQuery("select id, positionsID, cafeID, name, lastname, adress, birthdayDay, elogin, epassword from employees " +
+                    " where elogin='" + username + "' and epassword='" + password + "'")) {
+                org.junit.Assert.assertNotNull("Not found user",resultSet);
+            }
         } catch (SQLException e) {
-            Assert.fail("Ошибка подключения");
+            System.out.println(e);
+            org.junit.Assert.fail("mysql connection error");
         }
     }
-
-
 }
