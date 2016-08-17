@@ -14,7 +14,7 @@ public class Main {
     public static Properties prop = new Properties();
 
     /**
-     * Начало работы сервера
+     * Start working with server
      * @param args начальные аргументы программы
      */
     public static void main(String[] args) {
