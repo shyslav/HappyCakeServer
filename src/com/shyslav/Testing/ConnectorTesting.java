@@ -1,6 +1,5 @@
 import com.shyslav.database.connector;
 import junit.framework.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.*;
@@ -12,10 +11,10 @@ public class ConnectorTesting {
     @Test
     public void databaseConnection() {
         try {
-            org.junit.Assert.assertNotNull("connection null point",connector.connect());
+           Assert.assertNotNull("connection null point",connector.connect());
         } catch (SQLException e) {
             System.out.println(e);
-            org.junit.Assert.fail("connection error");
+            Assert.fail("connection error");
         }
     }
     @Test
@@ -26,11 +25,11 @@ public class ConnectorTesting {
             String password = "ivanov";
             try (ResultSet resultSet = statement.executeQuery("select id, positionsID, cafeID, name, lastname, adress, birthdayDay, elogin, epassword from employees " +
                     " where elogin='" + username + "' and epassword='" + password + "'")) {
-                org.junit.Assert.assertNotNull("Not found user",resultSet);
+               Assert.assertNotNull("Not found user",resultSet);
             }
         } catch (SQLException e) {
             System.out.println(e);
-            org.junit.Assert.fail("mysql connection error");
+            Assert.fail("mysql connection error");
         }
     }
 }
