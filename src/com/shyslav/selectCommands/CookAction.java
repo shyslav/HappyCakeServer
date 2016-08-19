@@ -1,13 +1,11 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.CookOrder;
 import com.shyslav.models.orderListCook;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 /**
  * Created by Shyshkin Vladyslav on 25.05.2016.
@@ -60,7 +58,7 @@ public class CookAction {
                         " inner join employees emp on ords.employeeID = emp.id\n" +
                         " where ords.compliteORnot = '-'\n" +
                         " order by ords.odate asc";
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 boolean tmp = false;
@@ -102,7 +100,7 @@ public class CookAction {
                 " inner join dish ds on ds.id = odlist.dishID\n" +
                 " where odlist.orderID = "+id+
                 " order by  odlist.id asc";
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

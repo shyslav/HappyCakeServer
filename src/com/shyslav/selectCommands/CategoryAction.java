@@ -1,11 +1,8 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.controller.Main;
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.category;
 import com.shyslav.models.dish;
-import com.shyslav.models.employees;
-import com.shyslav.models.user;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,7 +33,7 @@ public class CategoryAction {
                 query = "select * from category where id = "+id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
@@ -82,7 +79,7 @@ public class CategoryAction {
                 query = "select id as idfromdish, categoryID, name, description, amount, price, image, readyORnot, (select percent from hotprice where dishID = idfromdish and dateEnd>=curdate() ) as sell from dish  where categoryID = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

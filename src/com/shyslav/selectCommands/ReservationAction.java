@@ -1,8 +1,6 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
-import com.shyslav.models.dish;
-import com.shyslav.models.employees;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.preOrderTable;
 import com.shyslav.models.reservation;
 
@@ -34,7 +32,7 @@ public class ReservationAction {
                 query = "select * from reservation where id  = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
@@ -83,7 +81,7 @@ public class ReservationAction {
                         "inner join reservation r on r.id=p.reservID where r.id  = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

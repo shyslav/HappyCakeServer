@@ -1,10 +1,8 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
-import com.shyslav.models.dish;
+import com.shyslav.database.DBConnector;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -21,7 +19,7 @@ public class DeleteAction {
     public static String delete(String tableName, String id)
     {
         String query  = "delete from  "+tableName +" where id =" +id;
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             //System.out.println(query);
             statement.execute(query);

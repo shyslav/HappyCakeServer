@@ -1,10 +1,9 @@
 package com.shyslav.controller;
 
 
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.*;
 import com.shyslav.selectCommands.*;
-import javafx.scene.chart.Chart;
 
 import java.io.*;
 import java.net.Socket;
@@ -303,7 +302,7 @@ public class WorkThread implements Runnable {
      * @return Лист сотрудника который успешно подключился к серверу
      */
     public ArrayList<employees> login(String username, String password) {
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery("select id, positionsID, cafeID, name, lastname, adress, birthdayDay, elogin, epassword from employees " +
                     " where elogin='" + username + "' and epassword='" + password + "'")) {

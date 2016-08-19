@@ -1,4 +1,4 @@
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class ConnectorTesting {
     @Test
     public void databaseConnection() {
         try {
-           Assert.assertNotNull("connection null point",connector.connect());
+           Assert.assertNotNull("connection null point", DBConnector.connect());
         } catch (SQLException e) {
             System.out.println(e);
             Assert.fail("connection error");
@@ -19,7 +19,7 @@ public class ConnectorTesting {
     }
     @Test
     public void login(){
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             String username = "ivanov";
             String password = "ivanov";

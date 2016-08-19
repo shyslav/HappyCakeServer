@@ -1,7 +1,7 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.controller.Main;
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models._Cassir;
 import com.shyslav.models.orderList;
 import com.shyslav.models.orders;
@@ -23,7 +23,7 @@ public class CasirAction {
     public static ArrayList<_Cassir> CasirAction() {
         ArrayList<_Cassir> cas = new ArrayList<>();
         String query = "select * from category";
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
@@ -94,7 +94,7 @@ public class CasirAction {
     {
         orders od = null;
         String query = "select * from orders where employeeID = "+cassirID+" order by id desc limit 1";
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

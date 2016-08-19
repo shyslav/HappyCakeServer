@@ -1,6 +1,6 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.ReportsGraph;
 
 import java.sql.Connection;
@@ -60,7 +60,7 @@ public class ChartAction {
         }
         //Лист содержащий элементы графика
         ArrayList<ReportsGraph> charts = new ArrayList<>();
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

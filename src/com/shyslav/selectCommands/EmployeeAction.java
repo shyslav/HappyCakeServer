@@ -1,6 +1,6 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.cafeCoordinate;
 import com.shyslav.models.employees;
 import com.shyslav.models.positions;
@@ -33,7 +33,7 @@ public class EmployeeAction {
                 query = "select * from employees where id  = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
@@ -78,7 +78,7 @@ public class EmployeeAction {
                 query = "select * from cafecoordinate where id  = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
@@ -118,7 +118,7 @@ public class EmployeeAction {
                 query = "select * from positions where id  = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

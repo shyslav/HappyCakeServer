@@ -1,7 +1,6 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
-import com.shyslav.models.dish;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.orderList;
 import com.shyslav.models.orders;
 
@@ -33,7 +32,7 @@ public class OrderAction {
                 query = "select * from orders  where id = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
@@ -74,7 +73,7 @@ public class OrderAction {
                 query = "select list.id as id, list.orderID as orderID ,list.dishID as dishID ,dish.name as dishName,list.amount as amount, list.price as price from orderlist list inner join dish dish on dish.id = list.dishID where orderID = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {

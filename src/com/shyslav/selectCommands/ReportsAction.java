@@ -1,6 +1,6 @@
 package com.shyslav.selectCommands;
 
-import com.shyslav.database.connector;
+import com.shyslav.database.DBConnector;
 import com.shyslav.models.reports;
 
 import java.sql.Connection;
@@ -31,7 +31,7 @@ public class ReportsAction {
                 query = "select * from reports where id  = " + id;
                 break;
         }
-        try (Connection conn = connector.connect()) {
+        try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
