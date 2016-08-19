@@ -26,7 +26,7 @@ public class Main {
                 //подключить клиента
                 Socket incoming = serverSocket.accept();
                 //создание нового потока для каждого пользователя
-                Runnable runnable = new work(incoming);
+                Runnable runnable = new WorkThread(incoming);
                 Thread tr = new Thread(runnable);
                 tr.start();
             }

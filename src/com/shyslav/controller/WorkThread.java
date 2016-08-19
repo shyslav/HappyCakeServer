@@ -18,7 +18,7 @@ import java.util.Scanner;
 /**
  * Created by Shyshkin Vladyslav on 27.03.2016.
  */
-public class work implements Runnable {
+public class WorkThread implements Runnable {
     private CookAction cook = new CookAction();
     private Socket incoming;
     //входящее поток
@@ -32,7 +32,7 @@ public class work implements Runnable {
     private ObjectInputStream objectInp = null;
     boolean done = false;
 
-    public work(Socket i) {
+    public WorkThread(Socket i) {
         incoming = i;
     }
 
