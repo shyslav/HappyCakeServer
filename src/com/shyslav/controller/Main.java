@@ -2,6 +2,8 @@ package com.shyslav.controller;
 
 import com.shyslav.models.user;
 import com.shyslav.selectCommands.CookAction;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class Main {
+    private static final Logger log = Logger.getLogger(Main.class.getName());
     public static ArrayList<user> client = new ArrayList<>();
     public static Properties prop = new Properties();
 
@@ -18,7 +21,8 @@ public class Main {
      * @param args начальные аргументы программы
      */
     public static void main(String[] args) {
-        System.out.println("Server has been started");
+        log.info("Server has been started");
+        //System.out.println("Server has been started");
         try {
             ServerSocket serverSocket = new ServerSocket(8189);
             while (true)

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="Console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="conversionPattern" value="%-4r %d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c.%M() %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="file" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="false" />
+        <param name="maxFileSize" value="10KB" />
+        <param name="maxBackupIndex" value="5" />
+        <param name="file" value="/var/log/happycake/server.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="conversionPattern" value="%-4r %d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c.%M() %x - %m%n"/>
+        </layout>
+    </appender>
+    <root>
+        <priority value="ALL"/>
+        <appender-ref ref="Console"/>
+        <appender-ref ref="file" />
+    </root>
+</log4j:configuration>
