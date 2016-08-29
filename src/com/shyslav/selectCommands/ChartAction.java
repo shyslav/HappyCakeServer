@@ -18,9 +18,9 @@ public class ChartAction {
      * @param chart какой график строить
      * @param dateStart - дата начала формирования отчета
      * @param dateEnd - дата конца формирования отчета
-     * @return - обьект типа ReportsGraph который содержит описание и кол-во продуктов
+     * @return - обьект типа _GraphReport который содержит описание и кол-во продуктов
      */
-    public static ArrayList<ReportsGraph> selectChart(String chart, String dateStart, String dateEnd) {
+    public static ArrayList<_GraphReport> selectChart(String chart, String dateStart, String dateEnd) {
         String query = " ";
         //генерировать отчет по текущему месяцу если на вход поступают пустые значения
         if(dateStart==null||dateEnd==null)
@@ -59,12 +59,12 @@ public class ChartAction {
             }
         }
         //Лист содержащий элементы графика
-        ArrayList<ReportsGraph> charts = new ArrayList<>();
+        ArrayList<_GraphReport> charts = new ArrayList<>();
         try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    charts.add(new ReportsGraph(
+                    charts.add(new _GraphReport(
                             resultSet.getString("name"),
                             resultSet.getInt("amount")));
                 }

@@ -1,6 +1,7 @@
 package com.shyslav.controller;
 
 
+import appmodels.localmodels.LocalServerCassir;
 import com.shyslav.database.DBConnector;
 import appmodels.*;
 import com.shyslav.models.user;
@@ -83,7 +84,7 @@ public class WorkThread implements Runnable {
         try {
             //Подключение к серверу
             if (splits[0].equals("login")) {
-                ArrayList<employees> employees = login(splits[1], splits[2]);
+                ArrayList<_Employee> employees = login(splits[1], splits[2]);
                 if (employees != null && employees.size() == 1) {
                     objectOut.writeObject(employees);
                     objectOut.flush();
@@ -92,7 +93,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение новостей
             } else if (splits[0].equals("selectNews")) {
-                ArrayList<news> news = NewsAction.selectNews(Integer.parseInt(splits[1]));
+                ArrayList<_News> news = NewsAction.selectNews(Integer.parseInt(splits[1]));
                 if (news != null) {
                     objectOut.writeObject(news);
                     objectOut.flush();
@@ -101,7 +102,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение категорий
             } else if (splits[0].equals("selectCategory")) {
-                ArrayList<category> category = CategoryAction.selectCategory(Integer.parseInt(splits[1]));
+                ArrayList<_Category> category = CategoryAction.selectCategory(Integer.parseInt(splits[1]));
                 if (category != null) {
                     objectOut.writeObject(category);
                     objectOut.flush();
@@ -110,7 +111,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение блюд
             } else if (splits[0].equals("selectDish")) {
-                ArrayList<dish> dish = CategoryAction.selectDish(Integer.parseInt(splits[1]));
+                ArrayList<_Dish> dish = CategoryAction.selectDish(Integer.parseInt(splits[1]));
                 if (dish != null) {
                     objectOut.writeObject(dish);
                     objectOut.flush();
@@ -119,7 +120,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение резервов
             } else if (splits[0].equals("selectReservation")) {
-                ArrayList<reservation> reservation = ReservationAction.selectReservation(Integer.parseInt(splits[1]));
+                ArrayList<_Reservation> reservation = ReservationAction.selectReservation(Integer.parseInt(splits[1]));
                 if (reservation != null) {
                     objectOut.writeObject(reservation);
                     objectOut.flush();
@@ -128,7 +129,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение предзаказов в заказе
             } else if (splits[0].equals("selectPreOrder")) {
-                ArrayList<preOrderTable> preOrderTables = ReservationAction.selectPreOrder(Integer.parseInt(splits[1]));
+                ArrayList<_PreOrderTable> preOrderTables = ReservationAction.selectPreOrder(Integer.parseInt(splits[1]));
                 if (preOrderTables != null) {
                     objectOut.writeObject(preOrderTables);
                     objectOut.flush();
@@ -137,7 +138,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение сотрудников
             } else if (splits[0].equals("selectEmployees")) {
-                ArrayList<employees> employees = EmployeeAction.selectEmployees(Integer.parseInt(splits[1]));
+                ArrayList<_Employee> employees = EmployeeAction.selectEmployees(Integer.parseInt(splits[1]));
                 if (employees != null) {
                     objectOut.writeObject(employees);
                     objectOut.flush();
@@ -146,7 +147,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение отзывов
             } else if (splits[0].equals("selectReports")) {
-                ArrayList<reports> reports = ReportsAction.selectReports(Integer.parseInt(splits[1]));
+                ArrayList<_Reports> reports = ReportsAction.selectReports(Integer.parseInt(splits[1]));
                 if (reports != null) {
                     objectOut.writeObject(reports);
                     objectOut.flush();
@@ -155,7 +156,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение кординат
             } else if (splits[0].equals("selectCafeCoordinte")) {
-                ArrayList<cafeCoordinate> cafeCoordinates = EmployeeAction.selectcafeCoordinate(Integer.parseInt(splits[1]));
+                ArrayList<_CafeCoordinate> cafeCoordinates = EmployeeAction.selectcafeCoordinate(Integer.parseInt(splits[1]));
                 if (cafeCoordinates != null) {
                     objectOut.writeObject(cafeCoordinates);
                     objectOut.flush();
@@ -164,7 +165,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение вакансий
             } else if (splits[0].equals("selectPositions")) {
-                ArrayList<positions> positionses = EmployeeAction.selectPositions(Integer.parseInt(splits[1]));
+                ArrayList<_Positions> positionses = EmployeeAction.selectPositions(Integer.parseInt(splits[1]));
                 if (positionses != null) {
                     objectOut.writeObject(positionses);
                     objectOut.flush();
@@ -173,7 +174,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение заказов
             } else if (splits[0].equals("selectOrders")) {
-                ArrayList<orders> orderses = OrderAction.selectOrders(Integer.parseInt(splits[1]));
+                ArrayList<_Order> orderses = OrderAction.selectOrders(Integer.parseInt(splits[1]));
                 if (orderses != null) {
                     objectOut.writeObject(orderses);
                     objectOut.flush();
@@ -182,7 +183,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение элементов заказа
             } else if (splits[0].equals("selectOrderList")) {
-                ArrayList<orderList> orderList = OrderAction.selectorderList(Integer.parseInt(splits[1]));
+                ArrayList<_OrderList> orderList = OrderAction.selectorderList(Integer.parseInt(splits[1]));
                 if (orderList != null) {
                     objectOut.writeObject(orderList);
                     objectOut.flush();
@@ -222,7 +223,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение графиков по месяцу
             } else if (splits[0].equals("selectGrapgMonth")) {
-                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1], null, null);
+                ArrayList<_GraphReport> tmp = ChartAction.selectChart(splits[1], null, null);
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
                     objectOut.flush();
@@ -231,7 +232,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на получение графиков по дате
             } else if (splits[0].equals("selectGrapg")) {
-                ArrayList<ReportsGraph> tmp = ChartAction.selectChart(splits[1], splits[2], splits[3]);
+                ArrayList<_GraphReport> tmp = ChartAction.selectChart(splits[1], splits[2], splits[3]);
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
                     objectOut.flush();
@@ -240,7 +241,7 @@ public class WorkThread implements Runnable {
                 }
                 //Команда на инициализацию касира
             } else if (splits[0].equals("selectCassir")) {
-                ArrayList<_Cassir> tmp = CasirAction.CasirAction();
+                ArrayList<LocalServerCassir> tmp = CasirAction.CasirAction();
                 if (tmp != null) {
                     objectOut.writeObject(tmp);
                     objectOut.flush();
@@ -250,7 +251,7 @@ public class WorkThread implements Runnable {
                 //Команда на передачу на сервер обьекта
             } else if (splits[0].equals("readObj")) {
                 try {
-                    ArrayList<orderList> orders = (ArrayList<orderList>) objectInp.readObject();
+                    ArrayList<_OrderList> orders = (ArrayList<_OrderList>) objectInp.readObject();
                     System.out.println(orders.get(0).getDishName());
                     System.out.println(splits[splits.length - 1]);
                     String str = CasirAction.CasirAdd(orders, splits[1], splits[2]);
@@ -302,7 +303,7 @@ public class WorkThread implements Runnable {
      * @param password - пароль пользователя
      * @return Лист сотрудника который успешно подключился к серверу
      */
-    public ArrayList<employees> login(String username, String password) {
+    public ArrayList<_Employee> login(String username, String password) {
         try (Connection conn = DBConnector.connect()) {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery("select id, positionsID, cafeID, name, lastname, adress, birthdayDay, elogin, epassword from employees " +
@@ -314,9 +315,9 @@ public class WorkThread implements Runnable {
                             resultSet.getString("lastname"),
                             inputStream, scanner, outputStream, printWriter, objectOut, objectInp,
                             incoming, resultSet.getInt("positionsID")));
-                    ArrayList<employees> empl = new ArrayList<>();
+                    ArrayList<_Employee> empl = new ArrayList<>();
                     //Заполнить лист для передачи на клиента его всех данных
-                    empl.add(new employees(resultSet.getInt("id"), resultSet.getInt("positionsID"), resultSet.getInt("cafeID"),
+                    empl.add(new _Employee(resultSet.getInt("id"), resultSet.getInt("positionsID"), resultSet.getInt("cafeID"),
                             resultSet.getString("name"), resultSet.getString("lastname"), resultSet.getString("adress"), resultSet.getDate("birthdayDay"),
                             resultSet.getString("elogin"), resultSet.getString("epassword")));
                     return empl;

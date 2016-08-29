@@ -19,8 +19,8 @@ public class ReportsAction {
      * @param id отзыва для выборки
      * @return лист отзывов о ресторане
      */
-    public static ArrayList<reports> selectReports(int id) {
-        ArrayList<reports> reports = new ArrayList<>();
+    public static ArrayList<_Reports> selectReports(int id) {
+        ArrayList<_Reports> reports = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -35,7 +35,7 @@ public class ReportsAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    reports.add(new reports(resultSet.getInt("id"),
+                    reports.add(new _Reports(resultSet.getInt("id"),
                             resultSet.getString("author"),
                             resultSet.getString("rText"),
                             resultSet.getDate("rDate"),

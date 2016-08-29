@@ -18,9 +18,9 @@ public class NewsAction {
      * @param id - ид новости
      * @return лист новостей
      */
-    public static ArrayList<news> selectNews(int id)
+    public static ArrayList<_News> selectNews(int id)
     {
-        ArrayList<news> news = new ArrayList<>();
+        ArrayList<_News> news = new ArrayList<>();
         String query = " ";
         switch (id)
         {
@@ -36,7 +36,7 @@ public class NewsAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    news.add(new news(
+                    news.add(new _News(
                             resultSet.getInt("id"),
                             resultSet.getInt("authorID"),
                             resultSet.getString("name"),

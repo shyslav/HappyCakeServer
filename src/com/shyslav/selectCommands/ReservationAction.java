@@ -19,8 +19,8 @@ public class ReservationAction {
      * @param id - номер конкретного резерва
      * @return - лист резервов
      */
-    public static ArrayList<reservation> selectReservation(int id) {
-        ArrayList<reservation> reservation = new ArrayList<>();
+    public static ArrayList<_Reservation> selectReservation(int id) {
+        ArrayList<_Reservation> reservation = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -35,7 +35,7 @@ public class ReservationAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    reservation.add(new reservation(
+                    reservation.add(new _Reservation(
                             resultSet.getInt("id"),
                             resultSet.getInt("cafeID"),
                             resultSet.getString("clientName"),
@@ -64,8 +64,8 @@ public class ReservationAction {
      * @param id - номер резерва для получения предзаказа
      * @return - лист предзаказов
      */
-    public static ArrayList<preOrderTable> selectPreOrder(int id) {
-        ArrayList<preOrderTable> preOrderTable = new ArrayList<>();
+    public static ArrayList<_PreOrderTable> selectPreOrder(int id) {
+        ArrayList<_PreOrderTable> preOrderTable = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -84,7 +84,7 @@ public class ReservationAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    preOrderTable.add(new preOrderTable(
+                    preOrderTable.add(new _PreOrderTable(
                             resultSet.getInt("resid"),
                             resultSet.getInt("reservID"),
                             resultSet.getString("dishName"),

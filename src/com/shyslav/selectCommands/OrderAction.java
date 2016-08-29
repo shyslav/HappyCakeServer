@@ -19,8 +19,8 @@ public class OrderAction {
      * @param id - ид заказа
      * @return лист заказов
      */
-    public static ArrayList<orders> selectOrders(int id) {
-        ArrayList<orders> order = new ArrayList<>();
+    public static ArrayList<_Order> selectOrders(int id) {
+        ArrayList<_Order> order = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -35,7 +35,7 @@ public class OrderAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    order.add(new orders(
+                    order.add(new _Order(
                             resultSet.getInt("id"),
                             resultSet.getInt("employeeId"),
                             resultSet.getDouble("fullPrice"),
@@ -60,8 +60,8 @@ public class OrderAction {
      * @param id - ид заказа
      * @return лист всех элементов заказа
      */
-    public static ArrayList<orderList> selectorderList(int id) {
-        ArrayList<orderList> order = new ArrayList<>();
+    public static ArrayList<_OrderList> selectorderList(int id) {
+        ArrayList<_OrderList> order = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -76,7 +76,7 @@ public class OrderAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    order.add(new orderList(
+                    order.add(new _OrderList(
                             resultSet.getInt("id"),
                             resultSet.getInt("orderID"),
                             resultSet.getInt("dishID"),

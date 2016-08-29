@@ -19,8 +19,8 @@ public class EmployeeAction {
      * @param id - ид сотрудника по которому можно сделать выборку
      * @return - лист сотрудников
      */
-    public static ArrayList<employees> selectEmployees(int id) {
-        ArrayList<employees> employees = new ArrayList<>();
+    public static ArrayList<_Employee> selectEmployees(int id) {
+        ArrayList<_Employee> employees = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -35,7 +35,7 @@ public class EmployeeAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    employees.add(new employees(
+                    employees.add(new _Employee(
                             resultSet.getInt("id"),
                             resultSet.getInt("positionsID"),
                             resultSet.getInt("cafeID"),
@@ -64,8 +64,8 @@ public class EmployeeAction {
      * @param id - ид кафе в базе
      * @return лист размещения кафе в базе
      */
-    public static ArrayList<cafeCoordinate> selectcafeCoordinate(int id) {
-        ArrayList<cafeCoordinate> cafeCoordinate = new ArrayList<>();
+    public static ArrayList<_CafeCoordinate> selectcafeCoordinate(int id) {
+        ArrayList<_CafeCoordinate> cafeCoordinate = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -80,7 +80,7 @@ public class EmployeeAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    cafeCoordinate.add(new cafeCoordinate(
+                    cafeCoordinate.add(new _CafeCoordinate(
                             resultSet.getInt("id"),
                             resultSet.getString("adress"),
                             resultSet.getString("mobilePhone"),
@@ -104,8 +104,8 @@ public class EmployeeAction {
      * @param id - ид позиции
      * @return - лист позиций
      */
-    public static ArrayList<positions> selectPositions(int id) {
-        ArrayList<positions> positions = new ArrayList<>();
+    public static ArrayList<_Positions> selectPositions(int id) {
+        ArrayList<_Positions> positions = new ArrayList<>();
         String query = " ";
         switch (id) {
             case 0:
@@ -120,7 +120,7 @@ public class EmployeeAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    positions.add(new positions(
+                    positions.add(new _Positions(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getDouble("salary")));

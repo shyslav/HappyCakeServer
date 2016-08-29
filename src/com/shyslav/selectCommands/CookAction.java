@@ -10,13 +10,13 @@ import java.util.*;
  * Created by Shyshkin Vladyslav on 25.05.2016.
  */
 public class CookAction {
-    public LinkedList<CookOrder> queue = new LinkedList<>();
+    public LinkedList<_CookOrder> queue = new LinkedList<>();
 
     /**
      * Функция которая начинает работу повара
      * @return не закрытые заказы на текущий момент
      */
-    public LinkedList<CookOrder> start()
+    public LinkedList<_CookOrder> start()
     {
         selectFromOrderList();
         return queue;
@@ -26,7 +26,7 @@ public class CookAction {
      * Функция получения всех данных незакрытых заказов
      * @return лист незакрытых заказов
      */
-    public LinkedList<CookOrder> get()
+    public LinkedList<_CookOrder> get()
     {
         if(selectFromOrderList())
         {
@@ -42,7 +42,7 @@ public class CookAction {
     public void close(int orders)
     {
         //команда, таблица, №заказа, поле котрое нужно изменить
-        UpdateAction.update(new String [] {"update:","orders",String.valueOf(orders),"compliteORnot = '+'"});
+        UpdateAction.update(new String [] {"update:","_Order",String.valueOf(orders),"compliteORnot = '+'"});
     }
 
     /**
@@ -65,7 +65,7 @@ public class CookAction {
                     //Вытащить все заказы для текущего заказа
                     ArrayList orders = selectOrderListCook(resultSet.getInt("id"));
                     if(orders!=null) {
-                        queue.add(new CookOrder(resultSet.getInt("id"),
+                        queue.add(new _CookOrder(resultSet.getInt("id"),
                                 resultSet.getInt("employeeID"),
                                 resultSet.getString("employeeFIO"),
                                 resultSet.getDouble("fullPrice"),
@@ -91,9 +91,9 @@ public class CookAction {
      * @param id номер заказа для которого производить выборку
      * @return лист элементов в заказе для повара
      */
-    private ArrayList<orderListCook> selectOrderListCook(int id)
+    private ArrayList<_OrderListCook> selectOrderListCook(int id)
     {
-        ArrayList<orderListCook> ord = new ArrayList<>();
+        ArrayList<_OrderListCook> ord = new ArrayList<>();
         String query = "select odlist.id as id,odlist.dishID as dishID,ds.name as dishName,ds.amount as dishAmount,ds.image as dishImage,\n" +
                 " ds.readyORnot as dishReadyORnot,odlist.amount as amount,odlist.price as price from orderlist odlist\n" +
                 " inner join dish ds on ds.id = odlist.dishID\n" +
@@ -103,7 +103,7 @@ public class CookAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    ord.add(new orderListCook(resultSet.getInt("id"),
+                    ord.add(new _OrderListCook(resultSet.getInt("id"),
                             resultSet.getInt("dishID"),
                             resultSet.getString("dishName"),
                             resultSet.getInt("dishAmount"),

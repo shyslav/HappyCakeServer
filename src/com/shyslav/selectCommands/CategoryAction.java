@@ -20,8 +20,8 @@ public class CategoryAction {
      * @param id ид категории
      * @return лист категорий
      */
-    public static ArrayList<category> selectCategory(int id) {
-        ArrayList<category> category = new ArrayList<>();
+    public static ArrayList<_Category> selectCategory(int id) {
+        ArrayList<_Category> category = new ArrayList<>();
         String query = " ";
         switch (id)
         {
@@ -38,7 +38,7 @@ public class CategoryAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    category.add(new category(
+                    category.add(new _Category(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getString("description"),
@@ -64,8 +64,8 @@ public class CategoryAction {
      * @param id ид блюда для селекта
      * @return лист блюд
      */
-    public static ArrayList<dish> selectDish(int id) {
-        ArrayList<dish> dish = new ArrayList<>();
+    public static ArrayList<_Dish> selectDish(int id) {
+        ArrayList<_Dish> dish = new ArrayList<>();
         //В поле sell записывается скидка с таблицы hotprice
         String query = " ";
         switch (id)
@@ -84,7 +84,7 @@ public class CategoryAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    dish.add(new dish(
+                    dish.add(new _Dish(
                              resultSet.getInt("idfromdish"),
                              resultSet.getInt("categoryID"),
                              resultSet.getString("name"),
