@@ -1,9 +1,10 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.database.DBConnector;
-import com.shyslav.models.category;
-import com.shyslav.models.dish;
+import appmodels.*;
+import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +42,7 @@ public class CategoryAction {
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getString("description"),
-                            resultSet.getString("image")));
+                            IOUtils.toByteArray(resultSet.getBinaryStream("image"))));
                 }
                 if(category.size()!=0)
                 {
@@ -52,7 +53,7 @@ public class CategoryAction {
                     return null;
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             System.out.println(e);
             return null;
         }

@@ -1,7 +1,7 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.database.DBConnector;
-import com.shyslav.models.news;
+import appmodels.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,7 +36,7 @@ public class NewsAction {
             Statement statement = conn.createStatement();
             try (ResultSet resultSet = statement.executeQuery(query)) {
                 while (resultSet.next()) {
-                    news.add(new com.shyslav.models.news(
+                    news.add(new news(
                             resultSet.getInt("id"),
                             resultSet.getInt("authorID"),
                             resultSet.getString("name"),

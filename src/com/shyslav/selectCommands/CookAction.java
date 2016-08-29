@@ -1,8 +1,7 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.database.DBConnector;
-import com.shyslav.models.CookOrder;
-import com.shyslav.models.orderListCook;
+import appmodels.*;
 
 import java.sql.*;
 import java.util.*;

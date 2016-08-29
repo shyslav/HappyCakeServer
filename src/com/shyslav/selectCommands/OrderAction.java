@@ -1,8 +1,7 @@
 package com.shyslav.selectCommands;
 
 import com.shyslav.database.DBConnector;
-import com.shyslav.models.orderList;
-import com.shyslav.models.orders;
+import appmodels.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

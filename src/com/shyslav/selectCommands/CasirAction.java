@@ -2,9 +2,7 @@ package com.shyslav.selectCommands;
 
 import com.shyslav.controller.Main;
 import com.shyslav.database.DBConnector;
-import com.shyslav.models._Cassir;
-import com.shyslav.models.orderList;
-import com.shyslav.models.orders;
+import appmodels.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

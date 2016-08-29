@@ -2,7 +2,8 @@ package com.shyslav.controller;
 
 
 import com.shyslav.database.DBConnector;
-import com.shyslav.models.*;
+import appmodels.*;
+import com.shyslav.models.user;
 import com.shyslav.selectCommands.*;
 
 import java.io.*;

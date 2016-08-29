@@ -1,7 +1,7 @@
 package com.shyslav.selectCommands;
 
+import appmodels.*;
 import com.shyslav.database.DBConnector;
-import com.shyslav.models.ReportsGraph;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ public class ChartAction {
      * @param dateEnd - дата конца формирования отчета
      * @return - обьект типа ReportsGraph который содержит описание и кол-во продуктов
      */
-    public static ArrayList<ReportsGraph> selectChart(String chart,String dateStart,String dateEnd) {
+    public static ArrayList<ReportsGraph> selectChart(String chart, String dateStart, String dateEnd) {
         String query = " ";
         //генерировать отчет по текущему месяцу если на вход поступают пустые значения
         if(dateStart==null||dateEnd==null)
