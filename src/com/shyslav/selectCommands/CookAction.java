@@ -42,7 +42,7 @@ public class CookAction {
     public void close(int orders)
     {
         //команда, таблица, №заказа, поле котрое нужно изменить
-        UpdateAction.update(new String [] {"update:","order",String.valueOf(orders),"compliteORnot = '+'"});
+        UpdateAction.update(new String [] {"update:","orders",String.valueOf(orders),"compliteORnot = '+'"});
     }
 
     /**
