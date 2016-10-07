@@ -58,8 +58,8 @@ public class CasirAction {
     public static String CasirAdd(ArrayList<_OrderList> ord, String cassirID, String fullPrice) {
         //Массив длякоманды insert вставляет в таблицу заказы, ид кассира который пришел в команде
         //Прайс текущего заказа который пришел в команде и текущее время и дату.
-        String[] data = {"insert", "_Order", cassirID, fullPrice, "now()",
-                "(select case when (select count(readyORnot) from _Dish where id in (" + dishID(ord) + ") and readyORnot = '+')<=0 then '+' else '-' end)"};
+        String[] data = {"insert", "orders", cassirID, fullPrice, "now()",
+                "(select case when (select count(readyORnot) from dish where id in (" + dishID(ord) + ") and readyORnot = '+')<=0 then '+' else '-' end)"};
         UpdateAction.insert(data);
         //ид последнего заказа от текущего кассира
         _Order od = orderInBase(cassirID);
