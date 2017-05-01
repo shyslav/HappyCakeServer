@@ -1,4 +1,4 @@
-package main.java.com.shyslav.defaults;
+package com.shyslav.defaults;
 
 /**
  * @author Shyshkin Vladyslav on 30.04.17.

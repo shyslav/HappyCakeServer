@@ -1,14 +1,15 @@
-package main.java.com.shyslav.controller;
+package com.shyslav.controller;
 
 
 import com.happycake.HappyCakeStorage;
+import com.shyslav.controller.actions.ServerActions;
 import com.shyslav.defaultentityes.StringKeyValue;
+import com.shyslav.defaults.ErrorCodes;
+import com.shyslav.defaults.HappyCakeRequest;
+import com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.models.ServerOnlineUsers;
 import com.shyslav.utils.LazyGson;
-import main.java.com.shyslav.controller.actions.ServerActions;
-import main.java.com.shyslav.defaults.ErrorCodes;
-import main.java.com.shyslav.defaults.HappyCakeRequest;
-import main.java.com.shyslav.defaults.HappyCakeResponse;
-import main.java.com.shyslav.models.ServerOnlineUsers;
+
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

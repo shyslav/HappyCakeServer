@@ -1,8 +1,8 @@
-package main.java.com.shyslav.controller;
+package com.shyslav.controller;
 
+import com.shyslav.defaults.HappyCakeRequest;
+import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.utils.LazyGson;
-import main.java.com.shyslav.defaults.HappyCakeRequest;
-import main.java.com.shyslav.defaults.HappyCakeResponse;
 
 import java.io.IOException;
 import java.io.InputStream;

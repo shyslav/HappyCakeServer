@@ -1,9 +1,9 @@
-package main.java.com.shyslav.controller.actions;
+package com.shyslav.controller.actions;
 
+import com.shyslav.controller.ServerClient;
 import com.shyslav.defaultentityes.StringKeyValue;
-import main.java.com.shyslav.controller.ServerClient;
-import main.java.com.shyslav.defaults.HappyCakeRequest;
-import main.java.com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.defaults.HappyCakeRequest;
+import com.shyslav.defaults.HappyCakeResponse;
 
 /**
  * @author Shyshkin Vladyslav on 01.05.17.

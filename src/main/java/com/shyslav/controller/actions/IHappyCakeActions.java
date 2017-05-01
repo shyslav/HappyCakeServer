@@ -1,6 +1,6 @@
-package main.java.com.shyslav.controller.actions;
+package com.shyslav.controller.actions;
 
-import main.java.com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.defaults.HappyCakeResponse;
 
 /**
  * @author Shyshkin Vladyslav on 01.05.17.

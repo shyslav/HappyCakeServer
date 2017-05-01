@@ -1,4 +1,4 @@
-package main.java.com.shyslav.models;
+package com.shyslav.models;
 
 import java.io.*;
 import java.net.Socket;

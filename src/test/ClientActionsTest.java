@@ -1,10 +1,10 @@
 import com.happycake.sitemodels.Employees;
 import com.happycake.sitemodels.*;
-import main.java.com.shyslav.controller.ServerClient;
-import main.java.com.shyslav.controller.ServerStarApp;
-import main.java.com.shyslav.controller.actions.ClientActions;
-import main.java.com.shyslav.defaults.ErrorCodes;
-import main.java.com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.controller.ServerClient;
+import com.shyslav.controller.ServerStarApp;
+import com.shyslav.controller.actions.ClientActions;
+import com.shyslav.defaults.ErrorCodes;
+import com.shyslav.defaults.HappyCakeResponse;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

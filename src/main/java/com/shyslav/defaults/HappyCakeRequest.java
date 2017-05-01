@@ -1,4 +1,4 @@
-package main.java.com.shyslav.defaults;
+package com.shyslav.defaults;
 
 
 import com.shyslav.utils.LazyGson;

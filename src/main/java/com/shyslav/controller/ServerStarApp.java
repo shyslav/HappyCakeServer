@@ -1,8 +1,7 @@
-package main.java.com.shyslav.controller;
+package com.shyslav.controller;
 
 import com.happycake.HappyCakeStorage;
-import main.java.com.shyslav.controller.actions.ServerActions;
-import main.java.com.shyslav.models.ServerOnlineUsers;
+import com.shyslav.models.ServerOnlineUsers;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

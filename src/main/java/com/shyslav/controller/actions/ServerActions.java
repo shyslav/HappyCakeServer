@@ -1,12 +1,12 @@
-package main.java.com.shyslav.controller.actions;
+package com.shyslav.controller.actions;
 
 import com.happycake.sitemodels.Employees;
 import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.*;
+import com.shyslav.defaults.ErrorCodes;
+import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.mysql.interfaces.DBEntity;
-import main.java.com.shyslav.defaults.ErrorCodes;
-import main.java.com.shyslav.defaults.HappyCakeResponse;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
