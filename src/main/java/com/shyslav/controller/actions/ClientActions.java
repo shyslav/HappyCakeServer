@@ -126,4 +126,10 @@ public class ClientActions implements IHappyCakeActions {
         HappyCakeRequest request = new HappyCakeRequest("selectPositions");
         return client.writeAndRead(request);
     }
+
+    @Override
+    public HappyCakeResponse selectOrders() {
+        HappyCakeRequest request = new HappyCakeRequest("selectOrders");
+        return client.writeAndRead(request);
+    }
 }

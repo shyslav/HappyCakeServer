@@ -224,4 +224,24 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
+
+    /**
+     * Select orders list
+     *
+     * @return orders list
+     */
+    @Override
+    public HappyCakeResponse selectOrders() {
+        try {
+            OrderList list = new OrderList();
+            ArrayList<DBEntity> entity = storage.orderStorage.getAll();
+            for (DBEntity ent : entity) {
+                list.add((Order) ent);
+            }
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", storage.orderStorage.load(list));
+        } catch (DBException e) {
+            log.error("Unable to select news" + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
 }

@@ -78,4 +78,11 @@ public interface IHappyCakeActions {
      * @return response with position list
      */
     HappyCakeResponse selectPositions();
+
+    /**
+     * Select orders
+     *
+     * @return response with orders list
+     */
+    HappyCakeResponse selectOrders();
 }

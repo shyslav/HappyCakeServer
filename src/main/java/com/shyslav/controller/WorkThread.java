@@ -127,6 +127,10 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.selectPositions()));
                 break;
             }
+            case "selectorders": {
+                printWriter.println(LazyGson.toJson(actions.selectOrders()));
+                break;
+            }
             default: {
                 printWriter.println(LazyGson.toJson(new HappyCakeResponse(ErrorCodes.WROND_REQUST, "INVALID REQUEST")));
             }

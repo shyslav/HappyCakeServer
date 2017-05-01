@@ -141,6 +141,11 @@ public class ClientActionsTest {
         assertTrue(((ReportsList) response.getObject(ReportsList.class)).size() > 1);
     }
 
+    /**
+     * Select cafe coordinate test
+     *
+     * @throws Exception
+     */
     @Test
     public void selectCafeCoordinate() throws Exception {
         ClientActions client = successLogin();
@@ -149,6 +154,11 @@ public class ClientActionsTest {
         assertTrue(((CafeCoordinateList) response.getObject(CafeCoordinateList.class)).size() >= 1);
     }
 
+    /**
+     * Select position test
+     *
+     * @throws Exception
+     */
     @Test
     public void selectPositions() throws Exception {
         ClientActions client = successLogin();
@@ -157,6 +167,21 @@ public class ClientActionsTest {
         assertTrue(((PositionsList) response.getObject(PositionsList.class)).size() > 1);
     }
 
+
+    /**
+     * Select orders test
+     *
+     * @throws Exception
+     */
+    @Test
+    public void selectOrdersTest() throws Exception {
+        ClientActions client = successLogin();
+        HappyCakeResponse response = client.selectOrders();
+        assertTrue(response.getCode() == ErrorCodes.SUCCESS);
+        OrderList list = response.getObject(OrderList.class);
+        assertTrue(list.size() > 1);
+        assertTrue(list.get(0).getOrderDetails().size() >= 1);
+    }
 
     /**
      * Success login to server
