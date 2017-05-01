@@ -85,27 +85,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Add news
-     *
-     * @param news news
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addNews(News news) {
-        try {
-            if (news.getId() == 0) {
-                storage.newsStorage.update(news, news.getId());
-            } else {
-                storage.newsStorage.save(news);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED ");
-        } catch (DBException e) {
-            log.error("Unable to add news with id " + news.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select categories
      *
      * @return categories list in response
@@ -143,27 +122,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Add category
-     *
-     * @param category category
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addCategories(Category category) {
-        try {
-            if (category.getId() == 0) {
-                storage.categoryStorage.update(category, category.getId());
-            } else {
-                storage.categoryStorage.save(category);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add category with id " + category.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select dish list
      *
      * @return dish list in response
@@ -190,27 +148,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Add dish
-     *
-     * @param dish dish
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addDish(Dish dish) {
-        try {
-            if (dish.getId() == 0) {
-                storage.dishStorage.update(dish, dish.getId());
-            } else {
-                storage.dishStorage.save(dish);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add dish with id " + dish.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select reservation list
      *
      * @return reservation list in response
@@ -226,27 +163,6 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
-     * Add reservation
-     *
-     * @param reservation reservation entity
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addReservation(Reservation reservation) {
-        try {
-            if (reservation.getId() == 0) {
-                storage.reservationStorage.update(reservation, reservation.getId());
-            } else {
-                storage.reservationStorage.save(reservation);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add reservation with id " + reservation.getId() + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
@@ -272,27 +188,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Add preorder
-     *
-     * @param preOrder preorder
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addPreorder(PreOrder preOrder) {
-        try {
-            if (preOrder.getId() == 0) {
-                storage.preOrderStorage.update(preOrder, preOrder.getId());
-            } else {
-                storage.preOrderStorage.save(preOrder);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add preorder with id " + preOrder.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select employees list
      *
      * @return employees list in response object
@@ -308,27 +203,6 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
-     * Add employee
-     *
-     * @param employees employee
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addEmployee(Employees employees) {
-        try {
-            if (employees.getId() == 0) {
-                storage.employeesStorage.update(employees, employees.getId());
-            } else {
-                storage.employeesStorage.save(employees);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add employee with id " + employees.getId() + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
@@ -354,27 +228,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Add report
-     *
-     * @param reports report entity
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addReports(Reports reports) {
-        try {
-            if (reports.getId() == 0) {
-                storage.reportsStorage.update(reports, reports.getId());
-            } else {
-                storage.reportsStorage.save(reports);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add report with id " + reports.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select reports list
      *
      * @return reports list in response object
@@ -390,27 +243,6 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
-     * Add cafe coordinate
-     *
-     * @param cafeCoordinate cafe coordinates
-     * @return cafe coordinate
-     */
-    @Override
-    public HappyCakeResponse addCafeCoordinate(CafeCoordinate cafeCoordinate) {
-        try {
-            if (cafeCoordinate.getId() == 0) {
-                storage.cafeCoordinate.update(cafeCoordinate, cafeCoordinate.getId());
-            } else {
-                storage.cafeCoordinate.save(cafeCoordinate);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add cafe coordinate with id " + cafeCoordinate.getId() + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
@@ -436,27 +268,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Add position
-     *
-     * @param position position entity
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addPosition(Position position) {
-        try {
-            if (position.getId() == 0) {
-                storage.positionStorage.update(position, position.getId());
-            } else {
-                storage.positionStorage.save(position);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add position with id " + position.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select orders list
      *
      * @return orders list
@@ -472,27 +283,6 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", storage.orderStorage.load(list));
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
-     * Add order
-     *
-     * @param order order entity
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addOrder(Order order) {
-        try {
-            if (order.getId() == 0) {
-                storage.orderStorage.update(order, order.getId());
-            } else {
-                storage.orderStorage.save(order);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add order with id " + order.getId() + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }

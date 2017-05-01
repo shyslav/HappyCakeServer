@@ -1,6 +1,5 @@
 package com.shyslav.controller.actions;
 
-import com.happycake.sitemodels.*;
 import com.shyslav.defaults.HappyCakeResponse;
 
 /**
@@ -32,14 +31,6 @@ public interface IHappyCakeActions {
     HappyCakeResponse deleteNews(int id);
 
     /**
-     * Add news
-     *
-     * @param news news
-     * @return happycake response
-     */
-    HappyCakeResponse addNews(News news);
-
-    /**
      * Select all categories
      *
      * @return response with categories
@@ -55,27 +46,11 @@ public interface IHappyCakeActions {
     HappyCakeResponse deleteCategories(int id);
 
     /**
-     * Add category
-     *
-     * @param category category
-     * @return categories
-     */
-    HappyCakeResponse addCategories(Category category);
-
-    /**
      * Select dishes
      *
      * @return response with dishes list
      */
     HappyCakeResponse selectDish();
-
-    /**
-     * Add dish
-     *
-     * @param dish dish
-     * @return happycake response
-     */
-    HappyCakeResponse addDish(Dish dish);
 
     /**
      * Select reservation
@@ -85,27 +60,11 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectReservation();
 
     /**
-     * Add reservation
-     *
-     * @param reservation reservation entity
-     * @return happycake response
-     */
-    HappyCakeResponse addReservation(Reservation reservation);
-
-    /**
      * Select preorders
      *
      * @return response with preorder list
      */
     HappyCakeResponse selectPreOrder();
-
-    /**
-     * Add preorder
-     *
-     * @param preOrder preorder
-     * @return happycake response
-     */
-    HappyCakeResponse addPreorder(PreOrder preOrder);
 
     /**
      * Select employees
@@ -115,27 +74,11 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectEmployees();
 
     /**
-     * Add dish
-     *
-     * @param employees employee
-     * @return happycake response
-     */
-    HappyCakeResponse addEmployee(Employees employees);
-
-    /**
      * Select reports
      *
      * @return response with employees list
      */
     HappyCakeResponse selectReports();
-
-    /**
-     * Add dish
-     *
-     * @param reports report entity
-     * @return happycake response
-     */
-    HappyCakeResponse addReports(Reports reports);
 
 
     /**
@@ -146,14 +89,6 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectCafeCoordinate();
 
     /**
-     * Add dish
-     *
-     * @param cafeCoordinate cafe coordinates
-     * @return happycake response
-     */
-    HappyCakeResponse addCafeCoordinate(CafeCoordinate cafeCoordinate);
-
-    /**
      * Select user positions
      *
      * @return response with position list
@@ -161,27 +96,11 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectPositions();
 
     /**
-     * Add dish
-     *
-     * @param position position entity
-     * @return happycake response
-     */
-    HappyCakeResponse addPosition(Position position);
-
-    /**
      * Select orders
      *
      * @return response with orders list
      */
     HappyCakeResponse selectOrders();
-
-    /**
-     * Add dish
-     *
-     * @param order order entity
-     * @return happycake response
-     */
-    HappyCakeResponse addOrder(Order order);
 
     /**
      * Delete by id from table
