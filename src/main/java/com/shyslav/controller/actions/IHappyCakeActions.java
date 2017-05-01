@@ -70,6 +70,13 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectDish();
 
     /**
+     * Delete dish by id
+     * @param id dish id
+     * @return happy cake response
+     */
+    HappyCakeResponse deleteDish(int id);
+
+    /**
      * Add dish
      *
      * @param dish dish
@@ -83,6 +90,13 @@ public interface IHappyCakeActions {
      * @return response with reservation list
      */
     HappyCakeResponse selectReservation();
+
+    /**
+     * Delete reservation by id
+     * @param id reservation id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteReservation(int id);
 
     /**
      * Add reservation
@@ -100,6 +114,13 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectPreOrder();
 
     /**
+     * Delete preOrder by id
+     * @param id preOrder id
+     * @return happycake response
+     */
+    HappyCakeResponse deletePreOrder(int id);
+
+    /**
      * Add preorder
      *
      * @param preOrder preorder
@@ -113,6 +134,13 @@ public interface IHappyCakeActions {
      * @return response with employees list
      */
     HappyCakeResponse selectEmployees();
+
+    /**
+     * Delete employee by id
+     * @param id employee id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteEmployees(int id);
 
     /**
      * Add dish
@@ -130,6 +158,13 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectReports();
 
     /**
+     * Delete reports by id
+     * @param id report id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteReports(int id);
+
+    /**
      * Add dish
      *
      * @param reports report entity
@@ -144,6 +179,14 @@ public interface IHappyCakeActions {
      * @return response with cafe coordinates list
      */
     HappyCakeResponse selectCafeCoordinate();
+
+
+    /**
+     * Delete CafeCoordinates by id
+     * @param id CafeCoordinate id
+     * @return happyake response
+     */
+    HappyCakeResponse deleteCafeCoordinate(int id);
 
     /**
      * Add dish
@@ -161,6 +204,13 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectPositions();
 
     /**
+     * Delete positions by id
+     * @param id  position id
+     * @return happycake response
+     */
+    HappyCakeResponse deletePositions(int id);
+
+    /**
      * Add dish
      *
      * @param position position entity
@@ -174,6 +224,13 @@ public interface IHappyCakeActions {
      * @return response with orders list
      */
     HappyCakeResponse selectOrders();
+
+    /**
+     * Delete orders by id
+     * @param id order id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteOrders(int id);
 
     /**
      * Add dish

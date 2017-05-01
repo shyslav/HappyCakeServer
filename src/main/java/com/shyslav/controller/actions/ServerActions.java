@@ -77,7 +77,7 @@ public class ServerActions implements IHappyCakeActions {
     public HappyCakeResponse deleteNews(int id) {
         try {
             storage.newsStorage.deleteByID(id);
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SELECT ");
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
         } catch (DBException e) {
             log.error("Unable to delete news with id " + id + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
@@ -135,7 +135,7 @@ public class ServerActions implements IHappyCakeActions {
     public HappyCakeResponse deleteCategories(int id) {
         try {
             storage.categoryStorage.deleteByID(id);
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SELECT ");
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
         } catch (DBException e) {
             log.error("Unable to delete category with id " + id + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
@@ -190,6 +190,23 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * delete dish by id
+     *
+     * @param id dish id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteDish(int id) {
+        try {
+            storage.dishStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete dish with id " + id + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
      * Add dish
      *
      * @param dish dish
@@ -231,6 +248,23 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * delete reservation by id
+     *
+     * @param id reservation id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteReservation(int id) {
+        try {
+            storage.reservationStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete reservation with id " + id + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
      * Add reservation
      *
      * @param reservation reservation entity
@@ -267,6 +301,24 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+
+    /**
+     * Delete preOrder by id
+     *
+     * @param id preOrder id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deletePreOrder(int id) {
+        try {
+            storage.preOrderStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete preOrder with id " + id + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
@@ -313,6 +365,23 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete employee by id
+     *
+     * @param id employee id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteEmployees(int id) {
+        try {
+            storage.employeesStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete employee with id " + id + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
      * Add employee
      *
      * @param employees employee
@@ -354,6 +423,23 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete report by if
+     *
+     * @param id report id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteReports(int id) {
+        try {
+            storage.reportsStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete report with id " + id + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
      * Add report
      *
      * @param reports report entity
@@ -390,6 +476,24 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+
+    /**
+     * Delete CafeCoordinate by id
+     *
+     * @param id CafeCoordinate id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteCafeCoordinate(int id) {
+        try {
+            storage.cafeCoordinate.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete cafeCoordinate with id " + id + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
@@ -436,6 +540,24 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete position by id
+     *
+     * @param id position id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deletePositions(int id) {
+        try {
+            storage.positionStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete position with id " + id + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+
+    /**
      * Add position
      *
      * @param position position entity
@@ -472,6 +594,24 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", storage.orderStorage.load(list));
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+
+    /**
+     * Delete order by id
+     *
+     * @param id order id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteOrders(int id) {
+        try {
+            storage.orderStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
+        } catch (DBException e) {
+            log.error("Unable to delete order with id " + id + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
