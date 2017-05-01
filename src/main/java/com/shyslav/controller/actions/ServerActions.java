@@ -93,11 +93,17 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse selectDish() {
         try {
+            //load hot prices
+            HotPriceList hotPrices = new HotPriceList();
+            storage.hotPriceStorage.getAll().forEach(e -> hotPrices.add((HotPrice) e));
+            //load dishes
             DishesList list = new DishesList();
             ArrayList<DBEntity> entity = storage.dishStorage.getAll();
             for (DBEntity ent : entity) {
                 list.add((Dish) ent);
             }
+            //set discount for dishes
+            list.loadDiscount(hotPrices);
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
