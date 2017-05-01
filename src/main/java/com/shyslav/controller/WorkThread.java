@@ -2,16 +2,14 @@ package com.shyslav.controller;
 
 
 import com.happycake.HappyCakeStorage;
+import com.happycake.sitemodels.*;
 import com.shyslav.controller.actions.ServerActions;
 import com.shyslav.defaultentityes.StringKeyValue;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerOnlineUsers;
-import com.shyslav.mysql.connectionpool.MysqlConnection;
-import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.utils.LazyGson;
-
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -19,7 +17,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -138,6 +135,57 @@ public class WorkThread implements Runnable {
             case "deletebyid": {
                 StringKeyValue keyValue = request.getObject(StringKeyValue.class);
                 printWriter.println(LazyGson.toJson(actions.deleteByID(keyValue.getKey(), keyValue.getValue())));
+                break;
+            }
+            case "addnews": {
+                News news = request.getObject(News.class);
+                printWriter.println(LazyGson.toJson(actions.addNews(news)));
+                break;
+            }
+            case "addcategories": {
+                Category category = request.getObject(Category.class);
+                printWriter.println(LazyGson.toJson(actions.addCategories(category)));
+                break;
+            }
+            case "adddish": {
+                Dish dish = request.getObject(Dish.class);
+                printWriter.println(LazyGson.toJson(actions.addDish(dish)));
+                break;
+            }
+            case "addreservation": {
+                Reservation reservation = request.getObject(Reservation.class);
+                printWriter.println(LazyGson.toJson(actions.addReservation(reservation)));
+                break;
+            }
+            case "addpreorder": {
+                PreOrder preOrder = request.getObject(PreOrder.class);
+                printWriter.println(LazyGson.toJson(actions.addPreorder(preOrder)));
+                break;
+            }
+            case "addemployee": {
+                Employees employees = request.getObject(Employees.class);
+                printWriter.println(LazyGson.toJson(actions.addEmployee(employees)));
+                break;
+            }
+            case "addreports": {
+                Reports reports = request.getObject(Reports.class);
+                printWriter.println(LazyGson.toJson(actions.addReports(reports)));
+                break;
+            }
+            case "addcafecoordinate": {
+                CafeCoordinate coordinate = request.getObject(CafeCoordinate.class);
+                printWriter.println(LazyGson.toJson(actions.addCafeCoordinate(coordinate)));
+                break;
+            }
+            case "addposition": {
+                Position position = request.getObject(Position.class);
+                printWriter.println(LazyGson.toJson(actions.addPosition(position)));
+                break;
+            }
+            case "addorder": {
+                Order order = request.getObject(Order.class);
+                printWriter.println(LazyGson.toJson(actions.addOrder(order)));
+                break;
             }
             default: {
                 printWriter.println(LazyGson.toJson(new HappyCakeResponse(ErrorCodes.WROND_REQUST, "INVALID REQUEST")));
