@@ -127,9 +127,27 @@ public class ClientActions implements IHappyCakeActions {
         return client.writeAndRead(request);
     }
 
+    /**
+     * Select orders
+     *
+     * @return orders list
+     */
     @Override
     public HappyCakeResponse selectOrders() {
         HappyCakeRequest request = new HappyCakeRequest("selectOrders");
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Delete by id
+     *
+     * @param tableName table name
+     * @param id        element id
+     * @return response
+     */
+    @Override
+    public HappyCakeResponse deleteByID(String tableName, String id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteByID", new StringKeyValue(tableName, id));
         return client.writeAndRead(request);
     }
 }

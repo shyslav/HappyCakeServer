@@ -85,4 +85,13 @@ public interface IHappyCakeActions {
      * @return response with orders list
      */
     HappyCakeResponse selectOrders();
+
+    /**
+     * Delete by id from table
+     *
+     * @param tableName table name
+     * @param id        element id
+     * @return server response
+     */
+    HappyCakeResponse deleteByID(String tableName, String id);
 }

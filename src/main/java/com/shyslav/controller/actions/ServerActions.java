@@ -5,10 +5,12 @@ import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.*;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.mysql.connectionpool.MysqlConnection;
 import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.mysql.interfaces.DBEntity;
 import org.apache.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -249,5 +251,26 @@ public class ServerActions implements IHappyCakeActions {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
+    }
+
+    /**
+     * Delete from table by id
+     *
+     * @param tableName table name
+     * @param id        element id
+     * @return
+     */
+    @Override
+    public HappyCakeResponse deleteByID(String tableName, String id) {
+        try (MysqlConnection connection = storage.getPool().getConnection()) {
+            connection.executeQuery("DELETE FROM " + tableName + " where id = " + id);
+        } catch (DBException e) {
+            log.error(" Unable to get mysql connection " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.WROND_REQUST, " Unable to get mysql connection " + e.getMessage());
+        } catch (SQLException e) {
+            log.error(" Unable to execute delete by id command " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.WROND_REQUST, " Unable to execute delete by id command " + e.getMessage());
+        }
+        return new HappyCakeResponse(ErrorCodes.SUCCESS, "SUCCESS DELETE");
     }
 }

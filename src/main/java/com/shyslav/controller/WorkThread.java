@@ -8,6 +8,8 @@ import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerOnlineUsers;
+import com.shyslav.mysql.connectionpool.MysqlConnection;
+import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.utils.LazyGson;
 
 import org.apache.log4j.Logger;
@@ -17,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -131,6 +134,10 @@ public class WorkThread implements Runnable {
             case "selectorders": {
                 printWriter.println(LazyGson.toJson(actions.selectOrders()));
                 break;
+            }
+            case "deletebyid": {
+                StringKeyValue keyValue = request.getObject(StringKeyValue.class);
+                printWriter.println(LazyGson.toJson(actions.deleteByID(keyValue.getKey(), keyValue.getValue())));
             }
             default: {
                 printWriter.println(LazyGson.toJson(new HappyCakeResponse(ErrorCodes.WROND_REQUST, "INVALID REQUEST")));

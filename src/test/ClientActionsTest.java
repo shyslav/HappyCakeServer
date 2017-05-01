@@ -3,7 +3,9 @@ import com.happycake.sitemodels.*;
 import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.ServerStarApp;
 import com.shyslav.controller.actions.ClientActions;
+import com.shyslav.defaultentityes.StringKeyValue;
 import com.shyslav.defaults.ErrorCodes;
+import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -181,6 +183,13 @@ public class ClientActionsTest {
         OrderList list = response.getObject(OrderList.class);
         assertTrue(list.size() > 1);
         assertTrue(list.get(0).getOrderDetails().size() >= 1);
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+        ClientActions client = successLogin();
+        HappyCakeResponse response = client.deleteByID("test", "123");
+        assertTrue(response.getCode() == ErrorCodes.WROND_REQUST);
     }
 
     /**
