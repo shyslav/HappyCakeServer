@@ -68,6 +68,23 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete news by id
+     *
+     * @param id news id
+     * @return happy cake response
+     */
+    @Override
+    public HappyCakeResponse deleteNews(int id) {
+        try {
+            storage.newsStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SELECT ");
+        } catch (DBException e) {
+            log.error("Unable to delete news with id " + id + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
      * Select categories
      *
      * @return categories list in response
@@ -83,6 +100,23 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
+     * Delete category by id
+     *
+     * @param id category id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteCategories(int id) {
+        try {
+            storage.categoryStorage.deleteByID(id);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SELECT ");
+        } catch (DBException e) {
+            log.error("Unable to delete category with id " + id + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }

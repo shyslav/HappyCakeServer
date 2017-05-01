@@ -23,11 +23,27 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectNews();
 
     /**
+     * Delete news by id
+     *
+     * @param id news id
+     * @return happy cake response
+     */
+    HappyCakeResponse deleteNews(int id);
+
+    /**
      * Select all categories
      *
      * @return response with categories
      */
     HappyCakeResponse selectCategories();
+
+    /**
+     * Delete categories
+     *
+     * @param id category id
+     * @return happy cake response
+     */
+    HappyCakeResponse deleteCategories(int id);
 
     /**
      * Select dishes

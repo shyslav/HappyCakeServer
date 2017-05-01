@@ -40,6 +40,18 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete news by id
+     *
+     * @param id news id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteNews(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteNews", id);
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Select categories
      *
      * @return categories list in response object
@@ -47,6 +59,18 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse selectCategories() {
         HappyCakeRequest request = new HappyCakeRequest("selectCategory");
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Delete category
+     *
+     * @param id category id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteCategories(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteCategories", id);
         return client.writeAndRead(request);
     }
 
