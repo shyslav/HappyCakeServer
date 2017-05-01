@@ -1,6 +1,6 @@
 package main.java.com.shyslav.controller.actions;
 
-import appmodels.Employees;
+import com.happycake.sitemodels.Employees;
 import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.*;
 import com.shyslav.mysql.exceptions.DBException;

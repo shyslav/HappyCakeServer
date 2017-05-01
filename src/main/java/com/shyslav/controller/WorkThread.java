@@ -235,7 +235,7 @@ public class WorkThread implements Runnable {
 //                    objectOut.writeObject("not found");
 //                }
 //                //Команда на получение заказов
-//            } else if (splits[0].equals("selectOrders")) {
+//            } else if (splits[0].equals("selectOrders")) { +
 //                ArrayList<_Order> orderses = OrderAction.selectOrders(Integer.parseInt(splits[1]));
 //                if (orderses != null) {
 //                    objectOut.writeObject(orderses);
@@ -244,7 +244,7 @@ public class WorkThread implements Runnable {
 //                    objectOut.writeObject("not found");
 //                }
 //                //Команда на получение элементов заказа
-//            } else if (splits[0].equals("selectOrderList")) {
+//            } else if (splits[0].equals("selectOrderList")) { +
 //                ArrayList<_OrderList> orderList = OrderAction.selectorderList(Integer.parseInt(splits[1]));
 //                if (orderList != null) {
 //                    objectOut.writeObject(orderList);
