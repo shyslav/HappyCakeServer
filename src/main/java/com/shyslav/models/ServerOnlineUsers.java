@@ -1,30 +1,30 @@
-package com.shyslav.models;
+package main.java.com.shyslav.models;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Created by Shyshkin Vladyslav on 27.03.2016.
+ * @author Shyshkin Vladyslav on 27.03.2016.
  */
-public class user {
+public class ServerOnlineUsers {
     private int id;
     private String name;
     private String lastName;
-    //входящее поток
+    //----
     private InputStream inputStream = null;
     private Scanner scanner = null;
-    //исходящее сообщение
+    //----
     private OutputStream outputStream = null;
     private PrintWriter printWriter = null;
-    //потоки обьектов
+    //----
     private ObjectOutputStream objectOut = null;
     private ObjectInputStream objectInp = null;
 
     private Socket sock;
     private int positionId;
 
-    public user(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, ObjectOutputStream objectOut, ObjectInputStream objectInp, Socket sock, int positionId) {
+    public ServerOnlineUsers(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, ObjectOutputStream objectOut, ObjectInputStream objectInp, Socket sock, int positionId) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
