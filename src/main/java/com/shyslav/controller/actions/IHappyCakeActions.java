@@ -53,6 +53,12 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectDish();
 
     /**
+     * Delete dish by id
+     * @param id dish id
+     * @return happy cake response
+     */
+    HappyCakeResponse deleteDish(int id);
+    /**
      * Select reservation
      *
      * @return response with reservation list
@@ -60,12 +66,25 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectReservation();
 
     /**
+     * Delete reservation by id
+     * @param id reservation id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteReservation(int id);
+    /**
      * Select preorders
      *
      * @return response with preorder list
      */
+
     HappyCakeResponse selectPreOrder();
 
+    /**
+     * Delete preOrder by id
+     * @param id preOrder id
+     * @return happycake response
+     */
+    HappyCakeResponse deletePreOrder(int id);
     /**
      * Select employees
      *
@@ -74,20 +93,39 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectEmployees();
 
     /**
+     * Delete employee by id
+     * @param id employee id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteEmployees(int id);
+    /**
      * Select reports
      *
      * @return response with employees list
      */
     HappyCakeResponse selectReports();
 
+    /**
+     * Delete reports by id
+     * @param id report id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteReports(int id);
 
     /**
      * Select cafe coordinates
      *
      * @return response with cafe coordinates list
      */
+
     HappyCakeResponse selectCafeCoordinate();
 
+    /**
+     * Delete CafeCoordinates by id
+     * @param id CafeCoordinate id
+     * @return happyake response
+     */
+    HappyCakeResponse deleteCafeCoordinate(int id);
     /**
      * Select user positions
      *
@@ -96,12 +134,25 @@ public interface IHappyCakeActions {
     HappyCakeResponse selectPositions();
 
     /**
+     * Delete positions by id
+     * @param id  position id
+     * @return happycake response
+     */
+    HappyCakeResponse deletePositions(int id);
+    /**
      * Select orders
      *
      * @return response with orders list
      */
+
     HappyCakeResponse selectOrders();
 
+    /**
+     * Delete orders by id
+     * @param id order id
+     * @return happycake response
+     */
+    HappyCakeResponse deleteOrders(int id);
     /**
      * Delete by id from table
      *

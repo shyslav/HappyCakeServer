@@ -86,6 +86,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete dish by id
+     * @param id dish id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteDish(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteDish", id);
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Select reservation list
      *
      * @return reservation list in response object
@@ -93,6 +104,17 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse selectReservation() {
         HappyCakeRequest request = new HappyCakeRequest("selectReservation");
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Delete reservation by id
+     * @param id reservation id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteReservation(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteReservation", id);
         return client.writeAndRead(request);
     }
 
@@ -108,6 +130,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete preOrder by id
+     * @param id preOrder id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deletePreOrder(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deletePreOrder", id);
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Select employees list
      *
      * @return employees list
@@ -115,6 +148,17 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse selectEmployees() {
         HappyCakeRequest request = new HappyCakeRequest("selectEmployees");
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Delete employee by id
+     * @param id employee id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteEmployees(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteEmployees", id);
         return client.writeAndRead(request);
     }
 
@@ -130,6 +174,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete report by id
+     * @param id report id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteReports(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteReports", id);
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Select cafe coordinate list
      *
      * @return coordinates list
@@ -137,6 +192,17 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse selectCafeCoordinate() {
         HappyCakeRequest request = new HappyCakeRequest("selectCafeCoordinate");
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Delete cafeCoordinate by id
+     * @param id CafeCoordinate id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteCafeCoordinate(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteCafeCoordinate", id);
         return client.writeAndRead(request);
     }
 
@@ -152,6 +218,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Delete position by id
+     * @param id  position id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deletePositions(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deletePositions", id);
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Select orders
      *
      * @return orders list
@@ -159,6 +236,17 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse selectOrders() {
         HappyCakeRequest request = new HappyCakeRequest("selectOrders");
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Delete order by id
+     * @param id order id
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse deleteOrders(int id) {
+        HappyCakeRequest request = new HappyCakeRequest("deleteOrders", id);
         return client.writeAndRead(request);
     }
 
