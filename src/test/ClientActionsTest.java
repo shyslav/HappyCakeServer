@@ -375,29 +375,34 @@ public class ClientActionsTest {
      * @throws Exception
      */
     @Test
-    public void deleteNewsTest() throws Exception {
+    public void deleteNews() throws Exception {
         ClientActions client = successLogin();
-        //add new news for delete
+
+        //add news
         News news = new News();
-        news.setName("Test news");
-        news.setText("Test news body");
-        news.setTegs("test tag");
-        news.setDate(LazyDate.getUnixDate());
+        news.setName("Test");
+        news.setDate(121212);
         news.setAuthorID(1);
+        news.setImageLink("Test");
+        news.setTegs("Test");
+        news.setText("Test");
+        news.setView(1);
+
         client.addNews(news);
 
-        //load list of news
-        NewsList newsList = client.selectNews().getObject(NewsList.class);
-        assertTrue(newsList.size() >= 1);
-        assertTrue(newsList.get(newsList.size() - 1).getName().equals(news.getName()));
+        //load all news
+        NewsList list = client.selectNews().getObject(NewsList.class);
+        News lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getName().equals("Test"));
 
         //delete news
-        HappyCakeResponse response = client.deleteNews(newsList.get(newsList.size() - 1).getId());
-        assertTrue(response.getCode() == ErrorCodes.SUCCESS);
+        client.deleteNews(lastElement.getId());
 
-        //load list of news
-        newsList = client.selectNews().getObject(NewsList.class);
-        assertTrue(!newsList.get(newsList.size() - 1).getName().equals(news.getName()));
+        //check if news was deleted
+        list = client.selectNews().getObject(NewsList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getName().equals("Test"));
     }
 
     /**
@@ -430,6 +435,296 @@ public class ClientActionsTest {
         lastElement = list.get(list.size() - 1);
         assertTrue(!lastElement.getName().equals("Test"));
     }
+
+    /**
+     * Delete dish test
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteDish() throws Exception {
+        ClientActions client = successLogin();
+
+        //add dish
+        Dish dish = new Dish();
+        dish.setCategoryId(1);
+        dish.setName("Test");
+        dish.setDescription("Test");
+        dish.setAmount(1);
+        dish.setPrice(1.00);
+        dish.setImage(new byte[]{1, 2, 3, 4, 5});
+        dish.setReadyORnot("+");
+        dish.setDiscount(1);
+        client.addDish(dish);
+
+
+        //load all dishes
+        DishesList list = client.selectDish().getObject(DishesList.class);
+        Dish lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getName().equals("Test"));
+
+        //delete dish
+        client.deleteDish(lastElement.getId());
+
+        //check if dish was deleted
+        list = client.selectDish().getObject(DishesList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getName().equals("Test"));
+    }
+
+    /**
+     * Delete test on reservation
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteReservation() throws Exception {
+        ClientActions client = successLogin();
+
+        //add reservation
+        Reservation reservation = new Reservation();
+        reservation.setCafeId(1);
+        reservation.setClientName("Test");
+        reservation.setAmountPeople(1);
+        reservation.setClientPhone("test");
+        reservation.setDate(121212);
+        reservation.setDescription("Test");
+        reservation.setConfirm(true);
+        client.addReservation(reservation);
+
+        //load all reservations
+        ReservationList list = client.selectReservation().getObject(ReservationList.class);
+        Reservation lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getClientName().equals("Test"));
+
+        //delete reservations
+        client.deleteReservation(lastElement.getId());
+
+        //check if category was deleted
+        list = client.selectReservation().getObject(ReservationList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getClientName().equals("Test"));
+    }
+
+
+    /**
+     * Delete test on preOrder
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deletePreOrder() throws Exception {
+        ClientActions client = successLogin();
+
+        //add preOrder
+        PreOrder preOrder = new PreOrder();
+        preOrder.setDishID(1);
+        preOrder.setAmount(1);
+        preOrder.setReservationID(1);
+        preOrder.setPrice(999999.00);
+
+
+        client.addPreorder(preOrder);
+
+        //load all preOrders
+        PreOrderList list = client.selectPreOrder().getObject(PreOrderList.class);
+        PreOrder lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getPrice()==999999.00);
+
+        //delete preOrders
+        client.deletePreOrder(lastElement.getId());
+
+        //check if preOrder was deleted
+        list = client.selectPreOrder().getObject(PreOrderList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(lastElement.getPrice()!=999999.00);
+    }
+
+
+    /**
+     *Delete test on employee
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteEmployee() throws Exception {
+        ClientActions client = successLogin();
+
+        //add employee
+
+        Employees employee = new Employees();
+        employee.setCafeID(1);
+        employee.setName("Test");
+        employee.setLastname("Test");
+        employee.setAddress("Test");
+        employee.setBirthday(14051996);
+        employee.setLogin("Test");
+        employee.setPassword("Test");
+        employee.setPositionID(1);
+        client.addEmployee(employee);
+
+        //load all employees
+        EmployeesList list = client.selectEmployees().getObject(EmployeesList.class);
+        Employees lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getName().equals("Test"));
+
+        //delete employees
+        client.deleteEmployees(lastElement.getId());
+
+        //check if employee was deleted
+        list = client.selectEmployees().getObject(EmployeesList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getName().equals("Test"));
+    }
+
+    /**
+     * Delete test on reports
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteReports() throws Exception {
+        ClientActions client = successLogin();
+
+        //add report
+
+        Reports reports = new Reports();
+        reports.setAuthor("Test");
+        reports.setDate(121212);
+        reports.setMail("Test");
+        reports.setPhone("Test");
+        reports.setText("Test");
+        reports.setVision(true);
+
+        client.addReports(reports);
+
+        //load all reports
+        ReportsList list = client.selectReports().getObject(ReportsList.class);
+        Reports lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getAuthor().equals("Test"));
+
+        //delete report
+        client.deleteReports(lastElement.getId());
+
+        //check if report was deleted
+        list = client.selectReports().getObject(ReportsList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getAuthor().equals("Test"));
+    }
+
+    /**
+     * Delete test on CafeCoordinate
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteCafeCoordinate() throws Exception {
+        ClientActions client = successLogin();
+
+        //add cafeCoordinate
+
+        CafeCoordinate cafeCoordinate = new CafeCoordinate();
+        cafeCoordinate.setAddress("Test");
+        cafeCoordinate.setEmail("Test");
+        cafeCoordinate.setMobilePhone("+380913030598");
+        client.addCafeCoordinate(cafeCoordinate);
+
+        //load all cafeCoordinate
+        CafeCoordinateList list = client.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+        CafeCoordinate lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getAddress().equals("Test"));
+
+        //delete cafeCoordinate
+        client.deleteCafeCoordinate(lastElement.getId());
+
+        //check if cafeCoordinate was deleted
+        list = client.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getAddress().equals("Test"));
+    }
+
+    /**
+     * Delete test on positions
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deletePositions() throws Exception {
+        ClientActions client = successLogin();
+
+        //add Position
+
+        Position position = new Position();
+        position.setName("Test");
+        position.setSalary(1.00);
+
+        client.addPosition(position);
+
+        //load all positions
+        PositionsList list = client.selectPositions().getObject(PositionsList.class);
+        Position lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getName().equals("Test"));
+
+        //delete position
+        client.deletePositions(lastElement.getId());
+
+        //check if position was deleted
+        list = client.selectPositions().getObject(PositionsList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getName().equals("Test"));
+    }
+
+    /**
+     * Delete test on orders
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteOrders() throws Exception {
+        ClientActions client = successLogin();
+
+        //add order
+        Order order = new Order();
+        order.setComplite(true);
+        order.setDate(121212);
+        order.setEmployeeId(1);
+        order.setFullPrice(999999.00);
+
+        //add orderDetails
+        OrderDetails orderDetails = new OrderDetails();
+        orderDetails.setAmount(1);
+        orderDetails.setDishID(1);
+        orderDetails.setOrderId(order.getId());
+        orderDetails.setPrice(1.00);
+
+        OrderDetailsList detailsList = new OrderDetailsList();
+        detailsList.add(orderDetails);
+        order.setOrderDetails(detailsList);
+        client.addOrder(order);
+
+        //load all orders
+        OrderList list = client.selectOrders().getObject(OrderList.class);
+        Order lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getFullPrice()==999999.00);
+
+        //delete order
+        client.deleteOrders(lastElement.getId());
+
+        //check if order was deleted
+        list = client.selectOrders().getObject(OrderList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(lastElement.getFullPrice()!=999999.00);
+    }
+
+
 
     /**
      * Success login to server
