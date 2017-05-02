@@ -381,7 +381,6 @@ public class ClientActionsTest {
         //add news
         News news = new News();
         news.setName("Test");
-        news.setDate(121212);
         news.setAuthorID(1);
         news.setImageLink("Test");
         news.setTegs("Test");
@@ -449,12 +448,9 @@ public class ClientActionsTest {
         Dish dish = new Dish();
         dish.setCategoryId(1);
         dish.setName("Test");
-        dish.setDescription("Test");
         dish.setAmount(1);
-        dish.setPrice(1.00);
+        dish.setPrice(Integer.MAX_VALUE);
         dish.setImage(new byte[]{1, 2, 3, 4, 5});
-        dish.setReadyORnot("+");
-        dish.setDiscount(1);
         client.addDish(dish);
 
 
@@ -488,9 +484,7 @@ public class ClientActionsTest {
         reservation.setClientName("Test");
         reservation.setAmountPeople(1);
         reservation.setClientPhone("test");
-        reservation.setDate(121212);
         reservation.setDescription("Test");
-        reservation.setConfirm(true);
         client.addReservation(reservation);
 
         //load all reservations
@@ -523,7 +517,7 @@ public class ClientActionsTest {
         preOrder.setDishID(1);
         preOrder.setAmount(1);
         preOrder.setReservationID(1);
-        preOrder.setPrice(999999.00);
+        preOrder.setPrice(Integer.MAX_VALUE);
 
 
         client.addPreorder(preOrder);
@@ -532,7 +526,7 @@ public class ClientActionsTest {
         PreOrderList list = client.selectPreOrder().getObject(PreOrderList.class);
         PreOrder lastElement = list.get(list.size() - 1);
         assertTrue(list.size() >= 1);
-        assertTrue(lastElement.getPrice() == 999999.00);
+        assertTrue(lastElement.getPrice() == Integer.MAX_VALUE);
 
         //delete preOrders
         client.deletePreOrder(lastElement.getId());
@@ -540,7 +534,7 @@ public class ClientActionsTest {
         //check if preOrder was deleted
         list = client.selectPreOrder().getObject(PreOrderList.class);
         lastElement = list.get(list.size() - 1);
-        assertTrue(lastElement.getPrice() != 999999.00);
+        assertTrue(lastElement.getPrice() != Integer.MAX_VALUE);
     }
 
 
@@ -554,16 +548,15 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
 
         //add employee
-
         Employees employee = new Employees();
         employee.setCafeID(1);
+        employee.setPositionID(1);
+        employee.setBirthday(14051996);
         employee.setName("Test");
         employee.setLastname("Test");
         employee.setAddress("Test");
-        employee.setBirthday(14051996);
         employee.setLogin("Test");
         employee.setPassword("Test");
-        employee.setPositionID(1);
         client.addEmployee(employee);
 
         //load all employees
@@ -594,11 +587,9 @@ public class ClientActionsTest {
 
         Reports reports = new Reports();
         reports.setAuthor("Test");
-        reports.setDate(121212);
         reports.setMail("Test");
         reports.setPhone("Test");
         reports.setText("Test");
-        reports.setVision(true);
 
         client.addReports(reports);
 
@@ -659,10 +650,9 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
 
         //add Position
-
         Position position = new Position();
         position.setName("Test");
-        position.setSalary(1.00);
+        position.setSalary(Integer.MAX_VALUE);
 
         client.addPosition(position);
 
@@ -691,29 +681,14 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
 
         //add order
-        Order order = new Order();
-        order.setComplite(true);
-        order.setDate(121212);
-        order.setEmployeeId(1);
-        order.setFullPrice(999999.00);
-
-        //add orderDetails
-        OrderDetails orderDetails = new OrderDetails();
-        orderDetails.setAmount(1);
-        orderDetails.setDishID(1);
-        orderDetails.setOrderId(order.getId());
-        orderDetails.setPrice(1.00);
-
-        OrderDetailsList detailsList = new OrderDetailsList();
-        detailsList.add(orderDetails);
-        order.setOrderDetails(detailsList);
-        client.addOrder(order);
+        Order order = generateTestOrderWithDetails();
+        client.saveOrderWithDetails(order);
 
         //load all orders
         OrderList list = client.selectOrders().getObject(OrderList.class);
         Order lastElement = list.get(list.size() - 1);
         assertTrue(list.size() >= 1);
-        assertTrue(lastElement.getFullPrice() == 999999.00);
+        assertTrue(lastElement.getFullPrice() == Integer.MAX_VALUE);
 
         //delete order
         client.deleteOrders(lastElement.getId());
@@ -721,7 +696,10 @@ public class ClientActionsTest {
         //check if order was deleted
         list = client.selectOrders().getObject(OrderList.class);
         lastElement = list.get(list.size() - 1);
-        assertTrue(lastElement.getFullPrice() != 999999.00);
+        assertTrue(lastElement.getFullPrice() != Integer.MAX_VALUE);
+        if (lastElement.getOrderDetails().size() != 0) {
+            assertTrue(lastElement.getOrderDetails().get(0).getPrice() != Integer.MAX_VALUE);
+        }
     }
 
     /**
@@ -744,6 +722,9 @@ public class ClientActionsTest {
         Order last = list.get(list.size() - 1);
         assertTrue(last.getOrderDetails().size() == 1);
         assertTrue(last.getOrderDetails().get(0).getPrice() == Integer.MAX_VALUE);
+
+        HappyCakeResponse deleteOrders = client.deleteOrders(last.getId());
+        assertTrue(deleteOrders.getCode() == ErrorCodes.SUCCESS);
     }
 
 
@@ -760,6 +741,11 @@ public class ClientActionsTest {
         return clientActions;
     }
 
+    /**
+     * Generate test order with order details
+     *
+     * @return order with details
+     */
     private Order generateTestOrderWithDetails() {
         //set order required fields
         Order order = new Order();
