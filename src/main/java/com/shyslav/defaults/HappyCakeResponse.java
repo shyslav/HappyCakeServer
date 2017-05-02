@@ -50,4 +50,13 @@ public class HappyCakeResponse {
     public String getContext() {
         return context;
     }
+
+    /**
+     * Check response returned with success code
+     *
+     * @return true if success
+     */
+    public boolean isSuccess() {
+        return code == ErrorCodes.SUCCESS;
+    }
 }

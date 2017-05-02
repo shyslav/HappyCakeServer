@@ -204,13 +204,34 @@ public class ClientActionsTest {
     @Test
     public void addNews() throws Exception {
         ClientActions client = successLogin();
+        NewsList list = client.selectNews().getObject(NewsList.class);
+
+        //add news
         News news = new News();
+        news.setName("Test");
+        news.setAuthorID(1);
+        news.setImageLink("Test");
+        news.setTegs("Test");
+        news.setText("Test");
         HappyCakeResponse response = client.addNews(news);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        news.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addNews(news);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if news were added
+        NewsList newsList = client.selectNews().getObject(NewsList.class);
+        assertTrue(list.size() + 1 == newsList.size());
+        News addedNews = newsList.get(newsList.size() - 1);
+        assertTrue(newsList.get(newsList.size() - 1).getName().equals("Test"));
+
+        //check if news were updated
+        addedNews.setName("Test12345");
+        HappyCakeResponse updateResponse = client.addNews(addedNews);
+        assertTrue(updateResponse.isSuccess());
+
+        newsList = client.selectNews().getObject(NewsList.class);
+        News byID = newsList.getByID(addedNews.getId());
+        assertTrue(byID.getName().equals("Test12345"));
+
+        client.deleteNews(byID.getId());
     }
 
     /**
