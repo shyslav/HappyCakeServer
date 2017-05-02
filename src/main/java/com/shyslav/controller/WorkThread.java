@@ -237,6 +237,11 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteOrders(id)));
                 break;
             }
+            case "saveorderwithdetails": {
+                Order order = request.getObject(Order.class);
+                printWriter.println(LazyGson.toJson(actions.saveOrderWithDetails(order)));
+                break;
+            }
             default: {
                 printWriter.println(LazyGson.toJson(new HappyCakeResponse(ErrorCodes.WROND_REQUST, "INVALID REQUEST")));
             }

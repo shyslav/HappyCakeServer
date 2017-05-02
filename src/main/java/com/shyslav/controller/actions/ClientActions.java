@@ -112,6 +112,7 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete dish by id
+     *
      * @param id dish id
      * @return happycake response
      */
@@ -146,6 +147,7 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete reservation by id
+     *
      * @param id reservation id
      * @return happycake response
      */
@@ -180,6 +182,7 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete preOrder by id
+     *
      * @param id preOrder id
      * @return happycake response
      */
@@ -214,6 +217,7 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete employee by id
+     *
      * @param id employee id
      * @return happycake response
      */
@@ -247,9 +251,9 @@ public class ClientActions implements IHappyCakeActions {
     }
 
 
-
     /**
      * Delete report by id
+     *
      * @param id report id
      * @return happycake response
      */
@@ -284,6 +288,7 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete cafeCoordinate by id
+     *
      * @param id CafeCoordinate id
      * @return happycake response
      */
@@ -318,7 +323,8 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete position by id
-     * @param id  position id
+     *
+     * @param id position id
      * @return happycake response
      */
     @Override
@@ -353,6 +359,7 @@ public class ClientActions implements IHappyCakeActions {
 
     /**
      * Delete order by id
+     *
      * @param id order id
      * @return happycake response
      */
@@ -371,6 +378,18 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addOrder(Order order) {
         HappyCakeRequest request = new HappyCakeRequest("addOrder", order);
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Add order with details
+     *
+     * @param order order
+     * @return order with details
+     */
+    @Override
+    public HappyCakeResponse saveOrderWithDetails(Order order) {
+        HappyCakeRequest request = new HappyCakeRequest("saveOrderWithDetails", order);
         return client.writeAndRead(request);
     }
 

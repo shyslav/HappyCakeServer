@@ -638,6 +638,27 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
+     * Save order with details
+     *
+     * @param order order
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse saveOrderWithDetails(Order order) {
+        try {
+            if (order.getId() != 0) {
+                return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " USE METHOD addOrder for update order ");
+            } else {
+                storage.orderStorage.saveOrderWithDetails(order);
+            }
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " ORDER SAVED ");
+        } catch (DBException e) {
+            log.error("Unable to add order with id " + order.getId() + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
      * Delete from table by id
      *
      * @param tableName table name

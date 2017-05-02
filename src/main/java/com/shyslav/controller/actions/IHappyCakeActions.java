@@ -71,6 +71,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete dish by id
+     *
      * @param id dish id
      * @return happy cake response
      */
@@ -93,6 +94,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete reservation by id
+     *
      * @param id reservation id
      * @return happycake response
      */
@@ -115,6 +117,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete preOrder by id
+     *
      * @param id preOrder id
      * @return happycake response
      */
@@ -137,6 +140,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete employee by id
+     *
      * @param id employee id
      * @return happycake response
      */
@@ -159,6 +163,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete reports by id
+     *
      * @param id report id
      * @return happycake response
      */
@@ -183,6 +188,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete CafeCoordinates by id
+     *
      * @param id CafeCoordinate id
      * @return happyake response
      */
@@ -205,7 +211,8 @@ public interface IHappyCakeActions {
 
     /**
      * Delete positions by id
-     * @param id  position id
+     *
+     * @param id position id
      * @return happycake response
      */
     HappyCakeResponse deletePositions(int id);
@@ -227,6 +234,7 @@ public interface IHappyCakeActions {
 
     /**
      * Delete orders by id
+     *
      * @param id order id
      * @return happycake response
      */
@@ -239,6 +247,14 @@ public interface IHappyCakeActions {
      * @return happycake response
      */
     HappyCakeResponse addOrder(Order order);
+
+    /**
+     * Add order with details
+     *
+     * @param order order
+     * @return happycake response
+     */
+    HappyCakeResponse saveOrderWithDetails(Order order);
 
     /**
      * Delete by id from table

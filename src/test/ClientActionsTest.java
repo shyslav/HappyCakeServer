@@ -532,7 +532,7 @@ public class ClientActionsTest {
         PreOrderList list = client.selectPreOrder().getObject(PreOrderList.class);
         PreOrder lastElement = list.get(list.size() - 1);
         assertTrue(list.size() >= 1);
-        assertTrue(lastElement.getPrice()==999999.00);
+        assertTrue(lastElement.getPrice() == 999999.00);
 
         //delete preOrders
         client.deletePreOrder(lastElement.getId());
@@ -540,12 +540,12 @@ public class ClientActionsTest {
         //check if preOrder was deleted
         list = client.selectPreOrder().getObject(PreOrderList.class);
         lastElement = list.get(list.size() - 1);
-        assertTrue(lastElement.getPrice()!=999999.00);
+        assertTrue(lastElement.getPrice() != 999999.00);
     }
 
 
     /**
-     *Delete test on employee
+     * Delete test on employee
      *
      * @throws Exception
      */
@@ -713,7 +713,7 @@ public class ClientActionsTest {
         OrderList list = client.selectOrders().getObject(OrderList.class);
         Order lastElement = list.get(list.size() - 1);
         assertTrue(list.size() >= 1);
-        assertTrue(lastElement.getFullPrice()==999999.00);
+        assertTrue(lastElement.getFullPrice() == 999999.00);
 
         //delete order
         client.deleteOrders(lastElement.getId());
@@ -721,9 +721,30 @@ public class ClientActionsTest {
         //check if order was deleted
         list = client.selectOrders().getObject(OrderList.class);
         lastElement = list.get(list.size() - 1);
-        assertTrue(lastElement.getFullPrice()!=999999.00);
+        assertTrue(lastElement.getFullPrice() != 999999.00);
     }
 
+    /**
+     * Save order with details
+     *
+     * @throws Exception
+     */
+    @Test
+    public void saveOrdersWithDetails() throws Exception {
+        ClientActions client = successLogin();
+
+        Order order = generateTestOrderWithDetails();
+        HappyCakeResponse response = client.saveOrderWithDetails(order);
+
+        assertTrue(response.getCode() == ErrorCodes.SUCCESS);
+
+        OrderList list = client.selectOrders().getObject(OrderList.class);
+        assertNotNull(list);
+
+        Order last = list.get(list.size() - 1);
+        assertTrue(last.getOrderDetails().size() == 1);
+        assertTrue(last.getOrderDetails().get(0).getPrice() == Integer.MAX_VALUE);
+    }
 
 
     /**
@@ -737,5 +758,26 @@ public class ClientActionsTest {
         ClientActions clientActions = new ClientActions(client);
         clientActions.login(realUserName, realUserPass);
         return clientActions;
+    }
+
+    private Order generateTestOrderWithDetails() {
+        //set order required fields
+        Order order = new Order();
+        order.setDate(LazyDate.getUnixDate());
+        order.setEmployeeId(1);
+        order.setFullPrice(Integer.MAX_VALUE);
+
+        //ser order details required fields
+        OrderDetails orderDetails = new OrderDetails();
+        orderDetails.setAmount(1);
+        orderDetails.setDishID(1);
+        orderDetails.setPrice(Integer.MAX_VALUE);
+
+        //set details for order
+        OrderDetailsList detailsList = new OrderDetailsList();
+        detailsList.add(orderDetails);
+        order.setOrderDetails(detailsList);
+
+        return order;
     }
 }
