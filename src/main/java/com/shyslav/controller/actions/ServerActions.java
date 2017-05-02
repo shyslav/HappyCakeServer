@@ -93,7 +93,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addNews(News news) {
         try {
-            if (news.getId() == 0) {
+            if (news.getId() != 0) {
                 storage.newsStorage.update(news, news.getId());
             } else {
                 storage.newsStorage.save(news);
@@ -151,7 +151,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addCategories(Category category) {
         try {
-            if (category.getId() == 0) {
+            if (category.getId() != 0) {
                 storage.categoryStorage.update(category, category.getId());
             } else {
                 storage.categoryStorage.save(category);
@@ -215,7 +215,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addDish(Dish dish) {
         try {
-            if (dish.getId() == 0) {
+            if (dish.getId() != 0) {
                 storage.dishStorage.update(dish, dish.getId());
             } else {
                 storage.dishStorage.save(dish);
@@ -273,7 +273,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addReservation(Reservation reservation) {
         try {
-            if (reservation.getId() == 0) {
+            if (reservation.getId() != 0) {
                 storage.reservationStorage.update(reservation, reservation.getId());
             } else {
                 storage.reservationStorage.save(reservation);
@@ -332,7 +332,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addPreorder(PreOrder preOrder) {
         try {
-            if (preOrder.getId() == 0) {
+            if (preOrder.getId() != 0) {
                 storage.preOrderStorage.update(preOrder, preOrder.getId());
             } else {
                 storage.preOrderStorage.save(preOrder);
@@ -390,7 +390,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addEmployee(Employees employees) {
         try {
-            if (employees.getId() == 0) {
+            if (employees.getId() != 0) {
                 storage.employeesStorage.update(employees, employees.getId());
             } else {
                 storage.employeesStorage.save(employees);
@@ -448,7 +448,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addReports(Reports reports) {
         try {
-            if (reports.getId() == 0) {
+            if (reports.getId() != 0) {
                 storage.reportsStorage.update(reports, reports.getId());
             } else {
                 storage.reportsStorage.save(reports);
@@ -507,7 +507,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addCafeCoordinate(CafeCoordinate cafeCoordinate) {
         try {
-            if (cafeCoordinate.getId() == 0) {
+            if (cafeCoordinate.getId() != 0) {
                 storage.cafeCoordinate.update(cafeCoordinate, cafeCoordinate.getId());
             } else {
                 storage.cafeCoordinate.save(cafeCoordinate);
@@ -566,7 +566,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addPosition(Position position) {
         try {
-            if (position.getId() == 0) {
+            if (position.getId() != 0) {
                 storage.positionStorage.update(position, position.getId());
             } else {
                 storage.positionStorage.save(position);
@@ -625,7 +625,7 @@ public class ServerActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse addOrder(Order order) {
         try {
-            if (order.getId() == 0) {
+            if (order.getId() != 0) {
                 storage.orderStorage.update(order, order.getId());
             } else {
                 storage.orderStorage.save(order);

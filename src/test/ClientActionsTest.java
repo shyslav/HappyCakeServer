@@ -4,6 +4,7 @@ import com.shyslav.controller.ServerStarApp;
 import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.utils.LazyDate;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -368,9 +369,66 @@ public class ClientActionsTest {
     }
 
 
+    /**
+     * Delete news test
+     *
+     * @throws Exception
+     */
     @Test
-    public void deleteNewsTest() {
+    public void deleteNewsTest() throws Exception {
+        ClientActions client = successLogin();
+        //add new news for delete
+        News news = new News();
+        news.setName("Test news");
+        news.setText("Test news body");
+        news.setTegs("test tag");
+        news.setDate(LazyDate.getUnixDate());
+        news.setAuthorID(1);
+        client.addNews(news);
 
+        //load list of news
+        NewsList newsList = client.selectNews().getObject(NewsList.class);
+        assertTrue(newsList.size() >= 1);
+        assertTrue(newsList.get(newsList.size() - 1).getName().equals(news.getName()));
+
+        //delete news
+        HappyCakeResponse response = client.deleteNews(newsList.get(newsList.size() - 1).getId());
+        assertTrue(response.getCode() == ErrorCodes.SUCCESS);
+
+        //load list of news
+        newsList = client.selectNews().getObject(NewsList.class);
+        assertTrue(!newsList.get(newsList.size() - 1).getName().equals(news.getName()));
+    }
+
+    /**
+     * Delete categories test
+     *
+     * @throws Exception
+     */
+    @Test
+    public void deleteCategories() throws Exception {
+        ClientActions client = successLogin();
+
+        //add categories
+        Category category = new Category();
+        category.setName("Test");
+        category.setDescription("Test");
+        category.setImage(new byte[]{1, 2, 3, 4, 5});
+        client.addCategories(category);
+
+        //load all categories
+        CategoriesList list = client.selectCategories().getObject(CategoriesList.class);
+        Category lastElement = list.get(list.size() - 1);
+        assertTrue(list.size() >= 1);
+        assertTrue(lastElement.getName().equals("Test"));
+
+        //delete category
+        client.deleteCategories(lastElement.getId());
+
+        //check if category was deleted
+        list = client.selectCategories().getObject(CategoriesList.class);
+        lastElement = list.get(list.size() - 1);
+        assertTrue(!lastElement.getName().equals("Test"));
     }
 
     /**

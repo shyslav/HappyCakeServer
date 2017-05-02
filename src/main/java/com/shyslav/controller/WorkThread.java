@@ -187,6 +187,56 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addOrder(order)));
                 break;
             }
+            case "deletenews": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteNews(id)));
+                break;
+            }
+            case "deletecategories": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteCategories(id)));
+                break;
+            }
+            case "deletedish": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteDish(id)));
+                break;
+            }
+            case "deletereservation": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteReservation(id)));
+                break;
+            }
+            case "deletepreorder": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deletePreOrder(id)));
+                break;
+            }
+            case "deleteemployees": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteEmployees(id)));
+                break;
+            }
+            case "deletereports": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteReports(id)));
+                break;
+            }
+            case "deletecafecoordinate": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteCafeCoordinate(id)));
+                break;
+            }
+            case "deletepositions": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deletePositions(id)));
+                break;
+            }
+            case "deleteorders": {
+                int id = request.getObject(Integer.class);
+                printWriter.println(LazyGson.toJson(actions.deleteOrders(id)));
+                break;
+            }
             default: {
                 printWriter.println(LazyGson.toJson(new HappyCakeResponse(ErrorCodes.WROND_REQUST, "INVALID REQUEST")));
             }
