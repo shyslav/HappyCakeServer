@@ -242,13 +242,34 @@ public class ClientActionsTest {
     @Test
     public void addCategory() throws Exception {
         ClientActions client = successLogin();
+
+        CategoriesList list = client.selectCategories().getObject(CategoriesList.class);
+
+        //add category
         Category category = new Category();
+        category.setName("Test");
+        category.setDescription("Test");
+        category.setImage(new byte[]{1, 2, 3, 4, 5});
+
         HappyCakeResponse response = client.addCategories(category);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        category.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addCategories(category);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if category was added
+        CategoriesList categoriesList = client.selectCategories().getObject(CategoriesList.class);
+        assertTrue(list.size() + 1 == categoriesList.size());
+        Category addedCategory = categoriesList.get(categoriesList.size() - 1);
+        assertTrue(categoriesList.get(categoriesList.size() - 1).getName().equals("Test"));
+
+        //check if category were updated
+        addedCategory.setName("Test12345");
+        HappyCakeResponse updateResponse = client.addCategories(addedCategory);
+        assertTrue(updateResponse.isSuccess());
+
+        categoriesList = client.selectCategories().getObject(CategoriesList.class);
+        Category byID = categoriesList.getByID(addedCategory.getId());
+        assertTrue(byID.getName().equals("Test12345"));
+
+        client.deleteCategories(byID.getId());
     }
 
     /**
@@ -276,13 +297,36 @@ public class ClientActionsTest {
     @Test
     public void addReservation() throws Exception {
         ClientActions client = successLogin();
+
+        ReservationList list = client.selectReservation().getObject(ReservationList.class);
+
+        //add reservation
         Reservation reservation = new Reservation();
+        reservation.setCafeId(1);
+        reservation.setClientName("Test");
+        reservation.setAmountPeople(1);
+        reservation.setClientPhone("test");
+        reservation.setDescription("Test");
+
         HappyCakeResponse response = client.addReservation(reservation);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        reservation.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addReservation(reservation);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if reservation was added
+        ReservationList reservationList = client.selectReservation().getObject(ReservationList.class);
+        assertTrue(list.size() + 1 == reservationList.size());
+        Reservation addedReservation = reservationList.get(reservationList.size() - 1);
+        assertTrue(reservationList.get(reservationList.size() - 1).getClientName().equals("Test"));
+
+        //check if reservation were updated
+        addedReservation.setClientName("Test12345");
+        HappyCakeResponse updateResponse = client.addReservation(addedReservation);
+        assertTrue(updateResponse.isSuccess());
+
+        reservationList = client.selectReservation().getObject(ReservationList.class);
+        Reservation byID = reservationList.getByID(addedReservation.getId());
+        assertTrue(byID.getClientName().equals("Test12345"));
+
+        client.deleteReservation(byID.getId());
     }
 
     /**
@@ -293,13 +337,35 @@ public class ClientActionsTest {
     @Test
     public void addPreoder() throws Exception {
         ClientActions client = successLogin();
+
+        PreOrderList list = client.selectPreOrder().getObject(PreOrderList.class);
+
+        //add preOrder
         PreOrder preOrder = new PreOrder();
+        preOrder.setDishID(1);
+        preOrder.setAmount(1);
+        preOrder.setReservationID(1);
+        preOrder.setPrice(Integer.MAX_VALUE);
+
         HappyCakeResponse response = client.addPreorder(preOrder);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        preOrder.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addPreorder(preOrder);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if preOrder was added
+        PreOrderList preOrderList = client.selectPreOrder().getObject(PreOrderList.class);
+        assertTrue(list.size() + 1 == preOrderList.size());
+        PreOrder addedPreOrder = preOrderList.get(preOrderList.size() - 1);
+        assertTrue(preOrderList.get(preOrderList.size() - 1).getPrice() == Integer.MAX_VALUE);
+
+        //check if preOrder were updated
+        addedPreOrder.setAmount(Integer.MAX_VALUE);
+        HappyCakeResponse updateResponse = client.addPreorder(addedPreOrder);
+        assertTrue(updateResponse.isSuccess());
+
+        preOrderList = client.selectPreOrder().getObject(PreOrderList.class);
+        PreOrder byID = preOrderList.getByID(addedPreOrder.getId());
+        assertTrue(byID.getAmount() == Integer.MAX_VALUE);
+
+        client.deletePreOrder(byID.getId());
     }
 
     /**
@@ -310,13 +376,40 @@ public class ClientActionsTest {
     @Test
     public void addEmployee() throws Exception {
         ClientActions client = successLogin();
-        Employees employees = new Employees();
-        HappyCakeResponse response = client.addEmployee(employees);
+
+        EmployeesList list = client.selectEmployees().getObject(EmployeesList.class);
+
+        //add employee
+        Employees employee = new Employees();
+        employee.setCafeID(1);
+        employee.setPositionID(1);
+        employee.setBirthday(14051996);
+        employee.setName("Test");
+        employee.setLastname("Test");
+        employee.setAddress("Test");
+        employee.setLogin("Test");
+        employee.setPassword("Test");
+
+
+        HappyCakeResponse response = client.addEmployee(employee);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        employees.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addEmployee(employees);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if employee was added
+        EmployeesList employeesList = client.selectEmployees().getObject(EmployeesList.class);
+        assertTrue(list.size() + 1 == employeesList.size());
+        Employees addedEmployees = employeesList.get(employeesList.size() - 1);
+        assertTrue(employeesList.get(employeesList.size() - 1).getName().equals("Test"));
+
+        //check if employee were updated
+        addedEmployees.setName("Test12345");
+        HappyCakeResponse updateResponse = client.addEmployee(addedEmployees);
+        assertTrue(updateResponse.isSuccess());
+
+        employeesList = client.selectEmployees().getObject(EmployeesList.class);
+        Employees byID = employeesList.getByID(addedEmployees.getId());
+        assertTrue(byID.getName().equals("Test12345"));
+
+        client.deleteEmployees(byID.getId());
     }
 
     /**
@@ -327,13 +420,35 @@ public class ClientActionsTest {
     @Test
     public void addReports() throws Exception {
         ClientActions client = successLogin();
+
+        ReportsList list = client.selectReports().getObject(ReportsList.class);
+
+        //add report
         Reports reports = new Reports();
+        reports.setAuthor("Test");
+        reports.setMail("Test");
+        reports.setPhone("Test");
+        reports.setText("Test");
+
         HappyCakeResponse response = client.addReports(reports);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        reports.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addReports(reports);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if report was added
+        ReportsList reportsList = client.selectReports().getObject(ReportsList.class);
+        assertTrue(list.size() + 1 == reportsList.size());
+        Reports addedReports = reportsList.get(reportsList.size() - 1);
+        assertTrue(reportsList.get(reportsList.size() - 1).getAuthor().equals("Test"));
+
+        //check if report were updated
+        addedReports.setAuthor("Test12345");
+        HappyCakeResponse updateResponse = client.addReports(addedReports);
+        assertTrue(updateResponse.isSuccess());
+
+        reportsList = client.selectReports().getObject(ReportsList.class);
+        Reports byID = reportsList.getByID(addedReports.getId());
+        assertTrue(byID.getAuthor().equals("Test12345"));
+
+        client.deleteReports(byID.getId());
     }
 
 
@@ -345,13 +460,34 @@ public class ClientActionsTest {
     @Test
     public void addCafeCoordinate() throws Exception {
         ClientActions client = successLogin();
+
+        CafeCoordinateList list = client.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+
+        //add cafeCoordinate
         CafeCoordinate cafeCoordinate = new CafeCoordinate();
+        cafeCoordinate.setAddress("Test");
+        cafeCoordinate.setEmail("Test");
+        cafeCoordinate.setMobilePhone("+380913030598");
+
         HappyCakeResponse response = client.addCafeCoordinate(cafeCoordinate);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        cafeCoordinate.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addCafeCoordinate(cafeCoordinate);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if cafeCoordinate was added
+        CafeCoordinateList cafeCoordinateList = client.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+        assertTrue(list.size() + 1 == cafeCoordinateList.size());
+        CafeCoordinate addedCafeCoordinate = cafeCoordinateList.get(cafeCoordinateList.size() - 1);
+        assertTrue(cafeCoordinateList.get(cafeCoordinateList.size() - 1).getAddress().equals("Test"));
+
+        //check if cafeCoordinate were updated
+        addedCafeCoordinate.setAddress("Test12345");
+        HappyCakeResponse updateResponse = client.addCafeCoordinate(addedCafeCoordinate);
+        assertTrue(updateResponse.isSuccess());
+
+        cafeCoordinateList = client.selectCafeCoordinate().getObject(CafeCoordinateList.class);
+        CafeCoordinate byID = cafeCoordinateList.getByID(addedCafeCoordinate.getId());
+        assertTrue(byID.getAddress().equals("Test12345"));
+
+        client.deleteCafeCoordinate(byID.getId());
     }
 
 
@@ -363,13 +499,33 @@ public class ClientActionsTest {
     @Test
     public void addPosition() throws Exception {
         ClientActions client = successLogin();
+
+        PositionsList list = client.selectPositions().getObject(PositionsList.class);
+
+        //add Position
         Position position = new Position();
+        position.setName("Test");
+        position.setSalary(Integer.MAX_VALUE);
+
         HappyCakeResponse response = client.addPosition(position);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        position.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addPosition(position);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if position was added
+        PositionsList positionsList = client.selectPositions().getObject(PositionsList.class);
+        assertTrue(list.size() + 1 == positionsList.size());
+        Position addedPosition = positionsList.get(positionsList.size() - 1);
+        assertTrue(positionsList.get(positionsList.size() - 1).getName().equals("Test"));
+
+        //check if positions were updated
+        addedPosition.setName("Test12345");
+        HappyCakeResponse updateResponse = client.addPosition(addedPosition);
+        assertTrue(updateResponse.isSuccess());
+
+        positionsList = client.selectPositions().getObject(PositionsList.class);
+        Position byID = positionsList.getByID(addedPosition.getId());
+        assertTrue(byID.getName().equals("Test12345"));
+
+        client.deletePositions(byID.getId());
     }
 
     /**
@@ -380,13 +536,29 @@ public class ClientActionsTest {
     @Test
     public void addOrder() throws Exception {
         ClientActions client = successLogin();
-        Order order = new Order();
+        OrderList list = client.selectOrders().getObject(OrderList.class);
+        //add order
+        Order order = generateTestOrderWithDetails();
+
         HappyCakeResponse response = client.addOrder(order);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        order.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addOrder(order);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if order was added
+        OrderList orderList = client.selectOrders().getObject(OrderList.class);
+        assertTrue(list.size() + 1 == orderList.size());
+        Order addedOrder = orderList.get(orderList.size() - 1);
+        assertTrue(orderList.get(orderList.size() - 1).getFullPrice()== Integer.MAX_VALUE);
+
+        //check if order were updated
+        addedOrder.setFullPrice(Integer.MAX_VALUE);
+        HappyCakeResponse updateResponse = client.addOrder(addedOrder);
+        assertTrue(updateResponse.isSuccess());
+
+        orderList = client.selectOrders().getObject(OrderList.class);
+        Order byID = orderList.getByID(addedOrder.getId());
+        assertTrue(byID.getFullPrice()==Integer.MAX_VALUE);
+
+        client.deleteOrders(byID.getId());
     }
 
 
@@ -747,7 +919,6 @@ public class ClientActionsTest {
         HappyCakeResponse deleteOrders = client.deleteOrders(last.getId());
         assertTrue(deleteOrders.getCode() == ErrorCodes.SUCCESS);
     }
-
 
     /**
      * Success login to server
