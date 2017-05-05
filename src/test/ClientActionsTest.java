@@ -37,7 +37,6 @@ public class ClientActionsTest {
     public void before() {
         try {
             ServerStarApp.storages.clear();
-            createUser();
         } catch (DBException e) {
             fail();
         }
@@ -73,9 +72,19 @@ public class ClientActionsTest {
     @Test
     public void selectNews() throws Exception {
         ClientActions client = successLogin();
+        int userID = createUser();
+
+        News news = new News();
+        news.setName("Test");
+        news.setAuthorID(userID);
+        news.setImageLink("Test");
+        news.setTegs("Test");
+        news.setText("Test");
+        client.addNews(news);
+
         HappyCakeResponse response = client.selectNews();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((NewsList) response.getObject(NewsList.class)).size() > 1);
+        assertTrue(((NewsList) response.getObject(NewsList.class)).size() == 1);
     }
 
     /**
@@ -975,7 +984,7 @@ public class ClientActionsTest {
         return order;
     }
 
-    private void createUser() throws DBException {
+    private int createUser() throws DBException {
         //create cafe coordinate
         CafeCoordinate cafeCoordinate = new CafeCoordinate();
         cafeCoordinate.setEmail("email");
@@ -999,6 +1008,6 @@ public class ClientActionsTest {
         employees.setLastname("123");
         employees.setLogin("admin");
         employees.setPassword("admin");
-        ServerStarApp.storages.employeesStorage.save(employees);
+        return (int) ServerStarApp.storages.employeesStorage.saveAndGetLastInsertID(employees);
     }
 }
