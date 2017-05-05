@@ -4,12 +4,15 @@ import com.shyslav.controller.ServerStarApp;
 import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeResponse;
+import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.utils.LazyDate;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * @author Shyshkin Vladyslav on 07.06.2016.
@@ -20,13 +23,26 @@ public class ClientActionsTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Thread thread = new Thread(ServerStarApp::start);
+        Thread thread = new Thread(() -> {
+            ServerStarApp.start("/etc/start_test.xml");
+        });
         thread.setName("server");
         thread.start();
         while (!ServerStarApp.started) {
             Thread.sleep(1000);
         }
     }
+
+    @Before
+    public void before() {
+        try {
+            ServerStarApp.storages.clear();
+            createUser();
+        } catch (DBException e) {
+            fail();
+        }
+    }
+
 
     /**
      * Login test
@@ -547,7 +563,7 @@ public class ClientActionsTest {
         OrderList orderList = client.selectOrders().getObject(OrderList.class);
         assertTrue(list.size() + 1 == orderList.size());
         Order addedOrder = orderList.get(orderList.size() - 1);
-        assertTrue(orderList.get(orderList.size() - 1).getFullPrice()== Integer.MAX_VALUE);
+        assertTrue(orderList.get(orderList.size() - 1).getFullPrice() == Integer.MAX_VALUE);
 
         //check if order were updated
         addedOrder.setFullPrice(Integer.MAX_VALUE);
@@ -556,7 +572,7 @@ public class ClientActionsTest {
 
         orderList = client.selectOrders().getObject(OrderList.class);
         Order byID = orderList.getByID(addedOrder.getId());
-        assertTrue(byID.getFullPrice()==Integer.MAX_VALUE);
+        assertTrue(byID.getFullPrice() == Integer.MAX_VALUE);
 
         client.deleteOrders(byID.getId());
     }
@@ -957,5 +973,32 @@ public class ClientActionsTest {
         order.setOrderDetails(detailsList);
 
         return order;
+    }
+
+    private void createUser() throws DBException {
+        //create cafe coordinate
+        CafeCoordinate cafeCoordinate = new CafeCoordinate();
+        cafeCoordinate.setEmail("email");
+        cafeCoordinate.setAddress("address");
+        cafeCoordinate.setMobilePhone("mobile");
+        ServerStarApp.storages.cafeCoordinate.save(cafeCoordinate);
+
+        //create position
+        Position position = new Position();
+        position.setName("Admin");
+        position.setSalary(12345);
+        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
+
+        //create employee
+        Employees employees = new Employees();
+        employees.setPositionID((int) positionID);
+        employees.setAddress("123");
+        employees.setBirthday(12345);
+        employees.setCafeID(1);
+        employees.setName("12345");
+        employees.setLastname("123");
+        employees.setLogin("admin");
+        employees.setPassword("admin");
+        ServerStarApp.storages.employeesStorage.save(employees);
     }
 }

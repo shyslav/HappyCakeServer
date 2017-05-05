@@ -13,7 +13,7 @@ public class ServerStarApp {
     public static boolean started = false;
     private static final Logger log = Logger.getLogger(ServerStarApp.class.getName());
     public static ArrayList<ServerOnlineUsers> client = new ArrayList<>();
-    private static final HappyCakeStorage storages = new HappyCakeStorage();
+    public static HappyCakeStorage storages;
 
     /**
      * Start working with server
@@ -21,10 +21,11 @@ public class ServerStarApp {
      * @param args начальные аргументы программы
      */
     public static void main(String[] args) {
-        start();
+        start("/etc/start.xml");
     }
 
-    public static void start() {
+    public static void start(String pathToConfigFile) {
+        storages = new HappyCakeStorage(pathToConfigFile);
         log.info("Server has been started");
         try {
             ServerSocket serverSocket = new ServerSocket(8189);

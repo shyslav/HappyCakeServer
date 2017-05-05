@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--MAIN START CONFIG-->
+    <bean id="start_config" class="com.shyslav.mysql.connectionpool.ConnectionPool">
+        <constructor-arg name="driver" ref="database_driver"/>
+    </bean>
+    <!--END MAIN START CONFIG-->
+
+
+    <!--DB DRIVER-->
+    <bean id="database_driver" class="com.shyslav.mysql.driver.DBSpringDriver">
+        <constructor-arg name="driver" value="com.mysql.jdbc.Driver"/>
+        <constructor-arg name="username" value="root"/>
+        <constructor-arg name="password" value="12345"/>
+        <constructor-arg name="databaseName" value="happycake"/>
+        <constructor-arg name="hostname" value="127.0.0.1"/>
+        <constructor-arg name="port" value="3306"/>
+        <constructor-arg name="params">
+            <bean class="com.shyslav.defaultentityes.StringKeyValueList">
+                <constructor-arg>
+                    <list>
+                        <ref bean="useUnicode"/>
+                        <ref bean="characterEncoding"/>
+                        <ref bean="useSSL"/>
+                    </list>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="useUnicode" class="com.shyslav.defaultentityes.StringKeyValue">
+        <constructor-arg name="key" value="useUnicode"/>
+        <constructor-arg name="value" value="true"/>
+    </bean>
+    <bean id="characterEncoding" class="com.shyslav.defaultentityes.StringKeyValue">
+        <constructor-arg name="key" value="characterEncoding"/>
+        <constructor-arg name="value" value="utf-8"/>
+    </bean>
+    <bean id="useSSL" class="com.shyslav.defaultentityes.StringKeyValue">
+        <constructor-arg name="key" value="useSSL"/>
+        <constructor-arg name="value" value="false"/>
+    </bean>
+    <!--END DB DRIVER-->
+</beans>
