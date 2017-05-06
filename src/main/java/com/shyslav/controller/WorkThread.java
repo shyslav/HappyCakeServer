@@ -363,7 +363,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.saveOrderWithDetails(order)));
                 //send notification to cook about new order
                 //check if order new
-                if (order.getId() == 0) {
+                if (order.getId() != 0) {
                     try {
                         //check if order need to cook
                         if (storage.orderStorage.isNeedCookOrder(order)) {
