@@ -71,8 +71,8 @@ public class ClientActionsTest {
      */
     @Test
     public void selectNews() throws Exception {
-        ClientActions client = successLogin();
         int userID = createUser();
+        ClientActions client = successLogin();
 
         News news = new News();
         news.setName("Test");
@@ -95,9 +95,17 @@ public class ClientActionsTest {
     @Test
     public void selectCategories() throws Exception {
         ClientActions client = successLogin();
+
+        //add category
+        Category category = new Category();
+        category.setName("Test");
+        category.setDescription("Test");
+        category.setImage(new byte[]{1, 2, 3, 4, 5});
+        client.addCategories(category);
+
         HappyCakeResponse response = client.selectCategories();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((CategoriesList) response.getObject(CategoriesList.class)).size() > 1);
+        assertTrue(((CategoriesList) response.getObject(CategoriesList.class)).size() == 1);
     }
 
     /**
@@ -107,10 +115,21 @@ public class ClientActionsTest {
      */
     @Test
     public void selectDishes() throws Exception {
+        int categoryID = createCategory();
         ClientActions client = successLogin();
+
+        Dish dish = new Dish();
+        dish.setName("Test");
+        dish.setDiscount(1);
+        dish.setImage(new byte[]{1, 2, 3, 4, 5});
+        dish.setPrice(1);
+        dish.setAmount(1);
+        dish.setCategoryId((int) categoryID);
+        client.addDish(dish);
+
         HappyCakeResponse response = client.selectDish();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((DishesList) response.getObject(DishesList.class)).size() > 1);
+        assertTrue(((DishesList) response.getObject(DishesList.class)).size() == 1);
     }
 
     /**
@@ -121,9 +140,19 @@ public class ClientActionsTest {
     @Test
     public void selectReservation() throws Exception {
         ClientActions client = successLogin();
+
+        //add reservation
+        Reservation reservation = new Reservation();
+        reservation.setCafeId(1);
+        reservation.setClientName("Test");
+        reservation.setAmountPeople(1);
+        reservation.setClientPhone("test");
+        reservation.setDescription("Test");
+        client.addReservation(reservation);
+
         HappyCakeResponse response = client.selectReservation();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((ReservationList) response.getObject(ReservationList.class)).size() > 1);
+        assertTrue(((ReservationList) response.getObject(ReservationList.class)).size() == 1);
     }
 
     /**
@@ -133,10 +162,27 @@ public class ClientActionsTest {
      */
     @Test
     public void selectPreorders() throws Exception {
+        int dishID = createDish();
         ClientActions client = successLogin();
+        Reservation reservation = new Reservation();
+        reservation.setCafeId(1);
+        reservation.setClientName("Test");
+        reservation.setAmountPeople(1);
+        reservation.setClientPhone("test");
+        reservation.setDescription("Test");
+        long reservationID = ServerStarApp.storages.reservationStorage.saveAndGetLastInsertID(reservation);
+
+        //add preOrder
+        PreOrder preOrder = new PreOrder();
+        preOrder.setDishID((int) dishID);
+        preOrder.setAmount(1);
+        preOrder.setReservationID((int) reservationID);
+        preOrder.setPrice(Integer.MAX_VALUE);
+        client.addPreorder(preOrder);
+
         HappyCakeResponse response = client.selectPreOrder();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((PreOrderList) response.getObject(PreOrderList.class)).size() > 1);
+        assertTrue(((PreOrderList) response.getObject(PreOrderList.class)).size() == 1);
     }
 
 
@@ -148,9 +194,35 @@ public class ClientActionsTest {
     @Test
     public void selectEmployees() throws Exception {
         ClientActions client = successLogin();
+
+        //create cafe coordinate
+//        CafeCoordinate cafeCoordinate = new CafeCoordinate();
+//        cafeCoordinate.setEmail("email");
+//        cafeCoordinate.setAddress("address");
+//        cafeCoordinate.setMobilePhone("mobile");
+//        ServerStarApp.storages.cafeCoordinate.save(cafeCoordinate);
+
+        //create position
+        Position position = new Position();
+        position.setName("Admin");
+        position.setSalary(12345);
+        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
+
+        //create employee
+        Employees employees = new Employees();
+        employees.setPositionID((int) positionID);
+        employees.setAddress("123");
+        employees.setBirthday(12345);
+        employees.setCafeID(1);
+        employees.setName("12345");
+        employees.setLastname("123");
+        employees.setLogin("admin");
+        employees.setPassword("admin");
+        client.addEmployee(employees);
+
         HappyCakeResponse response = client.selectEmployees();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((EmployeesList) response.getObject(EmployeesList.class)).size() > 1);
+        assertTrue(((EmployeesList) response.getObject(EmployeesList.class)).size() == 1);
     }
 
     /**
@@ -163,7 +235,7 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
         HappyCakeResponse response = client.selectReports();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((ReportsList) response.getObject(ReportsList.class)).size() > 1);
+        assertTrue(((ReportsList) response.getObject(ReportsList.class)).size() >= 1);
     }
 
     /**
@@ -187,9 +259,15 @@ public class ClientActionsTest {
     @Test
     public void selectPositions() throws Exception {
         ClientActions client = successLogin();
+        //create position
+        Position position = new Position();
+        position.setName("Admin");
+        position.setSalary(12345);
+        client.addPosition(position);
+
         HappyCakeResponse response = client.selectPositions();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((PositionsList) response.getObject(PositionsList.class)).size() > 1);
+        assertTrue(((PositionsList) response.getObject(PositionsList.class)).size() == 1);
     }
 
 
@@ -200,12 +278,18 @@ public class ClientActionsTest {
      */
     @Test
     public void selectOrdersTest() throws Exception {
+        int userID = createUser();
+        int dishID = createDish();
         ClientActions client = successLogin();
+
+        //add order
+        Order order = generateTestOrderWithDetails(userID, dishID);
+        client.saveOrderWithDetails(order);
+
         HappyCakeResponse response = client.selectOrders();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        OrderList list = response.getObject(OrderList.class);
-        assertTrue(list.size() > 1);
-        assertTrue(list.get(0).getOrderDetails().size() >= 1);
+        assertTrue(((OrderList) response.getObject(OrderList.class)).size() == 1);
+        assertTrue(((OrderList) response.getObject(OrderList.class)).get(0).getOrderDetails().size() == 1);
     }
 
     /**
@@ -228,13 +312,14 @@ public class ClientActionsTest {
      */
     @Test
     public void addNews() throws Exception {
+        int userID = createUser();
         ClientActions client = successLogin();
         NewsList list = client.selectNews().getObject(NewsList.class);
 
         //add news
         News news = new News();
         news.setName("Test");
-        news.setAuthorID(1);
+        news.setAuthorID(userID);
         news.setImageLink("Test");
         news.setTegs("Test");
         news.setText("Test");
@@ -304,14 +389,37 @@ public class ClientActionsTest {
      */
     @Test
     public void addDish() throws Exception {
+        int categoryID = createCategory();
         ClientActions client = successLogin();
+
+        DishesList list = client.selectDish().getObject(DishesList.class);
         Dish dish = new Dish();
+        dish.setName("Test");
+        dish.setDiscount(1);
+        dish.setImage(new byte[]{1, 2, 3, 4, 5});
+        dish.setPrice(1);
+        dish.setAmount(1);
+        dish.setCategoryId((int) categoryID);
         HappyCakeResponse response = client.addDish(dish);
+
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
 
-        dish.setId(Integer.MAX_VALUE);
-        HappyCakeResponse response1 = client.addDish(dish);
-        assertTrue(response1.getCode() == ErrorCodes.INTERNAL_ERROR);
+        //check if category was added
+        DishesList dishesList = client.selectDish().getObject(DishesList.class);
+        assertTrue(list.size() + 1 == dishesList.size());
+        Dish addedDish = dishesList.get(dishesList.size() - 1);
+        assertTrue(dishesList.get(dishesList.size() - 1).getName().equals("Test"));
+
+        //check if category were updated
+        addedDish.setName("Test12345");
+        HappyCakeResponse updateResponse = client.addDish(addedDish);
+        assertTrue(updateResponse.isSuccess());
+
+        dishesList = client.selectDish().getObject(DishesList.class);
+        Dish byID = dishesList.getByID(addedDish.getId());
+        assertTrue(byID.getName().equals("Test12345"));
+
+        client.deleteDish(byID.getId());
     }
 
     /**
@@ -361,15 +469,23 @@ public class ClientActionsTest {
      */
     @Test
     public void addPreoder() throws Exception {
+        int dishID = createDish();
         ClientActions client = successLogin();
-
         PreOrderList list = client.selectPreOrder().getObject(PreOrderList.class);
+
+        Reservation reservation = new Reservation();
+        reservation.setCafeId(1);
+        reservation.setClientName("Test");
+        reservation.setAmountPeople(1);
+        reservation.setClientPhone("test");
+        reservation.setDescription("Test");
+        long reservationID = ServerStarApp.storages.reservationStorage.saveAndGetLastInsertID(reservation);
 
         //add preOrder
         PreOrder preOrder = new PreOrder();
-        preOrder.setDishID(1);
+        preOrder.setDishID((int) dishID);
         preOrder.setAmount(1);
-        preOrder.setReservationID(1);
+        preOrder.setReservationID((int) reservationID);
         preOrder.setPrice(Integer.MAX_VALUE);
 
         HappyCakeResponse response = client.addPreorder(preOrder);
@@ -404,17 +520,21 @@ public class ClientActionsTest {
 
         EmployeesList list = client.selectEmployees().getObject(EmployeesList.class);
 
+        Position position = new Position();
+        position.setName("Admin");
+        position.setSalary(12345);
+        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
+
         //add employee
         Employees employee = new Employees();
         employee.setCafeID(1);
-        employee.setPositionID(1);
+        employee.setPositionID((int) positionID);
         employee.setBirthday(14051996);
         employee.setName("Test");
         employee.setLastname("Test");
         employee.setAddress("Test");
         employee.setLogin("Test");
         employee.setPassword("Test");
-
 
         HappyCakeResponse response = client.addEmployee(employee);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
@@ -560,10 +680,12 @@ public class ClientActionsTest {
      */
     @Test
     public void addOrder() throws Exception {
+        int userID = createUser();
+        int dishID = createDish();
         ClientActions client = successLogin();
         OrderList list = client.selectOrders().getObject(OrderList.class);
         //add order
-        Order order = generateTestOrderWithDetails();
+        Order order = generateTestOrderWithDetails(userID, dishID);
 
         HappyCakeResponse response = client.addOrder(order);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
@@ -594,12 +716,13 @@ public class ClientActionsTest {
      */
     @Test
     public void deleteNews() throws Exception {
+        int userID = createUser();
         ClientActions client = successLogin();
 
         //add news
         News news = new News();
         news.setName("Test");
-        news.setAuthorID(1);
+        news.setAuthorID(userID);
         news.setImageLink("Test");
         news.setTegs("Test");
         news.setText("Test");
@@ -618,8 +741,13 @@ public class ClientActionsTest {
 
         //check if news was deleted
         list = client.selectNews().getObject(NewsList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getName().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getName().equals("Test"));
+        }
+
     }
 
     /**
@@ -649,8 +777,12 @@ public class ClientActionsTest {
 
         //check if category was deleted
         list = client.selectCategories().getObject(CategoriesList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getName().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getName().equals("Test"));
+        }
     }
 
     /**
@@ -660,11 +792,12 @@ public class ClientActionsTest {
      */
     @Test
     public void deleteDish() throws Exception {
+        int categoryID = createCategory();
         ClientActions client = successLogin();
 
         //add dish
         Dish dish = new Dish();
-        dish.setCategoryId(1);
+        dish.setCategoryId(categoryID);
         dish.setName("Test");
         dish.setAmount(1);
         dish.setPrice(Integer.MAX_VALUE);
@@ -683,8 +816,12 @@ public class ClientActionsTest {
 
         //check if dish was deleted
         list = client.selectDish().getObject(DishesList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getName().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getName().equals("Test"));
+        }
     }
 
     /**
@@ -716,8 +853,12 @@ public class ClientActionsTest {
 
         //check if category was deleted
         list = client.selectReservation().getObject(ReservationList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getClientName().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getClientName().equals("Test"));
+        }
     }
 
 
@@ -728,13 +869,23 @@ public class ClientActionsTest {
      */
     @Test
     public void deletePreOrder() throws Exception {
+        int dishID = createDish();
+
         ClientActions client = successLogin();
+        Reservation reservation = new Reservation();
+        reservation.setCafeId(1);
+        reservation.setClientName("Test");
+        reservation.setAmountPeople(1);
+        reservation.setClientPhone("test");
+        reservation.setDescription("Test");
+        long reservationID = ServerStarApp.storages.reservationStorage.saveAndGetLastInsertID(reservation);
+
 
         //add preOrder
         PreOrder preOrder = new PreOrder();
-        preOrder.setDishID(1);
+        preOrder.setDishID(dishID);
         preOrder.setAmount(1);
-        preOrder.setReservationID(1);
+        preOrder.setReservationID((int) reservationID);
         preOrder.setPrice(Integer.MAX_VALUE);
 
 
@@ -751,8 +902,12 @@ public class ClientActionsTest {
 
         //check if preOrder was deleted
         list = client.selectPreOrder().getObject(PreOrderList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(lastElement.getPrice() != Integer.MAX_VALUE);
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(lastElement.getPrice() != Integer.MAX_VALUE);
+        }
     }
 
 
@@ -765,10 +920,16 @@ public class ClientActionsTest {
     public void deleteEmployee() throws Exception {
         ClientActions client = successLogin();
 
+        Position position = new Position();
+        position.setName("Test");
+        position.setSalary(Integer.MAX_VALUE);
+        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
+
+
         //add employee
         Employees employee = new Employees();
         employee.setCafeID(1);
-        employee.setPositionID(1);
+        employee.setPositionID((int) positionID);
         employee.setBirthday(14051996);
         employee.setName("Test");
         employee.setLastname("Test");
@@ -788,8 +949,12 @@ public class ClientActionsTest {
 
         //check if employee was deleted
         list = client.selectEmployees().getObject(EmployeesList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getName().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getName().equals("Test"));
+        }
     }
 
     /**
@@ -822,8 +987,12 @@ public class ClientActionsTest {
 
         //check if report was deleted
         list = client.selectReports().getObject(ReportsList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getAuthor().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getAuthor().equals("Test"));
+        }
     }
 
     /**
@@ -854,8 +1023,12 @@ public class ClientActionsTest {
 
         //check if cafeCoordinate was deleted
         list = client.selectCafeCoordinate().getObject(CafeCoordinateList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getAddress().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getAddress().equals("Test"));
+        }
     }
 
     /**
@@ -885,8 +1058,12 @@ public class ClientActionsTest {
 
         //check if position was deleted
         list = client.selectPositions().getObject(PositionsList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(!lastElement.getName().equals("Test"));
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(!lastElement.getName().equals("Test"));
+        }
     }
 
     /**
@@ -896,10 +1073,12 @@ public class ClientActionsTest {
      */
     @Test
     public void deleteOrders() throws Exception {
+        int userID = createUser();
+        int dishID = createDish();
         ClientActions client = successLogin();
 
         //add order
-        Order order = generateTestOrderWithDetails();
+        Order order = generateTestOrderWithDetails(userID, dishID);
         client.saveOrderWithDetails(order);
 
         //load all orders
@@ -913,10 +1092,14 @@ public class ClientActionsTest {
 
         //check if order was deleted
         list = client.selectOrders().getObject(OrderList.class);
-        lastElement = list.get(list.size() - 1);
-        assertTrue(lastElement.getFullPrice() != Integer.MAX_VALUE);
-        if (lastElement.getOrderDetails().size() != 0) {
-            assertTrue(lastElement.getOrderDetails().get(0).getPrice() != Integer.MAX_VALUE);
+        if (list.isEmpty()) {
+            assertTrue(list.isEmpty());
+        } else {
+            lastElement = list.get(list.size() - 1);
+            assertTrue(lastElement.getFullPrice() != Integer.MAX_VALUE);
+            if (lastElement.getOrderDetails().size() != 0) {
+                assertTrue(lastElement.getOrderDetails().get(0).getPrice() != Integer.MAX_VALUE);
+            }
         }
     }
 
@@ -927,9 +1110,11 @@ public class ClientActionsTest {
      */
     @Test
     public void saveOrdersWithDetails() throws Exception {
+        int userID = createUser();
+        int dishID = createDish();
         ClientActions client = successLogin();
 
-        Order order = generateTestOrderWithDetails();
+        Order order = generateTestOrderWithDetails(userID, dishID);
         HappyCakeResponse response = client.saveOrderWithDetails(order);
 
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
@@ -963,17 +1148,17 @@ public class ClientActionsTest {
      *
      * @return order with details
      */
-    private Order generateTestOrderWithDetails() {
+    private Order generateTestOrderWithDetails(int employeeID, int dishID) {
         //set order required fields
         Order order = new Order();
         order.setDate(LazyDate.getUnixDate());
-        order.setEmployeeId(1);
+        order.setEmployeeId(employeeID);
         order.setFullPrice(Integer.MAX_VALUE);
 
         //ser order details required fields
         OrderDetails orderDetails = new OrderDetails();
         orderDetails.setAmount(1);
-        orderDetails.setDishID(1);
+        orderDetails.setDishID(dishID);
         orderDetails.setPrice(Integer.MAX_VALUE);
 
         //set details for order
@@ -985,12 +1170,6 @@ public class ClientActionsTest {
     }
 
     private int createUser() throws DBException {
-        //create cafe coordinate
-        CafeCoordinate cafeCoordinate = new CafeCoordinate();
-        cafeCoordinate.setEmail("email");
-        cafeCoordinate.setAddress("address");
-        cafeCoordinate.setMobilePhone("mobile");
-        ServerStarApp.storages.cafeCoordinate.save(cafeCoordinate);
 
         //create position
         Position position = new Position();
@@ -1010,4 +1189,25 @@ public class ClientActionsTest {
         employees.setPassword("admin");
         return (int) ServerStarApp.storages.employeesStorage.saveAndGetLastInsertID(employees);
     }
+
+    private int createCategory() throws DBException {
+        Category category = new Category();
+        category.setName("Test");
+        category.setDescription("Test");
+        category.setImage(new byte[]{1, 2, 3, 4, 5});
+        return (int) ServerStarApp.storages.categoryStorage.saveAndGetLastInsertID(category);
+    }
+
+    private int createDish() throws DBException {
+        int categoryID = createCategory();
+        Dish dish = new Dish();
+        dish.setName("Test");
+        dish.setDiscount(1);
+        dish.setImage(new byte[]{1, 2, 3, 4, 5});
+        dish.setPrice(1);
+        dish.setAmount(1);
+        dish.setCategoryId((int) categoryID);
+        return (int) ServerStarApp.storages.dishStorage.saveAndGetLastInsertID(dish);
+    }
+
 }
