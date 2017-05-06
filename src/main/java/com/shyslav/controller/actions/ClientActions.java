@@ -356,6 +356,17 @@ public class ClientActions implements IHappyCakeActions {
         return client.writeAndRead(request);
     }
 
+    /**
+     * Select orders for cook
+     *
+     * @return order list for cook
+     */
+    @Override
+    public HappyCakeResponse selectOrderForCook() {
+        HappyCakeRequest request = new HappyCakeRequest("selectOrdersForCook");
+        return client.writeAndRead(request);
+    }
+
 
     /**
      * Delete order by id
@@ -404,5 +415,14 @@ public class ClientActions implements IHappyCakeActions {
     public HappyCakeResponse deleteByID(String tableName, String id) {
         HappyCakeRequest request = new HappyCakeRequest("deleteByID", new StringKeyValue(tableName, id));
         return client.writeAndRead(request);
+    }
+
+    /**
+     * Get server client protocol
+     *
+     * @return server client protocol
+     */
+    public ServerClient getClient() {
+        return client;
     }
 }

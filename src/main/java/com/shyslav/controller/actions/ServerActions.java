@@ -598,6 +598,22 @@ public class ServerActions implements IHappyCakeActions {
         }
     }
 
+    /**
+     * Select order list for cook
+     *
+     * @return
+     */
+    @Override
+    public HappyCakeResponse selectOrderForCook() {
+        try {
+            OrderList entity = storage.orderStorage.getOrdersForCook();
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", storage.orderStorage.load(entity));
+        } catch (DBException e) {
+            log.error("Unable to select news" + " . " + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
 
     /**
      * Delete order by id
