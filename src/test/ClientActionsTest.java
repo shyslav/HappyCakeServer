@@ -23,9 +23,7 @@ public class ClientActionsTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Thread thread = new Thread(() -> {
-            ServerStarApp.start("/etc/start_test.xml");
-        });
+        Thread thread = new Thread(() -> ServerStarApp.start("/etc/start_test.xml"));
         thread.setName("server");
         thread.start();
         while (!ServerStarApp.started) {
@@ -85,6 +83,11 @@ public class ClientActionsTest {
         HappyCakeResponse response = client.selectNews();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
         assertTrue(((NewsList) response.getObject(NewsList.class)).size() == 1);
+    }
+
+    @Test
+    public void selectOrdersForCook() throws Exception {
+        //TODO create
     }
 
     /**

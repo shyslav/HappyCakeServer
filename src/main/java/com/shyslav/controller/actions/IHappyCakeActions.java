@@ -232,6 +232,14 @@ public interface IHappyCakeActions {
      */
     HappyCakeResponse selectOrders();
 
+
+    /**
+     * Select order list for cook
+     *
+     * @return order list for cook
+     */
+    HappyCakeResponse selectOrderForCook();
+
     /**
      * Delete orders by id
      *

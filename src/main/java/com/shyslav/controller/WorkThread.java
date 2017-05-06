@@ -132,6 +132,10 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.selectOrders()));
                 break;
             }
+            case "selectordersforcook": {
+                printWriter.println(LazyGson.toJson(actions.selectOrderForCook()));
+                break;
+            }
             case "deletebyid": {
                 StringKeyValue keyValue = request.getObject(StringKeyValue.class);
                 printWriter.println(LazyGson.toJson(actions.deleteByID(keyValue.getKey(), keyValue.getValue())));
