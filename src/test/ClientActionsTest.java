@@ -51,6 +51,7 @@ public class ClientActionsTest {
         //success login
         ServerClient client = new ServerClient();
         ClientActions clientActions = new ClientActions(client);
+        createUser();
         HappyCakeResponse login = clientActions.login(realUserName, realUserPass);
         assertNotNull(login);
         assertTrue(login.getCode() == ErrorCodes.SUCCESS);
@@ -83,11 +84,6 @@ public class ClientActionsTest {
         HappyCakeResponse response = client.selectNews();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
         assertTrue(((NewsList) response.getObject(NewsList.class)).size() == 1);
-    }
-
-    @Test
-    public void selectOrdersForCook() throws Exception {
-        //TODO create
     }
 
     /**
@@ -127,7 +123,7 @@ public class ClientActionsTest {
         dish.setImage(new byte[]{1, 2, 3, 4, 5});
         dish.setPrice(1);
         dish.setAmount(1);
-        dish.setCategoryId((int) categoryID);
+        dish.setCategoryId(categoryID);
         client.addDish(dish);
 
         HappyCakeResponse response = client.selectDish();
@@ -177,7 +173,7 @@ public class ClientActionsTest {
 
         //add preOrder
         PreOrder preOrder = new PreOrder();
-        preOrder.setDishID((int) dishID);
+        preOrder.setDishID(dishID);
         preOrder.setAmount(1);
         preOrder.setReservationID((int) reservationID);
         preOrder.setPrice(Integer.MAX_VALUE);
@@ -197,13 +193,6 @@ public class ClientActionsTest {
     @Test
     public void selectEmployees() throws Exception {
         ClientActions client = successLogin();
-
-        //create cafe coordinate
-//        CafeCoordinate cafeCoordinate = new CafeCoordinate();
-//        cafeCoordinate.setEmail("email");
-//        cafeCoordinate.setAddress("address");
-//        cafeCoordinate.setMobilePhone("mobile");
-//        ServerStarApp.storages.cafeCoordinate.save(cafeCoordinate);
 
         //create position
         Position position = new Position();
@@ -236,9 +225,17 @@ public class ClientActionsTest {
     @Test
     public void selectReports() throws Exception {
         ClientActions client = successLogin();
+
+        Reports reports = new Reports();
+        reports.setMail("mail");
+        reports.setAuthor("author");
+        reports.setPhone("phone");
+        reports.setText("text");
+        client.addReports(reports);
+
         HappyCakeResponse response = client.selectReports();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((ReportsList) response.getObject(ReportsList.class)).size() >= 1);
+        assertTrue(((ReportsList) response.getObject(ReportsList.class)).size() == 1);
     }
 
     /**
@@ -286,11 +283,32 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
 
         //add order
-        Order order = generateTestOrderWithDetails(userID, dishID);
+        Order order = generateTestOrderWithDetails(userID, dishID, false);
         client.saveOrderWithDetails(order);
 
         HappyCakeResponse response = client.selectOrders();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
+        assertTrue(((OrderList) response.getObject(OrderList.class)).size() == 1);
+        assertTrue(((OrderList) response.getObject(OrderList.class)).get(0).getOrderDetails().size() == 1);
+    }
+
+    /**
+     * Select orders for cook where complete = false
+     *
+     * @throws Exception
+     */
+    @Test
+    public void selectOrdersForCook() throws Exception {
+        int userID = createUser();
+        int dishID = createDish();
+        ClientActions client = successLogin();
+        //add order
+        Order order = generateTestOrderWithDetails(userID, dishID, true);
+        client.saveOrderWithDetails(order);
+        Order order2 = generateTestOrderWithDetails(userID, dishID, false);
+        client.saveOrderWithDetails(order2);
+
+        HappyCakeResponse response = client.selectOrderForCook();
         assertTrue(((OrderList) response.getObject(OrderList.class)).size() == 1);
         assertTrue(((OrderList) response.getObject(OrderList.class)).get(0).getOrderDetails().size() == 1);
     }
@@ -402,7 +420,7 @@ public class ClientActionsTest {
         dish.setImage(new byte[]{1, 2, 3, 4, 5});
         dish.setPrice(1);
         dish.setAmount(1);
-        dish.setCategoryId((int) categoryID);
+        dish.setCategoryId(categoryID);
         HappyCakeResponse response = client.addDish(dish);
 
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
@@ -486,7 +504,7 @@ public class ClientActionsTest {
 
         //add preOrder
         PreOrder preOrder = new PreOrder();
-        preOrder.setDishID((int) dishID);
+        preOrder.setDishID(dishID);
         preOrder.setAmount(1);
         preOrder.setReservationID((int) reservationID);
         preOrder.setPrice(Integer.MAX_VALUE);
@@ -688,7 +706,7 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
         OrderList list = client.selectOrders().getObject(OrderList.class);
         //add order
-        Order order = generateTestOrderWithDetails(userID, dishID);
+        Order order = generateTestOrderWithDetails(userID, dishID, false);
 
         HappyCakeResponse response = client.addOrder(order);
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
@@ -1081,7 +1099,7 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
 
         //add order
-        Order order = generateTestOrderWithDetails(userID, dishID);
+        Order order = generateTestOrderWithDetails(userID, dishID, false);
         client.saveOrderWithDetails(order);
 
         //load all orders
@@ -1117,7 +1135,7 @@ public class ClientActionsTest {
         int dishID = createDish();
         ClientActions client = successLogin();
 
-        Order order = generateTestOrderWithDetails(userID, dishID);
+        Order order = generateTestOrderWithDetails(userID, dishID, false);
         HappyCakeResponse response = client.saveOrderWithDetails(order);
 
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
@@ -1151,12 +1169,13 @@ public class ClientActionsTest {
      *
      * @return order with details
      */
-    private Order generateTestOrderWithDetails(int employeeID, int dishID) {
+    private Order generateTestOrderWithDetails(int employeeID, int dishID, boolean complite) {
         //set order required fields
         Order order = new Order();
         order.setDate(LazyDate.getUnixDate());
         order.setEmployeeId(employeeID);
         order.setFullPrice(Integer.MAX_VALUE);
+        order.setComplite(complite);
 
         //ser order details required fields
         OrderDetails orderDetails = new OrderDetails();
@@ -1172,8 +1191,13 @@ public class ClientActionsTest {
         return order;
     }
 
+    /**
+     * Create test user
+     *
+     * @return user id
+     * @throws DBException
+     */
     private int createUser() throws DBException {
-
         //create position
         Position position = new Position();
         position.setName("Admin");
@@ -1188,11 +1212,17 @@ public class ClientActionsTest {
         employees.setCafeID(1);
         employees.setName("12345");
         employees.setLastname("123");
-        employees.setLogin("admin");
-        employees.setPassword("admin");
+        employees.setLogin(realUserName);
+        employees.setPassword(realUserPass);
         return (int) ServerStarApp.storages.employeesStorage.saveAndGetLastInsertID(employees);
     }
 
+    /**
+     * Create test category
+     *
+     * @return category id
+     * @throws DBException
+     */
     private int createCategory() throws DBException {
         Category category = new Category();
         category.setName("Test");
@@ -1201,6 +1231,12 @@ public class ClientActionsTest {
         return (int) ServerStarApp.storages.categoryStorage.saveAndGetLastInsertID(category);
     }
 
+    /**
+     * Create dish
+     *
+     * @return dish id
+     * @throws DBException
+     */
     private int createDish() throws DBException {
         int categoryID = createCategory();
         Dish dish = new Dish();
@@ -1209,7 +1245,7 @@ public class ClientActionsTest {
         dish.setImage(new byte[]{1, 2, 3, 4, 5});
         dish.setPrice(1);
         dish.setAmount(1);
-        dish.setCategoryId((int) categoryID);
+        dish.setCategoryId(categoryID);
         return (int) ServerStarApp.storages.dishStorage.saveAndGetLastInsertID(dish);
     }
 
