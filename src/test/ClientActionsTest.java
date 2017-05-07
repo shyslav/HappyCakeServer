@@ -18,12 +18,16 @@ import static org.junit.Assert.fail;
  * @author Shyshkin Vladyslav on 07.06.2016.
  */
 public class ClientActionsTest {
+    private static ServerStarApp startApp;
+
     private final String realUserName = "admin";
     private final String realUserPass = "admin";
 
+
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Thread thread = new Thread(() -> ServerStarApp.start("/etc/start_test.xml"));
+        startApp = new ServerStarApp();
+        Thread thread = new Thread(() -> startApp.start("/etc/start_test.xml"));
         thread.setName("server");
         thread.start();
         while (!ServerStarApp.started) {

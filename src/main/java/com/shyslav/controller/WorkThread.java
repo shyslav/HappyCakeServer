@@ -9,6 +9,7 @@ import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerOnlineUsers;
+import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.utils.LazyGson;
 import org.apache.log4j.Logger;
 
@@ -40,11 +41,13 @@ public class WorkThread implements Runnable {
     //-----
     private final HappyCakeStorage storage;
     private final ServerActions actions;
+    private final ServerStarApp startApp;
 
-    public WorkThread(Socket i, HappyCakeStorage storage) {
+    public WorkThread(Socket i, HappyCakeStorage storage, ServerActions actions, ServerStarApp startApp) {
         this.incoming = i;
         this.storage = storage;
-        this.actions = new ServerActions(storage);
+        this.actions = actions;
+        this.startApp = startApp;
     }
 
     @Override
@@ -68,7 +71,7 @@ public class WorkThread implements Runnable {
             log.error("Unable to start read thread " + " . " + e.getMessage(), e);
         } finally {
             try {
-                delete(ServerStarApp.client);
+                delete(startApp.client);
                 inputStream.close();
                 scanner.close();
                 outputStream.close();
@@ -89,7 +92,22 @@ public class WorkThread implements Runnable {
         switch (request.getUrl().toLowerCase()) {
             case "login": {
                 StringKeyValue keyValue = request.getObject(StringKeyValue.class);
-                printWriter.println(LazyGson.toJson(actions.login(keyValue.getKey(), keyValue.getValue())));
+                HappyCakeResponse response = actions.login(keyValue.getKey(), keyValue.getValue());
+                if (response.isSuccess()) {
+                    Employees employees = response.getObject(Employees.class);
+                    startApp.client.add(new ServerOnlineUsers(
+                            employees.getId(),
+                            employees.getName(),
+                            employees.getLastname(),
+                            inputStream,
+                            scanner,
+                            outputStream,
+                            printWriter,
+                            incoming,
+                            employees.getPositionID()
+                    ));
+                }
+                printWriter.println(LazyGson.toJson(response));
                 break;
             }
             case "selectnews": {
@@ -244,6 +262,21 @@ public class WorkThread implements Runnable {
             case "saveorderwithdetails": {
                 Order order = request.getObject(Order.class);
                 printWriter.println(LazyGson.toJson(actions.saveOrderWithDetails(order)));
+                //send notification to cook about new order
+                //check if order new
+                if (order.getId() == 0) {
+                    try {
+                        //check if order need to cook
+                        if (storage.orderStorage.isNeedCookOrder(order)) {
+                            //generate order fo cook response
+                            HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, storage.orderStorage.getOrdersForCook());
+                            //send notification to cook
+                            startApp.sendNotificationToUsers(response, 3);
+                        }
+                    } catch (DBException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             }
             default: {

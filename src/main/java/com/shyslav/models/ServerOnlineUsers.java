@@ -17,14 +17,11 @@ public class ServerOnlineUsers {
     //----
     private OutputStream outputStream = null;
     private PrintWriter printWriter = null;
-    //----
-    private ObjectOutputStream objectOut = null;
-    private ObjectInputStream objectInp = null;
 
     private Socket sock;
     private int positionId;
 
-    public ServerOnlineUsers(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, ObjectOutputStream objectOut, ObjectInputStream objectInp, Socket sock, int positionId) {
+    public ServerOnlineUsers(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, Socket sock, int positionId) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -32,8 +29,6 @@ public class ServerOnlineUsers {
         this.scanner = scanner;
         this.outputStream = outputStream;
         this.printWriter = printWriter;
-        this.objectOut = objectOut;
-        this.objectInp = objectInp;
         this.sock = sock;
         this.positionId = positionId;
     }
@@ -109,22 +104,6 @@ public class ServerOnlineUsers {
 
     public void setPrintWriter(PrintWriter printWriter) {
         this.printWriter = printWriter;
-    }
-
-    public ObjectOutputStream getObjectOut() {
-        return objectOut;
-    }
-
-    public void setObjectOut(ObjectOutputStream objectOut) {
-        this.objectOut = objectOut;
-    }
-
-    public ObjectInputStream getObjectInp() {
-        return objectInp;
-    }
-
-    public void setObjectInp(ObjectInputStream objectInp) {
-        this.objectInp = objectInp;
     }
 }
 

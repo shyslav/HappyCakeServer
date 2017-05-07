@@ -607,7 +607,7 @@ public class ServerActions implements IHappyCakeActions {
     public HappyCakeResponse selectOrderForCook() {
         try {
             OrderList entity = storage.orderStorage.getOrdersForCook();
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", storage.orderStorage.load(entity));
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", entity);
         } catch (DBException e) {
             log.error("Unable to select news" + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
