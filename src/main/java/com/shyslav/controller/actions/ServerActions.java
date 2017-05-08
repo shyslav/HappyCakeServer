@@ -707,7 +707,25 @@ public class ServerActions implements IHappyCakeActions {
     public HappyCakeResponse getSalesForPeriod(int startTime, int endTime) {
         try {
             GraphReportList pieChart = storage.orderStorage.getSalesForPeriod(startTime, endTime);
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " ORDER SAVED ", pieChart);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " Success select ", pieChart);
+        } catch (DBException e) {
+            log.error("Unable to get pie chart" + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
+     * Get sales for period group by date
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse getDateSalesForPeriod(int startTime, int endTime) {
+        try {
+            GraphReportList pieChart = storage.orderStorage.getDateSalesForPeriod(startTime, endTime);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " Success select ", pieChart);
         } catch (DBException e) {
             log.error("Unable to get pie chart" + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");

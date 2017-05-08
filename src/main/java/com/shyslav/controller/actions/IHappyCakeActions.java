@@ -281,4 +281,13 @@ public interface IHappyCakeActions {
      * @return server response
      */
     HappyCakeResponse getSalesForPeriod(int startTime, int endTime);
+
+    /**
+     * Get sales group by date
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return server response
+     */
+    HappyCakeResponse getDateSalesForPeriod(int startTime, int endTime);
 }

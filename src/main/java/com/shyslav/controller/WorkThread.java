@@ -285,6 +285,11 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.getSalesForPeriod(integerKeyValue.getKey(), integerKeyValue.getValue())));
                 break;
             }
+            case "getdatesalesforperiod": {
+                IntegerKeyValue integerKeyValue = request.getObject(IntegerKeyValue.class);
+                printWriter.println(LazyGson.toJson(actions.getDateSalesForPeriod(integerKeyValue.getKey(), integerKeyValue.getValue())));
+                break;
+            }
             default: {
                 printWriter.println(LazyGson.toJson(new HappyCakeResponse(ErrorCodes.WROND_REQUST, "INVALID REQUEST")));
             }

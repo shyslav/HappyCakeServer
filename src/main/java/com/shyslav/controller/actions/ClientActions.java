@@ -432,6 +432,19 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Get sales for period group by date
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse getDateSalesForPeriod(int startTime, int endTime) {
+        HappyCakeRequest request = new HappyCakeRequest("getDateSalesForPeriod", new IntegerKeyValue(startTime, endTime));
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Get server client protocol
      *
      * @return server client protocol
