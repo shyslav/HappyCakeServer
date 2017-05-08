@@ -1,5 +1,6 @@
 package com.shyslav.controller.actions;
 
+import appmodels.GraphReportList;
 import com.happycake.sitemodels.Employees;
 import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.*;
@@ -693,5 +694,23 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.WROND_REQUST, " Unable to execute delete by id command " + e.getMessage());
         }
         return new HappyCakeResponse(ErrorCodes.SUCCESS, "SUCCESS DELETE");
+    }
+
+    /**
+     * Get pie chart
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return happycake response
+     */
+    @Override
+    public HappyCakeResponse getSalesForPeriod(int startTime, int endTime) {
+        try {
+            GraphReportList pieChart = storage.orderStorage.getSalesForPeriod(startTime, endTime);
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " ORDER SAVED ", pieChart);
+        } catch (DBException e) {
+            log.error("Unable to get pie chart" + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
     }
 }

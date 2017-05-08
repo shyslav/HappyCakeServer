@@ -4,6 +4,7 @@ package com.shyslav.controller;
 import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.actions.ServerActions;
+import com.shyslav.defaultentityes.IntegerKeyValue;
 import com.shyslav.defaultentityes.StringKeyValue;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeRequest;
@@ -277,6 +278,11 @@ public class WorkThread implements Runnable {
                         e.printStackTrace();
                     }
                 }
+                break;
+            }
+            case "getsalesforperiod": {
+                IntegerKeyValue integerKeyValue = request.getObject(IntegerKeyValue.class);
+                printWriter.println(LazyGson.toJson(actions.getSalesForPeriod(integerKeyValue.getKey(), integerKeyValue.getValue())));
                 break;
             }
             default: {

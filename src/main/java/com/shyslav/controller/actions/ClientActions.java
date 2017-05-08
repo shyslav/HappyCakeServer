@@ -2,6 +2,7 @@ package com.shyslav.controller.actions;
 
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.ServerClient;
+import com.shyslav.defaultentityes.IntegerKeyValue;
 import com.shyslav.defaultentityes.StringKeyValue;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
@@ -414,6 +415,19 @@ public class ClientActions implements IHappyCakeActions {
     @Override
     public HappyCakeResponse deleteByID(String tableName, String id) {
         HappyCakeRequest request = new HappyCakeRequest("deleteByID", new StringKeyValue(tableName, id));
+        return client.writeAndRead(request);
+    }
+
+    /**
+     * Get pie chart
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return response
+     */
+    @Override
+    public HappyCakeResponse getSalesForPeriod(int startTime, int endTime) {
+        HappyCakeRequest request = new HappyCakeRequest("getSalesForPeriod", new IntegerKeyValue(startTime, endTime));
         return client.writeAndRead(request);
     }
 

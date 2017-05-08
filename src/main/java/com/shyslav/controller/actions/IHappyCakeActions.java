@@ -272,4 +272,13 @@ public interface IHappyCakeActions {
      * @return server response
      */
     HappyCakeResponse deleteByID(String tableName, String id);
+
+    /**
+     * Get pie chart
+     *
+     * @param startTime start time
+     * @param endTime   end time
+     * @return server response
+     */
+    HappyCakeResponse getSalesForPeriod(int startTime, int endTime);
 }
