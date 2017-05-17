@@ -5,6 +5,7 @@ import com.shyslav.controller.actions.ServerActions;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerOnlineUsers;
 import com.shyslav.utils.LazyGson;
+import com.shyslav.utils.LazyUUID;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class ServerStarApp {
                 //create new thread for client
                 Runnable runnable = new WorkThread(incoming, storages, actions, this);
                 Thread tr = new Thread(runnable);
+                tr.setName("Client connection № " + LazyUUID.generateString());
                 tr.start();
             }
         } catch (IOException e) {

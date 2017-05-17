@@ -66,6 +66,9 @@ public class WorkThread implements Runnable {
                     HappyCakeRequest request = LazyGson.fromJson(line, HappyCakeRequest.class);
                     log.trace(" new request from client " + line);
                     parseCommand(request);
+                } else if (inputStream.read() == -1) {
+                    log.trace("socket is terminated");
+                    done = true;
                 }
             }
         } catch (IOException e) {
