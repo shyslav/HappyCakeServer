@@ -1,3 +1,4 @@
+import appmodels.IMTDataList;
 import com.happycake.sitemodels.*;
 import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.ServerStarApp;
@@ -1153,6 +1154,22 @@ public class ClientActionsTest {
 
         HappyCakeResponse deleteOrders = client.deleteOrders(last.getId());
         assertTrue(deleteOrders.getCode() == ErrorCodes.SUCCESS);
+    }
+
+    @Test
+    public void imtDataTest() throws Exception {
+        int userID = createUser();
+        int dishID = createDish();
+        ClientActions client = successLogin();
+
+        Order order = generateTestOrderWithDetails(userID, dishID, false);
+        client.saveOrderWithDetails(order);
+
+        HappyCakeResponse dataForIMTAlgo = client.getDataForIMTAlgo();
+        assertTrue(dataForIMTAlgo.isSuccess());
+
+        IMTDataList list = dataForIMTAlgo.getObject(IMTDataList.class);
+        assertTrue(list.size() == 1);
     }
 
     /**

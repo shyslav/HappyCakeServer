@@ -445,6 +445,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Get data for imt algorithm
+     *
+     * @return server response
+     */
+    @Override
+    public HappyCakeResponse getDataForIMTAlgo() {
+        HappyCakeRequest request = new HappyCakeRequest("getDataForIMTAlgo");
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Get server client protocol
      *
      * @return server client protocol

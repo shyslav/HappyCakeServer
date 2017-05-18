@@ -1,6 +1,7 @@
 package com.shyslav.controller.actions;
 
 import appmodels.GraphReportList;
+import appmodels.IMTDataList;
 import com.happycake.sitemodels.Employees;
 import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.*;
@@ -726,6 +727,22 @@ public class ServerActions implements IHappyCakeActions {
         try {
             GraphReportList pieChart = storage.orderStorage.getDateSalesForPeriod(startTime, endTime);
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " Success select ", pieChart);
+        } catch (DBException e) {
+            log.error("Unable to get pie chart" + e.getMessage(), e);
+            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
+        }
+    }
+
+    /**
+     * Get data for imt algorithm
+     *
+     * @return server response
+     */
+    @Override
+    public HappyCakeResponse getDataForIMTAlgo() {
+        try {
+            IMTDataList imtDataList = storage.orderStorage.getIMTDataList();
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " Success select ", imtDataList);
         } catch (DBException e) {
             log.error("Unable to get pie chart" + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");

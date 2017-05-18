@@ -290,4 +290,11 @@ public interface IHappyCakeActions {
      * @return server response
      */
     HappyCakeResponse getDateSalesForPeriod(int startTime, int endTime);
+
+    /**
+     * Get data for imt algorithm
+     *
+     * @return server response
+     */
+    HappyCakeResponse getDataForIMTAlgo();
 }
