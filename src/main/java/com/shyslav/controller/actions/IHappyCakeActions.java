@@ -296,5 +296,5 @@ public interface IHappyCakeActions {
      *
      * @return server response
      */
-    HappyCakeResponse getDataForIMTAlgo();
+    HappyCakeResponse getDataForIMTAlgo(int[] dishIDS);
 }

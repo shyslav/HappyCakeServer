@@ -450,8 +450,8 @@ public class ClientActions implements IHappyCakeActions {
      * @return server response
      */
     @Override
-    public HappyCakeResponse getDataForIMTAlgo() {
-        HappyCakeRequest request = new HappyCakeRequest("getDataForIMTAlgo");
+    public HappyCakeResponse getDataForIMTAlgo(int[] dishIDS) {
+        HappyCakeRequest request = new HappyCakeRequest("getDataForIMTAlgo", dishIDS);
         return client.writeAndRead(request);
     }
 

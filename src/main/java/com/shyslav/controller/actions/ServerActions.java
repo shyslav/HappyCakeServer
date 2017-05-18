@@ -739,9 +739,9 @@ public class ServerActions implements IHappyCakeActions {
      * @return server response
      */
     @Override
-    public HappyCakeResponse getDataForIMTAlgo() {
+    public HappyCakeResponse getDataForIMTAlgo(int[] dishIDS) {
         try {
-            IMTDataList imtDataList = storage.orderStorage.getIMTDataList();
+            IMTDataList imtDataList = storage.orderStorage.getIMTDataList(dishIDS);
             return new HappyCakeResponse(ErrorCodes.SUCCESS, " Success select ", imtDataList);
         } catch (DBException e) {
             log.error("Unable to get pie chart" + e.getMessage(), e);

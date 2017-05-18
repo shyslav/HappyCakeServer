@@ -1165,7 +1165,7 @@ public class ClientActionsTest {
         Order order = generateTestOrderWithDetails(userID, dishID, false);
         client.saveOrderWithDetails(order);
 
-        HappyCakeResponse dataForIMTAlgo = client.getDataForIMTAlgo();
+        HappyCakeResponse dataForIMTAlgo = client.getDataForIMTAlgo(new int[]{dishID});
         assertTrue(dataForIMTAlgo.isSuccess());
 
         IMTDataList list = dataForIMTAlgo.getObject(IMTDataList.class);

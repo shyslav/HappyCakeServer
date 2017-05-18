@@ -294,7 +294,8 @@ public class WorkThread implements Runnable {
                 break;
             }
             case "getdataforimtalgo": {
-                printWriter.println(LazyGson.toJson(actions.getDataForIMTAlgo()));
+                int [] dishIDS = request.getObject(int[].class);
+                printWriter.println(LazyGson.toJson(actions.getDataForIMTAlgo(dishIDS)));
                 break;
             }
             default: {
