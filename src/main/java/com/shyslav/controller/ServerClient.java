@@ -38,7 +38,7 @@ public class ServerClient {
      *
      * @param request happycake request
      */
-    public void write(HappyCakeRequest request) {
+    public synchronized void write(HappyCakeRequest request) {
         printWriter.println(LazyGson.toJson(request));
     }
 
@@ -49,7 +49,7 @@ public class ServerClient {
      * @param request action request
      * @return server response
      */
-    public HappyCakeResponse writeAndRead(HappyCakeRequest request) {
+    public synchronized HappyCakeResponse writeAndRead(HappyCakeRequest request) {
         write(request);
         return read();
     }
@@ -57,7 +57,7 @@ public class ServerClient {
     /**
      * Read response from server
      */
-    public HappyCakeResponse read() {
+    public synchronized HappyCakeResponse read() {
         String line = scanner.nextLine();
         return LazyGson.fromJson(line, HappyCakeResponse.class);
     }

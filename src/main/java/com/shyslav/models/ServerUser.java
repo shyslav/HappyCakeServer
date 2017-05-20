@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * @author Shyshkin Vladyslav on 27.03.2016.
  */
-public class ServerOnlineUsers {
+public class ServerUser {
     private int id;
     private String name;
     private String lastName;
@@ -21,7 +21,10 @@ public class ServerOnlineUsers {
     private Socket sock;
     private int positionId;
 
-    public ServerOnlineUsers(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, Socket sock, int positionId) {
+    //updates list
+    private final UserUpdatesList userUpdates;
+
+    public ServerUser(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, Socket sock, int positionId) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -31,6 +34,7 @@ public class ServerOnlineUsers {
         this.printWriter = printWriter;
         this.sock = sock;
         this.positionId = positionId;
+        this.userUpdates = new UserUpdatesList();
     }
 
 
@@ -104,6 +108,38 @@ public class ServerOnlineUsers {
 
     public void setPrintWriter(PrintWriter printWriter) {
         this.printWriter = printWriter;
+    }
+
+    /**
+     * Check if has updates
+     *
+     * @return true if has updates
+     */
+    public boolean isHasUpdates() {
+        synchronized (userUpdates) {
+            return userUpdates.size() != 0;
+        }
+    }
+
+    /**
+     * Add updates
+     */
+    public void addToUpdate(UserUpdate toUpdate) {
+        synchronized (userUpdates) {
+            userUpdates.add(toUpdate);
+        }
+    }
+
+    /**
+     * Get user updates
+     */
+    public UserUpdatesList getUserUpdates() {
+        synchronized (userUpdates) {
+            UserUpdatesList result = new UserUpdatesList();
+            result.addAll(userUpdates);
+            userUpdates.clear();
+            return result;
+        }
     }
 }
 

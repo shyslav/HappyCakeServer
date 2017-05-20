@@ -9,7 +9,9 @@ import com.shyslav.defaultentityes.StringKeyValue;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
-import com.shyslav.models.ServerOnlineUsers;
+import com.shyslav.models.ServerUser;
+import com.shyslav.models.UserUpdate;
+import com.shyslav.models.UserUpdatesList;
 import com.shyslav.mysql.exceptions.DBException;
 import com.shyslav.utils.LazyGson;
 import org.apache.log4j.Logger;
@@ -28,7 +30,6 @@ import java.util.Scanner;
 public class WorkThread implements Runnable {
     private static final Logger log = Logger.getLogger(WorkThread.class.getName());
 
-    //private CookAction cook = new CookAction();
     private Socket incoming;
     //input stream
     private InputStream inputStream = null;
@@ -43,6 +44,7 @@ public class WorkThread implements Runnable {
     private final HappyCakeStorage storage;
     private final ServerActions actions;
     private final ServerStarApp startApp;
+    private ServerUser user;
 
     public WorkThread(Socket i, HappyCakeStorage storage, ServerActions actions, ServerStarApp startApp) {
         this.incoming = i;
@@ -93,13 +95,14 @@ public class WorkThread implements Runnable {
      * @param request request
      */
     private void parseCommand(HappyCakeRequest request) {
+        log.trace(" new request from client " + (user != null ? user.getId() : "") + " " + request.getUrl());
         switch (request.getUrl().toLowerCase()) {
             case "login": {
                 StringKeyValue keyValue = request.getObject(StringKeyValue.class);
                 HappyCakeResponse response = actions.login(keyValue.getKey(), keyValue.getValue());
                 if (response.isSuccess()) {
                     Employees employees = response.getObject(Employees.class);
-                    startApp.client.add(new ServerOnlineUsers(
+                    this.user = new ServerUser(
                             employees.getId(),
                             employees.getName(),
                             employees.getLastname(),
@@ -109,7 +112,8 @@ public class WorkThread implements Runnable {
                             printWriter,
                             incoming,
                             employees.getPositionID()
-                    ));
+                    );
+                    startApp.client.add(this.user);
                 }
                 printWriter.println(LazyGson.toJson(response));
                 break;
@@ -294,8 +298,27 @@ public class WorkThread implements Runnable {
                 break;
             }
             case "getdataforimtalgo": {
-                int [] dishIDS = request.getObject(int[].class);
+                int[] dishIDS = request.getObject(int[].class);
                 printWriter.println(LazyGson.toJson(actions.getDataForIMTAlgo(dishIDS)));
+                break;
+            }
+            case "anyupdates": {
+                if (user.isHasUpdates()) {
+                    UserUpdatesList userUpdates = user.getUserUpdates();
+                    HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, "found updates", userUpdates);
+                    printWriter.println(LazyGson.toJson(response));
+                } else {
+                    HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.EMPTY, "updates not found");
+                    printWriter.println(LazyGson.toJson(response));
+                }
+                break;
+            }
+            case "getemptyupdate": {
+                UserUpdatesList userUpdates = new UserUpdatesList();
+                UserUpdate userUpdate = new UserUpdate("getemptyupdate", "test");
+                userUpdates.add(userUpdate);
+                HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, userUpdates);
+                startApp.sendNotificationToAllUsers(response);
                 break;
             }
             default: {
@@ -305,216 +328,12 @@ public class WorkThread implements Runnable {
     }
 
     /**
-     * Функция приема команды от клиента и правилами что делать после ее поступление
-     *
-     * @param splits - массив элементов команды
-     */
-    private void commandCheck(String[] splits) {
-        //Подключение к серверу
-        if (splits[0].equals("login")) {
-//            Employees employees = actions.login(splits[1], splits[2]);
-//            if (employees != null) {
-//                    objectOut.writeObject(employees);
-//                    objectOut.flush();
-        } else {
-//                    objectOut.writeObject("not found");
-        }
-    }
-    //Команда на получение новостей
-//            } else if (splits[0].equals("selectNews")) { +
-//                ArrayList<_News> news = NewsAction.selectNews(Integer.parseInt(splits[1]));
-//                if (news != null) {
-//                    objectOut.writeObject(news);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение категорий
-//            } else if (splits[0].equals("selectCategory")) { +
-//                ArrayList<_Category> category = CategoryAction.selectCategory(Integer.parseInt(splits[1]));
-//                if (category != null) {
-//                    objectOut.writeObject(category);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение блюд
-//            } else if (splits[0].equals("selectDish")) { +
-//                ArrayList<_Dish> dish = CategoryAction.selectDish(Integer.parseInt(splits[1]));
-//                if (dish != null) {
-//                    objectOut.writeObject(dish);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение резервов
-//            } else if (splits[0].equals("selectReservation")) { +
-//                ArrayList<_Reservation> reservation = ReservationAction.selectReservation(Integer.parseInt(splits[1]));
-//                if (reservation != null) {
-//                    objectOut.writeObject(reservation);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение предзаказов в заказе
-//            } else if (splits[0].equals("selectPreOrder")) { +
-//                ArrayList<_PreOrderTable> preOrderTables = ReservationAction.selectPreOrder(Integer.parseInt(splits[1]));
-//                if (preOrderTables != null) {
-//                    objectOut.writeObject(preOrderTables);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение сотрудников
-//            } else if (splits[0].equals("selectEmployees")) { +
-//                ArrayList<Employees> employees = EmployeeAction.selectEmployees(Integer.parseInt(splits[1]));
-//                if (employees != null) {
-//                    objectOut.writeObject(employees);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение отзывов
-//            } else if (splits[0].equals("selectReports")) { +
-//                ArrayList<_Reports> reports = ReportsAction.selectReports(Integer.parseInt(splits[1]));
-//                if (reports != null) {
-//                    objectOut.writeObject(reports);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение кординат
-//            } else if (splits[0].equals("selectCafeCoordinte")) { +
-//                ArrayList<_CafeCoordinate> cafeCoordinates = EmployeeAction.selectcafeCoordinate(Integer.parseInt(splits[1]));
-//                if (cafeCoordinates != null) {
-//                    objectOut.writeObject(cafeCoordinates);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение вакансий
-//            } else if (splits[0].equals("selectPositions")) { +
-//                ArrayList<_Positions> positionses = EmployeeAction.selectPositions(Integer.parseInt(splits[1]));
-//                if (positionses != null) {
-//                    objectOut.writeObject(positionses);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение заказов
-//            } else if (splits[0].equals("selectOrders")) { +
-//                ArrayList<_Order> orderses = OrderAction.selectOrders(Integer.parseInt(splits[1]));
-//                if (orderses != null) {
-//                    objectOut.writeObject(orderses);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение элементов заказа
-//            } else if (splits[0].equals("selectOrderList")) { +
-//                ArrayList<_OrderList> orderList = OrderAction.selectorderList(Integer.parseInt(splits[1]));
-//                if (orderList != null) {
-//                    objectOut.writeObject(orderList);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на удаление из таблицы
-//            } else if (splits[0].equals("deleteFromTable")) {
-//                if (DeleteAction.delete(splits[1], splits[2]) != null) {
-//                    objectOut.writeObject("done");
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение значения на апдейт
-//            } else if (splits[0].equals("getValueToUpdate")) {
-//                String update = UpdateAction.selectToUpdate(splits[1], splits[2], splits[3]);
-//                if (update != null) {
-//                    objectOut.writeObject(update);
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на обновление
-//            } else if (splits[0].equals("update")) {
-//                String update = UpdateAction.update(splits);
-//                if (update != null) {
-//                    objectOut.writeObject(update);
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на вставку
-//            } else if (splits[0].equals("insert")) {
-//                String insert = UpdateAction.insert(splits);
-//                if (insert != null) {
-//                    objectOut.writeObject(insert);
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение графиков по месяцу
-//            } else if (splits[0].equals("selectGrapgMonth")) {
-//                ArrayList<_GraphReport> tmp = ChartAction.selectChart(splits[1], null, null);
-//                if (tmp != null) {
-//                    objectOut.writeObject(tmp);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на получение графиков по дате
-//            } else if (splits[0].equals("selectGrapg")) {
-//                ArrayList<_GraphReport> tmp = ChartAction.selectChart(splits[1], splits[2], splits[3]);
-//                if (tmp != null) {
-//                    objectOut.writeObject(tmp);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на инициализацию касира
-//            } else if (splits[0].equals("selectCassir")) {
-//                ArrayList<LocalServerCassir> tmp = CasirAction.CasirAction();
-//                if (tmp != null) {
-//                    objectOut.writeObject(tmp);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на передачу на сервер обьекта
-//            } else if (splits[0].equals("readObj")) {
-//                try {
-//                    ArrayList<_OrderList> orders = (ArrayList<_OrderList>) objectInp.readObject();
-//                    System.out.println(orders.get(0).getDishName());
-//                    System.out.println(splits[splits.length - 1]);
-//                    String str = CasirAction.CasirAdd(orders, splits[1], splits[2]);
-//                    if (orders != null) {
-//                        objectOut.writeObject(str);
-//                    } else {
-//                        objectOut.writeObject("not found");
-//                    }
-//                } catch (ClassNotFoundException e) {
-//                    System.out.println(e);
-//                }
-//                //Команда на инициализцию повара
-//            } else if (splits[0].equals("getCookList")) {
-//                Object tmp = cook.start();
-//                if (tmp != null) {
-//                    objectOut.writeObject(tmp);
-//                    objectOut.flush();
-//                } else {
-//                    objectOut.writeObject("not found");
-//                }
-//                //Команда на закрытие заказа
-//            } else if (splits[0].equals("compliteCookOrder")) {
-//                cook.close(Integer.parseInt(splits[1]));
-//                Main.sendToCook();
-//            }
-//}
-
-    /**
      * Функция удаления клиента из списка подключенных к серверу
      *
      * @param client - лист клиента для удаления
      */
-    public void delete(ArrayList<ServerOnlineUsers> client) {
-        System.out.println("Клиент Удален");
+    public void delete(ArrayList<ServerUser> client) {
+        log.trace("Remove client");
         for (int i = 0; i < client.size(); i++) {
             if (client.get(i).getSock() == incoming) {
                 client.remove(i);

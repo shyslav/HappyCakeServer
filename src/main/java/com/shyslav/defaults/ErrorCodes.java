@@ -7,5 +7,6 @@ public enum ErrorCodes {
     SUCCESS,
     WROND_REQUST,
     INTERNAL_ERROR,
-    ACCESS_DENIED
+    ACCESS_DENIED,
+    EMPTY
 }

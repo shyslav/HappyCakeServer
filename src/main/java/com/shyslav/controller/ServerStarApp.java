@@ -3,7 +3,7 @@ package com.shyslav.controller;
 import com.happycake.HappyCakeStorage;
 import com.shyslav.controller.actions.ServerActions;
 import com.shyslav.defaults.HappyCakeResponse;
-import com.shyslav.models.ServerOnlineUsers;
+import com.shyslav.models.ServerUser;
 import com.shyslav.utils.LazyGson;
 import com.shyslav.utils.LazyUUID;
 import org.apache.log4j.Logger;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ServerStarApp {
     public static boolean started = false;
     private static final Logger log = Logger.getLogger(ServerStarApp.class.getName());
-    public ArrayList<ServerOnlineUsers> client = new ArrayList<>();
+    public ArrayList<ServerUser> client = new ArrayList<>();
     public static HappyCakeStorage storages;
     public static ServerActions actions;
 
@@ -58,10 +58,21 @@ public class ServerStarApp {
      * @param positionID id type of users
      */
     public void sendNotificationToUsers(HappyCakeResponse response, int positionID) {
-        for (ServerOnlineUsers serverOnlineUsers : client) {
+        for (ServerUser serverOnlineUsers : client) {
             if (serverOnlineUsers.getPositionId() == positionID) {
                 serverOnlineUsers.getPrintWriter().println(LazyGson.toJson(response));
             }
+        }
+    }
+
+    /**
+     * Send notification to all users
+     *
+     * @param response response to send
+     */
+    public void sendNotificationToAllUsers(HappyCakeResponse response) {
+        for (ServerUser serverOnlineUsers : client) {
+            serverOnlineUsers.getPrintWriter().println(LazyGson.toJson(response));
         }
     }
 }
