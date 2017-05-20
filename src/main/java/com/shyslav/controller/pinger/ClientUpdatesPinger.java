@@ -1,10 +1,8 @@
 package com.shyslav.controller.pinger;
 
 import com.happycake.sitemodels.HappyCakeNotifications;
-import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.defaults.ErrorCodes;
-import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.UserUpdate;
 import com.shyslav.models.UserUpdatesList;
@@ -107,7 +105,7 @@ public class ClientUpdatesPinger {
      *
      * @return amount of empty answers
      */
-    public long getAmountEmptyAnswers() {
+    public synchronized long getAmountEmptyAnswers() {
         return amountEmptyAnswers;
     }
 
@@ -116,7 +114,7 @@ public class ClientUpdatesPinger {
      *
      * @return amount of not empty answers
      */
-    public long getAmountNotEmptyAnswers() {
+    public synchronized long getAmountNotEmptyAnswers() {
         return amountNotEmptyAnswers;
     }
 
@@ -126,7 +124,11 @@ public class ClientUpdatesPinger {
      * @param name  unique name of listener
      * @param event to execute
      */
-    public void addListener(HappyCakeNotifications name, PingerListener event) {
+    public synchronized void addListener(HappyCakeNotifications name, PingerListener event) {
         listenerHashMap.put(name, event);
+    }
+
+    public synchronized void clearListeners() {
+        listenerHashMap.clear();
     }
 }
