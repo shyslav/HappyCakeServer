@@ -164,142 +164,193 @@ public class WorkThread implements Runnable {
             }
             case "addnews": {
                 News news = request.getObject(News.class);
-                printWriter.println(LazyGson.toJson(actions.addNews(news)));
+                HappyCakeResponse response = actions.addNews(news);
+                printWriter.println(LazyGson.toJson(response));
                 //news notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_NEWS, "news was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_NEWS, "news was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "addcategories": {
                 Category category = request.getObject(Category.class);
-                printWriter.println(LazyGson.toJson(actions.addCategories(category)));
+                HappyCakeResponse response = actions.addCategories(category);
+                printWriter.println(LazyGson.toJson(response));
                 //category notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CATEGORIES, "category was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CATEGORIES, "category was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                }
                 break;
             }
             case "adddish": {
                 Dish dish = request.getObject(Dish.class);
-                printWriter.println(LazyGson.toJson(actions.addDish(dish)));
+                HappyCakeResponse response = actions.addDish(dish);
+                printWriter.println(LazyGson.toJson(response));
                 //dish notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_DISHES, "dish was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_DISHES, "dish was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                }
                 break;
             }
             case "addreservation": {
                 Reservation reservation = request.getObject(Reservation.class);
-                printWriter.println(LazyGson.toJson(actions.addReservation(reservation)));
+                HappyCakeResponse response = actions.addReservation(reservation);
+                printWriter.println(LazyGson.toJson(response));
                 //reservation notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_RESERVATION, "reservation was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_RESERVATION, "reservation was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "addpreorder": {
                 PreOrder preOrder = request.getObject(PreOrder.class);
-                printWriter.println(LazyGson.toJson(actions.addPreorder(preOrder)));
+                HappyCakeResponse response = actions.addPreorder(preOrder);
+                printWriter.println(LazyGson.toJson(response));
                 //preorder notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_PREORDER, "preorder was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_PREORDER, "preorder was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "addemployee": {
                 Employees employees = request.getObject(Employees.class);
-                printWriter.println(LazyGson.toJson(actions.addEmployee(employees)));
+                HappyCakeResponse response = actions.addEmployee(employees);
+                printWriter.println(LazyGson.toJson(response));
                 //employee notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_EMPLOYEES, "employee was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_EMPLOYEES, "employee was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "addreports": {
                 Reports reports = request.getObject(Reports.class);
-                printWriter.println(LazyGson.toJson(actions.addReports(reports)));
+                HappyCakeResponse response = actions.addReports(reports);
+                printWriter.println(LazyGson.toJson(response));
                 //reports notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_REPORTS, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_REPORTS, "reports was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "addcafecoordinate": {
                 CafeCoordinate coordinate = request.getObject(CafeCoordinate.class);
-                printWriter.println(LazyGson.toJson(actions.addCafeCoordinate(coordinate)));
+                HappyCakeResponse response = actions.addCafeCoordinate(coordinate);
+                printWriter.println(LazyGson.toJson(response));
                 //cafe coordinate notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CAFECOORDINATE, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CAFECOORDINATE, "reports was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "addorder": {
                 Order order = request.getObject(Order.class);
-                printWriter.println(LazyGson.toJson(actions.addOrder(order)));
+                HappyCakeResponse response = actions.addOrder(order);
+                printWriter.println(LazyGson.toJson(response));
                 //order notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_ORDERS, "orders was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_ORDERS, "orders was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deletenews": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteNews(id)));
+                HappyCakeResponse response = actions.deleteNews(id);
+                printWriter.println(LazyGson.toJson(response));
                 //news notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_NEWS, "news was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_NEWS, "news was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deletecategories": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteCategories(id)));
+                HappyCakeResponse response = actions.deleteCategories(id);
+                printWriter.println(LazyGson.toJson(response));
                 //category notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CATEGORIES, "category was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CATEGORIES, "category was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                }
                 break;
             }
             case "deletedish": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteDish(id)));
+                HappyCakeResponse response = actions.deleteDish(id);
+                printWriter.println(LazyGson.toJson(response));
                 //dish notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_DISHES, "dish was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_DISHES, "dish was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
+                }
                 break;
             }
             case "deletereservation": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteReservation(id)));
+                HappyCakeResponse response = actions.deleteReservation(id);
+                printWriter.println(LazyGson.toJson(response));
                 //reservation notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_RESERVATION, "reservation was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_RESERVATION, "reservation was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deletepreorder": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deletePreOrder(id)));
+                HappyCakeResponse response = actions.deletePreOrder(id);
+                printWriter.println(LazyGson.toJson(response));
                 //preorder notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_PREORDER, "preorder was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_PREORDER, "preorder was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deleteemployees": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteEmployees(id)));
+                HappyCakeResponse response = actions.deleteEmployees(id);
+                printWriter.println(LazyGson.toJson(response));
                 //employee notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_EMPLOYEES, "employee was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_EMPLOYEES, "employee was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deletereports": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteReports(id)));
+                HappyCakeResponse response = actions.deleteReports(id);
+                printWriter.println(LazyGson.toJson(response));
                 //reports notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_REPORTS, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_REPORTS, "reports was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deletecafecoordinate": {
                 int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deleteCafeCoordinate(id)));
+                HappyCakeResponse response = actions.deleteCafeCoordinate(id);
+                printWriter.println(LazyGson.toJson(response));
                 //cafe coordinate notification to users
-                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CAFECOORDINATE, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                if (response.isSuccess()) {
+                    UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CAFECOORDINATE, "reports was changed");
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                }
                 break;
             }
             case "deleteorders": {
@@ -362,7 +413,11 @@ public class WorkThread implements Runnable {
                 String role = arr[0];
                 String message = arr[1];
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.MESSAGE_TO_USERS, message);
-                startApp.sendNotificationToAllUsers(userUpdate, user);
+                if (role.equalsIgnoreCase("all")) {
+                    startApp.sendNotificationToAllUsers(userUpdate, user);
+                } else {
+                    startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.valueOf(role), user);
+                }
                 break;
             }
             default: {
