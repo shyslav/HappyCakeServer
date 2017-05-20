@@ -3,10 +3,8 @@ package com.shyslav.controller;
 import com.happycake.HappyCakeStorage;
 import com.happycake.sitemodels.HappyCakeRoles;
 import com.shyslav.controller.actions.ServerActions;
-import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerUser;
 import com.shyslav.models.UserUpdate;
-import com.shyslav.utils.LazyGson;
 import com.shyslav.utils.LazyUUID;
 import org.apache.log4j.Logger;
 
@@ -59,8 +57,11 @@ public class ServerStarApp {
      * @param update   update to send
      * @param position type of users
      */
-    public void sendNotificationToUsers(UserUpdate update, HappyCakeRoles position) {
+    public void sendNotificationToUsers(UserUpdate update, HappyCakeRoles position, ServerUser currentClient) {
         for (ServerUser serverOnlineUsers : client) {
+            if (serverOnlineUsers == currentClient) {
+                continue;
+            }
             if (serverOnlineUsers.getPosition() == position) {
                 serverOnlineUsers.addToUpdate(update);
             }
@@ -72,8 +73,11 @@ public class ServerStarApp {
      *
      * @param update update to send
      */
-    public void sendNotificationToAllUsers(UserUpdate update) {
+    public void sendNotificationToAllUsers(UserUpdate update, ServerUser currentClient) {
         for (ServerUser serverOnlineUsers : client) {
+            if (serverOnlineUsers == currentClient) {
+                continue;
+            }
             serverOnlineUsers.addToUpdate(update);
         }
     }

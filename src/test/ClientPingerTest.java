@@ -48,28 +48,42 @@ public class ClientPingerTest {
     }
 
     @Test
-    public void pingerTest() throws InterruptedException {
-        ClientUpdatesPinger pinger = new ClientUpdatesPinger(client, 100);
-        assertTrue(pinger.isWork());
+    public void pingerTest() throws Exception {
+        //insert user
+        Employees user = createUser();
+        user.setPosition(HappyCakeRoles.ADMIN);
+        ServerStarApp.storages.employeesStorage.save(user);
+        //authorise
+        ClientActions client2 = successLogin();
+
+        ClientUpdatesPinger pinger1 = new ClientUpdatesPinger(client, 100);
+        ClientUpdatesPinger pinger2 = new ClientUpdatesPinger(client2, 100);
+        assertTrue(pinger1.isWork());
+        assertTrue(pinger2.isWork());
 
         //initialize listener
-        StringBuilder builder = new StringBuilder();
-        pinger.addListener(HappyCakeNotifications.MESSAGE_TO_USERS, (event) -> builder.append(event.getContext()));
+        StringBuilder builderClient1 = new StringBuilder();
+        pinger1.addListener(HappyCakeNotifications.MESSAGE_TO_USERS, (event) -> builderClient1.append(event.getContext()));
+
+        StringBuilder builderClient2 = new StringBuilder();
+        pinger2.addListener(HappyCakeNotifications.MESSAGE_TO_USERS, (event) -> builderClient2.append(event.getContext()));
         Thread.sleep(1000);
 
         //call event to get listener
         client.sendMessage("ALL", "test");
         Thread.sleep(1000);
-        assertTrue(builder.toString().equals("test"));
+        assertTrue(builderClient2.toString().equals("test"));
+        assertTrue(builderClient1.toString().isEmpty());
 
         //check statistic
-        assertTrue(pinger.getAmountEmptyAnswers() > 5);
-        assertTrue(pinger.getAmountNotEmptyAnswers() == 1);
+        assertTrue(pinger1.getAmountEmptyAnswers() > 5);
+        assertTrue(pinger1.getAmountNotEmptyAnswers() == 0);
+        assertTrue(pinger2.getAmountNotEmptyAnswers() != 0);
 
         //off pinger thread
-        pinger.offPingerThread();
+        pinger1.offPingerThread();
         Thread.sleep(1000);
-        assertTrue(!pinger.isWork());
+        assertTrue(!pinger1.isWork());
     }
 
     /**

@@ -167,7 +167,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addNews(news)));
                 //news notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_NEWS, "news was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "addcategories": {
@@ -175,8 +175,8 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addCategories(category)));
                 //category notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CATEGORIES, "category was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
                 break;
             }
             case "adddish": {
@@ -184,8 +184,8 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addDish(dish)));
                 //dish notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_DISHES, "dish was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
                 break;
             }
             case "addreservation": {
@@ -193,7 +193,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addReservation(reservation)));
                 //reservation notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_RESERVATION, "reservation was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "addpreorder": {
@@ -201,7 +201,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addPreorder(preOrder)));
                 //preorder notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_PREORDER, "preorder was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "addemployee": {
@@ -209,7 +209,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addEmployee(employees)));
                 //employee notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_EMPLOYEES, "employee was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "addreports": {
@@ -217,7 +217,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addReports(reports)));
                 //reports notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_REPORTS, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "addcafecoordinate": {
@@ -225,7 +225,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addCafeCoordinate(coordinate)));
                 //cafe coordinate notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CAFECOORDINATE, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "addorder": {
@@ -233,7 +233,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addOrder(order)));
                 //order notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_ORDERS, "orders was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deletenews": {
@@ -241,7 +241,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteNews(id)));
                 //news notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_NEWS, "news was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deletecategories": {
@@ -249,8 +249,8 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteCategories(id)));
                 //category notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CATEGORIES, "category was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
                 break;
             }
             case "deletedish": {
@@ -258,8 +258,8 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteDish(id)));
                 //dish notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_DISHES, "dish was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
                 break;
             }
             case "deletereservation": {
@@ -267,7 +267,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteReservation(id)));
                 //reservation notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_RESERVATION, "reservation was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deletepreorder": {
@@ -275,7 +275,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deletePreOrder(id)));
                 //preorder notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_PREORDER, "preorder was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deleteemployees": {
@@ -283,7 +283,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteEmployees(id)));
                 //employee notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_EMPLOYEES, "employee was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deletereports": {
@@ -291,7 +291,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteReports(id)));
                 //reports notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_REPORTS, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deletecafecoordinate": {
@@ -299,7 +299,7 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteCafeCoordinate(id)));
                 //cafe coordinate notification to users
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATE_CAFECOORDINATE, "reports was changed");
-                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN);
+                startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
                 break;
             }
             case "deleteorders": {
@@ -319,7 +319,7 @@ public class WorkThread implements Runnable {
                             //generate update orders notification
                             UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.COOK_UPDATE_ORDERS, "update orders notification");
                             //send notification to cook
-                            startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.COOK);
+                            startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.COOK, user);
                         }
                     } catch (DBException e) {
                         e.printStackTrace();
@@ -362,7 +362,7 @@ public class WorkThread implements Runnable {
                 String role = arr[0];
                 String message = arr[1];
                 UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.MESSAGE_TO_USERS, message);
-                startApp.sendNotificationToAllUsers(userUpdate);
+                startApp.sendNotificationToAllUsers(userUpdate, user);
                 break;
             }
             default: {
