@@ -4,6 +4,7 @@ import com.happycake.HappyCakeStorage;
 import com.shyslav.controller.actions.ServerActions;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerUser;
+import com.shyslav.models.UserUpdate;
 import com.shyslav.utils.LazyGson;
 import com.shyslav.utils.LazyUUID;
 import org.apache.log4j.Logger;
@@ -68,11 +69,11 @@ public class ServerStarApp {
     /**
      * Send notification to all users
      *
-     * @param response response to send
+     * @param update update to send
      */
-    public void sendNotificationToAllUsers(HappyCakeResponse response) {
+    public void sendNotificationToAllUsers(UserUpdate update) {
         for (ServerUser serverOnlineUsers : client) {
-            serverOnlineUsers.getPrintWriter().println(LazyGson.toJson(response));
+            serverOnlineUsers.addToUpdate(update);
         }
     }
 }

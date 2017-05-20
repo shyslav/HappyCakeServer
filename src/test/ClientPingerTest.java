@@ -57,11 +57,11 @@ public class ClientPingerTest {
 
         //initialize listener
         StringBuilder builder = new StringBuilder();
-        pinger.addListener("getemptyupdate", (event) -> builder.append(event.getContext()));
+        pinger.addListener("messagetoallusers", (event) -> builder.append(event.getContext()));
         Thread.sleep(1000);
 
         //call event to get listener
-        client.getClient().write(new HappyCakeRequest("getemptyupdate"));
+        client.getClient().write(new HappyCakeRequest("messagetoallusers"));
         Thread.sleep(1000);
         assertTrue(builder.toString().equals("test"));
 

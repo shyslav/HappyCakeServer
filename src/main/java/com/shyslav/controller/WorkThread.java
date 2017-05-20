@@ -304,7 +304,7 @@ public class WorkThread implements Runnable {
             }
             case "anyupdates": {
                 if (user.isHasUpdates()) {
-                    UserUpdatesList userUpdates = user.getUserUpdates();
+                    UserUpdatesList userUpdates = user.popAllUserUpdates();
                     HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, "found updates", userUpdates);
                     printWriter.println(LazyGson.toJson(response));
                 } else {
@@ -313,12 +313,9 @@ public class WorkThread implements Runnable {
                 }
                 break;
             }
-            case "getemptyupdate": {
-                UserUpdatesList userUpdates = new UserUpdatesList();
-                UserUpdate userUpdate = new UserUpdate("getemptyupdate", "test");
-                userUpdates.add(userUpdate);
-                HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, userUpdates);
-                startApp.sendNotificationToAllUsers(response);
+            case "messagetoallusers": {
+                UserUpdate userUpdate = new UserUpdate("messagetoallusers", "test");
+                startApp.sendNotificationToAllUsers(userUpdate);
                 break;
             }
             default: {

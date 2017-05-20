@@ -133,7 +133,7 @@ public class ServerUser {
     /**
      * Get user updates
      */
-    public UserUpdatesList getUserUpdates() {
+    public UserUpdatesList popAllUserUpdates() {
         synchronized (userUpdates) {
             UserUpdatesList result = new UserUpdatesList();
             result.addAll(userUpdates);
