@@ -66,7 +66,6 @@ public class WorkThread implements Runnable {
                 if (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
                     HappyCakeRequest request = LazyGson.fromJson(line, HappyCakeRequest.class);
-                    log.trace(" new request from client " + line);
                     parseCommand(request);
                 } else if (inputStream.read() == -1) {
                     log.trace("socket is terminated");
@@ -313,8 +312,15 @@ public class WorkThread implements Runnable {
                 }
                 break;
             }
-            case "messagetoallusers": {
-                UserUpdate userUpdate = new UserUpdate("messagetoallusers", "test");
+            case "messagetousers": {
+                String[] arr = request.getObject(String[].class);
+                if (arr.length != 2) {
+                    log.error("Message to user have got wrong arguments");
+                    break;
+                }
+                String role = arr[0];
+                String message = arr[1];
+                UserUpdate userUpdate = new UserUpdate("messagetousers", message);
                 startApp.sendNotificationToAllUsers(userUpdate);
                 break;
             }

@@ -297,4 +297,12 @@ public interface IHappyCakeActions {
      * @return server response
      */
     HappyCakeResponse getDataForIMTAlgo(int[] dishIDS);
+
+    /**
+     * Send message
+     *
+     * @param role role string
+     * @return server response
+     */
+    void sendMessage(String role, String message);
 }

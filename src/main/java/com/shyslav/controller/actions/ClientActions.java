@@ -456,6 +456,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Send message to users
+     *
+     * @param role role string
+     */
+    @Override
+    public void sendMessage(String role, String message) {
+        HappyCakeRequest request = new HappyCakeRequest("messagetousers", new String[]{role, message});
+        client.write(request);
+    }
+
+    /**
      * Get server client protocol
      *
      * @return server client protocol

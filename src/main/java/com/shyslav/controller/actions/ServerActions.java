@@ -748,4 +748,15 @@ public class ServerActions implements IHappyCakeActions {
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
         }
     }
+
+    /**
+     * Send message
+     *
+     * @param role    role string
+     * @param message message
+     */
+    @Override
+    public void sendMessage(String role, String message) {
+        throw new NotImplemenetYetError();
+    }
 }
