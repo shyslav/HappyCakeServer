@@ -1,5 +1,7 @@
 package com.shyslav.models;
 
+import com.happycake.sitemodels.HappyCakeRoles;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -19,12 +21,12 @@ public class ServerUser {
     private PrintWriter printWriter = null;
 
     private Socket sock;
-    private int positionId;
+    private HappyCakeRoles position;
 
     //updates list
     private final UserUpdatesList userUpdates;
 
-    public ServerUser(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, Socket sock, int positionId) {
+    public ServerUser(int id, String name, String lastName, InputStream inputStream, Scanner scanner, OutputStream outputStream, PrintWriter printWriter, Socket sock, HappyCakeRoles position) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -33,7 +35,7 @@ public class ServerUser {
         this.outputStream = outputStream;
         this.printWriter = printWriter;
         this.sock = sock;
-        this.positionId = positionId;
+        this.position = position;
         this.userUpdates = new UserUpdatesList();
     }
 
@@ -70,12 +72,8 @@ public class ServerUser {
         this.sock = sock;
     }
 
-    public int getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(int positionId) {
-        this.positionId = positionId;
+    public HappyCakeRoles getPosition() {
+        return position;
     }
 
     public InputStream getInputStream() {

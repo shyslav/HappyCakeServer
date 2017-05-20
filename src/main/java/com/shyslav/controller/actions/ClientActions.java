@@ -312,41 +312,6 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
-     * Select position list
-     *
-     * @return position list
-     */
-    @Override
-    public HappyCakeResponse selectPositions() {
-        HappyCakeRequest request = new HappyCakeRequest("selectPositions");
-        return client.writeAndRead(request);
-    }
-
-    /**
-     * Delete position by id
-     *
-     * @param id position id
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse deletePositions(int id) {
-        HappyCakeRequest request = new HappyCakeRequest("deletePositions", id);
-        return client.writeAndRead(request);
-    }
-
-    /**
-     * Add happycake position entity
-     *
-     * @param position position entity
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addPosition(Position position) {
-        HappyCakeRequest request = new HappyCakeRequest("addPosition", position);
-        return client.writeAndRead(request);
-    }
-
-    /**
      * Select orders
      *
      * @return orders list

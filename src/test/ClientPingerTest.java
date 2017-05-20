@@ -1,12 +1,9 @@
 import com.happycake.sitemodels.Employees;
-import com.happycake.sitemodels.News;
-import com.happycake.sitemodels.Position;
+import com.happycake.sitemodels.HappyCakeRoles;
 import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.ServerStarApp;
 import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.controller.pinger.ClientUpdatesPinger;
-import com.shyslav.defaults.HappyCakeRequest;
-import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.mysql.exceptions.DBException;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -39,9 +36,8 @@ public class ClientPingerTest {
         try {
             ServerStarApp.storages.clear();
             //insert user
-            long l = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(createPosition());
             Employees user = createUser();
-            user.setPositionID((int) l);
+            user.setPosition(HappyCakeRoles.ADMIN);
             ServerStarApp.storages.employeesStorage.save(user);
             //authorise
             client = successLogin();
@@ -61,7 +57,7 @@ public class ClientPingerTest {
         Thread.sleep(1000);
 
         //call event to get listener
-        client.sendMessage("ALL","test");
+        client.sendMessage("ALL", "test");
         Thread.sleep(1000);
         assertTrue(builder.toString().equals("test"));
 
@@ -97,7 +93,7 @@ public class ClientPingerTest {
     private static Employees createUser() {
         //create employee
         Employees employees = new Employees();
-        employees.setPositionID(1);
+        employees.setPosition(HappyCakeRoles.ADMIN);
         employees.setAddress("123");
         employees.setBirthday(12345);
         employees.setCafeID(1);
@@ -106,18 +102,5 @@ public class ClientPingerTest {
         employees.setLogin("admin");
         employees.setPassword("admin");
         return employees;
-    }
-
-    /**
-     * Create admin position
-     *
-     * @return position
-     */
-    private static Position createPosition() {
-        //create position
-        Position position = new Position();
-        position.setName("Admin");
-        position.setSalary(12345);
-        return position;
     }
 }

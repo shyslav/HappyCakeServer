@@ -1,6 +1,7 @@
 package com.shyslav.controller;
 
 import com.happycake.HappyCakeStorage;
+import com.happycake.sitemodels.HappyCakeRoles;
 import com.shyslav.controller.actions.ServerActions;
 import com.shyslav.defaults.HappyCakeResponse;
 import com.shyslav.models.ServerUser;
@@ -55,12 +56,12 @@ public class ServerStarApp {
     /**
      * Send message to all users with position id
      *
-     * @param response   response to send
-     * @param positionID id type of users
+     * @param response response to send
+     * @param position type of users
      */
-    public void sendNotificationToUsers(HappyCakeResponse response, int positionID) {
+    public void sendNotificationToUsers(HappyCakeResponse response, HappyCakeRoles position) {
         for (ServerUser serverOnlineUsers : client) {
-            if (serverOnlineUsers.getPositionId() == positionID) {
+            if (serverOnlineUsers.getPosition() == position) {
                 serverOnlineUsers.getPrintWriter().println(LazyGson.toJson(response));
             }
         }

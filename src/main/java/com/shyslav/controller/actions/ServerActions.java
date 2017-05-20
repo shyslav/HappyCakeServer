@@ -522,65 +522,6 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Select positions list
-     *
-     * @return position list in response object
-     */
-    @Override
-    public HappyCakeResponse selectPositions() {
-        try {
-            PositionsList list = new PositionsList();
-            ArrayList<DBEntity> entity = storage.positionStorage.getAll();
-            for (DBEntity ent : entity) {
-                list.add((Position) ent);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS SELECT ", list);
-        } catch (DBException e) {
-            log.error("Unable to select news" + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
-     * Delete position by id
-     *
-     * @param id position id
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse deletePositions(int id) {
-        try {
-            storage.positionStorage.deleteByID(id);
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " DELETE SUCCESS ");
-        } catch (DBException e) {
-            log.error("Unable to delete position with id " + id + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-
-    /**
-     * Add position
-     *
-     * @param position position entity
-     * @return happycake response
-     */
-    @Override
-    public HappyCakeResponse addPosition(Position position) {
-        try {
-            if (position.getId() != 0) {
-                storage.positionStorage.update(position, position.getId());
-            } else {
-                storage.positionStorage.save(position);
-            }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " SUCCESS ADDED");
-        } catch (DBException e) {
-            log.error("Unable to add position with id " + position.getId() + " . " + e.getMessage(), e);
-            return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
-        }
-    }
-
-    /**
      * Select orders list
      *
      * @return orders list

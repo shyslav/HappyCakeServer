@@ -203,29 +203,6 @@ public interface IHappyCakeActions {
     HappyCakeResponse addCafeCoordinate(CafeCoordinate cafeCoordinate);
 
     /**
-     * Select user positions
-     *
-     * @return response with position list
-     */
-    HappyCakeResponse selectPositions();
-
-    /**
-     * Delete positions by id
-     *
-     * @param id position id
-     * @return happycake response
-     */
-    HappyCakeResponse deletePositions(int id);
-
-    /**
-     * Add dish
-     *
-     * @param position position entity
-     * @return happycake response
-     */
-    HappyCakeResponse addPosition(Position position);
-
-    /**
      * Select orders
      *
      * @return response with orders list

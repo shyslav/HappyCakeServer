@@ -199,15 +199,9 @@ public class ClientActionsTest {
     public void selectEmployees() throws Exception {
         ClientActions client = successLogin();
 
-        //create position
-        Position position = new Position();
-        position.setName("Admin");
-        position.setSalary(12345);
-        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
-
         //create employee
         Employees employees = new Employees();
-        employees.setPositionID((int) positionID);
+        employees.setPosition(HappyCakeRoles.ADMIN);
         employees.setAddress("123");
         employees.setBirthday(12345);
         employees.setCafeID(1);
@@ -254,25 +248,6 @@ public class ClientActionsTest {
         HappyCakeResponse response = client.selectCafeCoordinate();
         assertTrue(response.getCode() == ErrorCodes.SUCCESS);
         assertTrue(((CafeCoordinateList) response.getObject(CafeCoordinateList.class)).size() >= 1);
-    }
-
-    /**
-     * Select position test
-     *
-     * @throws Exception
-     */
-    @Test
-    public void selectPositions() throws Exception {
-        ClientActions client = successLogin();
-        //create position
-        Position position = new Position();
-        position.setName("Admin");
-        position.setSalary(12345);
-        client.addPosition(position);
-
-        HappyCakeResponse response = client.selectPositions();
-        assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-        assertTrue(((PositionsList) response.getObject(PositionsList.class)).size() == 1);
     }
 
 
@@ -545,16 +520,10 @@ public class ClientActionsTest {
         ClientActions client = successLogin();
 
         EmployeesList list = client.selectEmployees().getObject(EmployeesList.class);
-
-        Position position = new Position();
-        position.setName("Admin");
-        position.setSalary(12345);
-        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
-
         //add employee
         Employees employee = new Employees();
         employee.setCafeID(1);
-        employee.setPositionID((int) positionID);
+        employee.setPosition(HappyCakeRoles.ADMIN);
         employee.setBirthday(14051996);
         employee.setName("Test");
         employee.setLastname("Test");
@@ -661,43 +630,6 @@ public class ClientActionsTest {
         client.deleteCafeCoordinate(byID.getId());
     }
 
-
-    /**
-     * Add position test
-     *
-     * @throws Exception
-     */
-    @Test
-    public void addPosition() throws Exception {
-        ClientActions client = successLogin();
-
-        PositionsList list = client.selectPositions().getObject(PositionsList.class);
-
-        //add Position
-        Position position = new Position();
-        position.setName("Test");
-        position.setSalary(Integer.MAX_VALUE);
-
-        HappyCakeResponse response = client.addPosition(position);
-        assertTrue(response.getCode() == ErrorCodes.SUCCESS);
-
-        //check if position was added
-        PositionsList positionsList = client.selectPositions().getObject(PositionsList.class);
-        assertTrue(list.size() + 1 == positionsList.size());
-        Position addedPosition = positionsList.get(positionsList.size() - 1);
-        assertTrue(positionsList.get(positionsList.size() - 1).getName().equals("Test"));
-
-        //check if positions were updated
-        addedPosition.setName("Test12345");
-        HappyCakeResponse updateResponse = client.addPosition(addedPosition);
-        assertTrue(updateResponse.isSuccess());
-
-        positionsList = client.selectPositions().getObject(PositionsList.class);
-        Position byID = positionsList.getByID(addedPosition.getId());
-        assertTrue(byID.getName().equals("Test12345"));
-
-        client.deletePositions(byID.getId());
-    }
 
     /**
      * Add order test
@@ -946,16 +878,10 @@ public class ClientActionsTest {
     public void deleteEmployee() throws Exception {
         ClientActions client = successLogin();
 
-        Position position = new Position();
-        position.setName("Test");
-        position.setSalary(Integer.MAX_VALUE);
-        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
-
-
         //add employee
         Employees employee = new Employees();
         employee.setCafeID(1);
-        employee.setPositionID((int) positionID);
+        employee.setPosition(HappyCakeRoles.ADMIN);
         employee.setBirthday(14051996);
         employee.setName("Test");
         employee.setLastname("Test");
@@ -1054,41 +980,6 @@ public class ClientActionsTest {
         } else {
             lastElement = list.get(list.size() - 1);
             assertTrue(!lastElement.getAddress().equals("Test"));
-        }
-    }
-
-    /**
-     * Delete test on positions
-     *
-     * @throws Exception
-     */
-    @Test
-    public void deletePositions() throws Exception {
-        ClientActions client = successLogin();
-
-        //add Position
-        Position position = new Position();
-        position.setName("Test");
-        position.setSalary(Integer.MAX_VALUE);
-
-        client.addPosition(position);
-
-        //load all positions
-        PositionsList list = client.selectPositions().getObject(PositionsList.class);
-        Position lastElement = list.get(list.size() - 1);
-        assertTrue(list.size() >= 1);
-        assertTrue(lastElement.getName().equals("Test"));
-
-        //delete position
-        client.deletePositions(lastElement.getId());
-
-        //check if position was deleted
-        list = client.selectPositions().getObject(PositionsList.class);
-        if (list.isEmpty()) {
-            assertTrue(list.isEmpty());
-        } else {
-            lastElement = list.get(list.size() - 1);
-            assertTrue(!lastElement.getName().equals("Test"));
         }
     }
 
@@ -1219,15 +1110,9 @@ public class ClientActionsTest {
      * @throws DBException
      */
     private int createUser() throws DBException {
-        //create position
-        Position position = new Position();
-        position.setName("Admin");
-        position.setSalary(12345);
-        long positionID = ServerStarApp.storages.positionStorage.saveAndGetLastInsertID(position);
-
         //create employee
         Employees employees = new Employees();
-        employees.setPositionID((int) positionID);
+        employees.setPosition(HappyCakeRoles.ADMIN);
         employees.setAddress("123");
         employees.setBirthday(12345);
         employees.setCafeID(1);

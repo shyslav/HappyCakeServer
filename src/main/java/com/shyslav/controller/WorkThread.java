@@ -110,7 +110,7 @@ public class WorkThread implements Runnable {
                             outputStream,
                             printWriter,
                             incoming,
-                            employees.getPositionID()
+                            employees.getPosition()
                     );
                     startApp.client.add(this.user);
                 }
@@ -147,10 +147,6 @@ public class WorkThread implements Runnable {
             }
             case "selectcafecoordinate": {
                 printWriter.println(LazyGson.toJson(actions.selectCafeCoordinate()));
-                break;
-            }
-            case "selectpositions": {
-                printWriter.println(LazyGson.toJson(actions.selectPositions()));
                 break;
             }
             case "selectorders": {
@@ -206,11 +202,6 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.addCafeCoordinate(coordinate)));
                 break;
             }
-            case "addposition": {
-                Position position = request.getObject(Position.class);
-                printWriter.println(LazyGson.toJson(actions.addPosition(position)));
-                break;
-            }
             case "addorder": {
                 Order order = request.getObject(Order.class);
                 printWriter.println(LazyGson.toJson(actions.addOrder(order)));
@@ -256,11 +247,6 @@ public class WorkThread implements Runnable {
                 printWriter.println(LazyGson.toJson(actions.deleteCafeCoordinate(id)));
                 break;
             }
-            case "deletepositions": {
-                int id = request.getObject(Integer.class);
-                printWriter.println(LazyGson.toJson(actions.deletePositions(id)));
-                break;
-            }
             case "deleteorders": {
                 int id = request.getObject(Integer.class);
                 printWriter.println(LazyGson.toJson(actions.deleteOrders(id)));
@@ -278,7 +264,7 @@ public class WorkThread implements Runnable {
                             //generate order fo cook response
                             HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, storage.orderStorage.getOrdersForCook());
                             //send notification to cook
-                            startApp.sendNotificationToUsers(response, 3);
+                            startApp.sendNotificationToUsers(response, HappyCakeRoles.COOK);
                         }
                     } catch (DBException e) {
                         e.printStackTrace();
