@@ -54,7 +54,7 @@ public class ClientPingerTest {
 
         //initialize listener
         StringBuilder builder = new StringBuilder();
-        pinger.addListener(HappyCakeNotifications.MESSAGETOUSERS, (event) -> builder.append(event.getContext()));
+        pinger.addListener(HappyCakeNotifications.MESSAGE_TO_USERS, (event) -> builder.append(event.getContext()));
         Thread.sleep(1000);
 
         //call event to get listener
