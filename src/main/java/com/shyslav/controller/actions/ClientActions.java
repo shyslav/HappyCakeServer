@@ -432,6 +432,17 @@ public class ClientActions implements IHappyCakeActions {
     }
 
     /**
+     * Get updates for user
+     *
+     * @return updates
+     */
+    @Override
+    public HappyCakeResponse anyUpdates() {
+        HappyCakeRequest request = new HappyCakeRequest("anyUpdates");
+        return client.writeAndRead(request);
+    }
+
+    /**
      * Get server client protocol
      *
      * @return server client protocol

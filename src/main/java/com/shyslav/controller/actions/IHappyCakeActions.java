@@ -1,6 +1,7 @@
 package com.shyslav.controller.actions;
 
 import com.happycake.sitemodels.*;
+import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
 
 /**
@@ -282,4 +283,11 @@ public interface IHappyCakeActions {
      * @return server response
      */
     void sendMessage(String role, String message);
+
+    /**
+     * Get updates for user
+     *
+     * @return server response
+     */
+    HappyCakeResponse anyUpdates();
 }

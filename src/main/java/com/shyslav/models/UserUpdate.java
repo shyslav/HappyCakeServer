@@ -1,19 +1,21 @@
 package com.shyslav.models;
 
+import com.happycake.sitemodels.HappyCakeNotifications;
+
 /**
  * @author Shyshkin Vladyslav on 20.05.17.
  */
 public class UserUpdate {
     //url of action
-    private final String action;
+    private final HappyCakeNotifications action;
     private final String context;
 
-    public UserUpdate(String action, String context) {
+    public UserUpdate(HappyCakeNotifications action, String context) {
         this.action = action;
         this.context = context;
     }
 
-    public String getAction() {
+    public HappyCakeNotifications getAction() {
         return action;
     }
 

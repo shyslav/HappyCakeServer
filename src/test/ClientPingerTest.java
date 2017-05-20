@@ -1,4 +1,5 @@
 import com.happycake.sitemodels.Employees;
+import com.happycake.sitemodels.HappyCakeNotifications;
 import com.happycake.sitemodels.HappyCakeRoles;
 import com.shyslav.controller.ServerClient;
 import com.shyslav.controller.ServerStarApp;
@@ -48,12 +49,12 @@ public class ClientPingerTest {
 
     @Test
     public void pingerTest() throws InterruptedException {
-        ClientUpdatesPinger pinger = new ClientUpdatesPinger(client.getClient(), 100);
+        ClientUpdatesPinger pinger = new ClientUpdatesPinger(client, 100);
         assertTrue(pinger.isWork());
 
         //initialize listener
         StringBuilder builder = new StringBuilder();
-        pinger.addListener("messagetousers", (event) -> builder.append(event.getContext()));
+        pinger.addListener(HappyCakeNotifications.MESSAGETOUSERS, (event) -> builder.append(event.getContext()));
         Thread.sleep(1000);
 
         //call event to get listener

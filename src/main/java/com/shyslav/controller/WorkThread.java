@@ -261,10 +261,10 @@ public class WorkThread implements Runnable {
                     try {
                         //check if order need to cook
                         if (storage.orderStorage.isNeedCookOrder(order)) {
-                            //generate order fo cook response
-                            HappyCakeResponse response = new HappyCakeResponse(ErrorCodes.SUCCESS, storage.orderStorage.getOrdersForCook());
+                            //generate update orders notification
+                            UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.UPDATEORDERS, "update orders notification");
                             //send notification to cook
-                            startApp.sendNotificationToUsers(response, HappyCakeRoles.COOK);
+                            startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.COOK);
                         }
                     } catch (DBException e) {
                         e.printStackTrace();
@@ -306,7 +306,7 @@ public class WorkThread implements Runnable {
                 }
                 String role = arr[0];
                 String message = arr[1];
-                UserUpdate userUpdate = new UserUpdate("messagetousers", message);
+                UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.MESSAGETOUSERS, message);
                 startApp.sendNotificationToAllUsers(userUpdate);
                 break;
             }

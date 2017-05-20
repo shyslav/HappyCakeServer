@@ -691,13 +691,18 @@ public class ServerActions implements IHappyCakeActions {
     }
 
     /**
-     * Send message
-     *
-     * @param role    role string
-     * @param message message
+     * Not supported in server actions
      */
     @Override
     public void sendMessage(String role, String message) {
-        throw new NotImplemenetYetError();
+        throw new NotStorageError();
+    }
+
+    /**
+     * Not supported in server actions
+     */
+    @Override
+    public HappyCakeResponse anyUpdates() {
+        throw new NotStorageError();
     }
 }

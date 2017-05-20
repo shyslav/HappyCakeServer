@@ -1,6 +1,8 @@
 package com.shyslav.controller.pinger;
 
+import com.happycake.sitemodels.HappyCakeNotifications;
 import com.shyslav.controller.ServerClient;
+import com.shyslav.controller.actions.ClientActions;
 import com.shyslav.defaults.ErrorCodes;
 import com.shyslav.defaults.HappyCakeRequest;
 import com.shyslav.defaults.HappyCakeResponse;
@@ -19,7 +21,7 @@ public class ClientUpdatesPinger {
     //every 10 seconds ask server about updates
     private final int delay;
 
-    private final ServerClient client;
+    private final ClientActions client;
     private Boolean work;
 
     //statistic
@@ -27,14 +29,14 @@ public class ClientUpdatesPinger {
     private long amountNotEmptyAnswers = 0;
 
     //listeners
-    private final HashMap<String, PingerListener> listenerHashMap;
+    private final HashMap<HappyCakeNotifications, PingerListener> listenerHashMap;
 
     /**
      * Constructor
      *
      * @param client server client protocol
      */
-    public ClientUpdatesPinger(ServerClient client) {
+    public ClientUpdatesPinger(ClientActions client) {
         this.client = client;
         this.work = true;
         this.delay = 10000;
@@ -47,22 +49,12 @@ public class ClientUpdatesPinger {
      *
      * @param client server client protocol
      */
-    public ClientUpdatesPinger(ServerClient client, int delay) {
+    public ClientUpdatesPinger(ClientActions client, int delay) {
         this.client = client;
         this.work = true;
         this.delay = delay;
         this.listenerHashMap = new LinkedHashMap<>();
         startPingerThread();
-    }
-
-    /**
-     * Get updates for user
-     *
-     * @return updates
-     */
-    private HappyCakeResponse anyUpdates() {
-        HappyCakeRequest request = new HappyCakeRequest("anyUpdates");
-        return client.writeAndRead(request);
     }
 
 
@@ -74,7 +66,7 @@ public class ClientUpdatesPinger {
             while (work) {
                 try {
                     Thread.sleep(delay);
-                    HappyCakeResponse response = anyUpdates();
+                    HappyCakeResponse response = client.anyUpdates();
                     if (response.getCode() != ErrorCodes.EMPTY) {
                         amountNotEmptyAnswers++;
                         UserUpdatesList userUpdates = response.getObject(UserUpdatesList.class);
@@ -86,8 +78,8 @@ public class ClientUpdatesPinger {
                     } else {
                         amountEmptyAnswers++;
                     }
-                } catch (InterruptedException e) {
-                    log.trace("Unable to sleep updates pinger thread");
+                } catch (Exception e) {
+                    log.error("Unable to parse pinger action " + e, e);
                 }
             }
         });
@@ -134,7 +126,7 @@ public class ClientUpdatesPinger {
      * @param name  unique name of listener
      * @param event to execute
      */
-    public void addListener(String name, PingerListener event) {
+    public void addListener(HappyCakeNotifications name, PingerListener event) {
         listenerHashMap.put(name, event);
     }
 }

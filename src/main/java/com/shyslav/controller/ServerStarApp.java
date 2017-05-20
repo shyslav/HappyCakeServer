@@ -56,13 +56,13 @@ public class ServerStarApp {
     /**
      * Send message to all users with position id
      *
-     * @param response response to send
+     * @param update   update to send
      * @param position type of users
      */
-    public void sendNotificationToUsers(HappyCakeResponse response, HappyCakeRoles position) {
+    public void sendNotificationToUsers(UserUpdate update, HappyCakeRoles position) {
         for (ServerUser serverOnlineUsers : client) {
             if (serverOnlineUsers.getPosition() == position) {
-                serverOnlineUsers.getPrintWriter().println(LazyGson.toJson(response));
+                serverOnlineUsers.addToUpdate(update);
             }
         }
     }
