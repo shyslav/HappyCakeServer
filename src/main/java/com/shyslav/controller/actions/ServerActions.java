@@ -610,7 +610,7 @@ public class ServerActions implements IHappyCakeActions {
             } else {
                 storage.orderStorage.saveOrderWithDetails(order);
             }
-            return new HappyCakeResponse(ErrorCodes.SUCCESS, " ORDER SAVED ");
+            return new HappyCakeResponse(ErrorCodes.SUCCESS, " ORDER SAVED ", order);
         } catch (DBException e) {
             log.error("Unable to add order with id " + order.getId() + " . " + e.getMessage(), e);
             return new HappyCakeResponse(ErrorCodes.INTERNAL_ERROR, " INTERNAL ERROR ");
