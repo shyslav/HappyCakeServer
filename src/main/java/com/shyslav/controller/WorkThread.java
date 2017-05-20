@@ -371,6 +371,8 @@ public class WorkThread implements Runnable {
                             UserUpdate userUpdate = new UserUpdate(HappyCakeNotifications.COOK_UPDATE_ORDERS, "update orders notification");
                             //send notification to cook
                             startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.COOK, user);
+                            startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.ADMIN, user);
+                            startApp.sendNotificationToUsers(userUpdate, HappyCakeRoles.EMPLOYEES, user);
                         }
                     } catch (DBException e) {
                         e.printStackTrace();
